@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>가치관 라이브러리 — Litmus</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#4A80B5;--cream:#FAF8F3;--warm:#F5EFE6;--dark:#1C1917;--text:#2D2B28;--muted:#78746E;--border:#E8E0D6;--white:#FFFFFF;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,248,243,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{font-family:'DM Serif Display',serif;font-size:15px;color:var(--dark);text-decoration:none;}
+.nav-brand span{color:var(--blue);}
+.nav-back{font-size:13px;color:var(--muted);text-decoration:none;}
+.nav-back:hover{color:var(--blue);}
+.hero{padding:100px 6% 48px;background:var(--dark);position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(74,128,181,0.15) 1px,transparent 1px);background-size:28px 28px;}
+.hero-inner{position:relative;z-index:1;max-width:700px;}
+.hero-label{font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:0.1em;margin-bottom:14px;}
+.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,46px);color:#fff;line-height:1.2;margin-bottom:16px;}
+.hero-desc{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.7;font-weight:300;}
+.controls{padding:18px 6%;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:60px;z-index:90;}
+.controls-inner{max-width:1260px;margin:0 auto;display:flex;flex-direction:column;gap:10px;}
+.top-row{display:flex;align-items:center;gap:12px;}
+.search-wrap{position:relative;flex:1;max-width:340px;}
+.search-input{width:100%;padding:9px 14px 9px 36px;border:1px solid var(--border);border-radius:100px;font-size:13px;font-family:inherit;background:var(--cream);color:var(--text);outline:none;}
+.search-input:focus{border-color:var(--blue);}
+.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;}
+.count{font-size:13px;color:var(--muted);margin-left:auto;}
+.filters{display:flex;gap:6px;flex-wrap:wrap;}
+.fbtn{padding:6px 13px;border-radius:100px;border:1px solid var(--border);background:var(--white);font-size:12px;font-family:inherit;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.fbtn:hover{border-color:var(--blue);color:var(--blue);}
+.fbtn.on{background:var(--blue);color:#fff;border-color:var(--blue);}
+.main{padding:30px 6% 80px;max-width:1260px;margin:0 auto;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:16px 10px 14px;text-align:center;cursor:pointer;transition:all 0.22s;position:relative;}
+.card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,0.1);border-color:var(--blue);}
+.card.hide{display:none;}
+.dot{position:absolute;top:10px;right:10px;width:7px;height:7px;border-radius:50%;}
+.img-wrap{width:88px;height:88px;margin:0 auto 10px;border-radius:50%;overflow:hidden;background:var(--warm);display:flex;align-items:center;justify-content:center;}
+.img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+.emoji{font-size:36px;line-height:1;}
+.cname{font-size:13px;font-weight:500;color:var(--dark);margin-bottom:2px;}
+.cen{font-size:11px;color:var(--muted);}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:200;align-items:center;justify-content:center;padding:20px;}
+.overlay.on{display:flex;}
+.modal{background:var(--white);border-radius:24px;max-width:460px;width:100%;overflow:hidden;position:relative;max-height:90vh;overflow-y:auto;}
+.modal-img{padding:36px 40px 28px;text-align:center;}
+.modal-circle{width:150px;height:150px;border-radius:50%;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;background:var(--warm);}
+.modal-circle img{width:100%;height:100%;object-fit:cover;}
+.modal-emoji{font-size:60px;}
+.modal-body{padding:0 30px 32px;}
+.modal-hr{border:none;border-top:1px solid var(--border);margin:0 0 18px;}
+.modal-cat{font-size:12px;font-weight:500;letter-spacing:0.05em;margin-bottom:6px;}
+.modal-name{font-family:'DM Serif Display',serif;font-size:30px;color:var(--dark);margin-bottom:3px;}
+.modal-en{font-size:14px;color:var(--muted);margin-bottom:18px;}
+.modal-lbl{font-size:11px;color:var(--muted);margin-bottom:7px;}
+.modal-def{font-size:15px;color:var(--text);line-height:1.75;}
+.close-btn{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.07);border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
+.close-btn:hover{background:rgba(0,0,0,0.14);}
+.empty{display:none;text-align:center;padding:60px;color:var(--muted);}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-back" href="index.html">← 홈으로</a>
+  <a class="nav-brand" href="index.html">가치관 실험실 <span>"Litmus"</span></a>
+</nav>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">VALUE LIBRARY · 가치관 라이브러리</div>
+    <h1 class="hero-title">지금 나에게 중요한<br>가치는 무엇인가요?</h1>
+    <p class="hero-desc">인간의 보편적 욕구와 삶의 방향을 담은 탐색 공간입니다.<br>끌리는 가치 카드를 클릭해 천천히 탐색해보세요.</p>
+  </div>
+</div>
+<div class="controls">
+  <div class="controls-inner">
+    <div class="top-row">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" id="q" type="text" placeholder="가치 이름 검색...">
+      </div>
+      <span class="count" id="cnt"></span>
+    </div>
+    <div class="filters" id="filters"></div>
+  </div>
+</div>
+<div class="main">
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty">검색 결과가 없어요 🔍</div>
+</div>
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="close-btn" id="closeBtn">✕</button>
+    <div class="modal-img" id="mImg"></div>
+    <div class="modal-body">
+      <hr class="modal-hr">
+      <div class="modal-cat" id="mCat"></div>
+      <div class="modal-name" id="mName"></div>
+      <div class="modal-en" id="mEn"></div>
+      <div class="modal-lbl">가치 정의</div>
+      <div class="modal-def" id="mDef"></div>
+    </div>
+  </div>
+</div>
+<script>
+var CATS = ['전체','안전','동조','전통','박애','보편주의','자율','자극','쾌락주의','성취','권력'];
+var CAT_MAP = {
+  '안전':'안전(Security)','동조':'동조(Conformity)','전통':'전통(Tradition)',
+  '박애':'박애(Benevolence)','보편주의':'보편주의(Universalism)','자율':'자율(Self-direction)',
+  '자극':'자극(Stimulation)','쾌락주의':'쾌락주의(Hedonism)','성취':'성취(Achievement)','권력':'권력(Power)'
+};
+var COL = {
+  '안전':'#4A80B5','동조':'#E8457A','전통':'#C4813D','박애':'#2DA06B',
+  '보편주의':'#3DAA8A','자율':'#7B5EA7','자극':'#E84545','쾌락주의':'#D97B2B',
+  '성취':'#8C8C8C','권력':'#C0392B'
+};
+var EMOJI = {
+  '가족':'👨‍👩‍👧','건강':'💪','연대감':'🤝','감사':'🙏','안전':'🛡️','균형':'⚖️',
+  '자연':'🌿','존경':'☀️','예의':'🌸','친절함':'💙','평등':'🌈','공정':'⚖️',
+  '유연함':'🌊','독립':'🦅','용기':'🦁','헌신':'❤️','사랑':'💛','신뢰':'🔗',
+  '책임감':'🎯','성취':'🏆','정직':'✨','신앙':'✝️','우정':'🫂','지혜':'🦉',
+  '봉사':'🤲','영성':'🕯️','배려':'💙','겸손':'🌾','평화':'☮️','인내':'⏳',
+  '아름다움':'🌺','정의':'⚖️','진정성':'💫','성장':'🌱','프라이버시':'🔒',
+  '공동체':'🏘️','자유':'🕊️','자존감':'💜','창의성':'🎨','절약':'💰','질서':'📋',
+  '경험':'🗺️','도전':'🚩','호기심':'🔭','영향력':'⚡','유머':'😄','쾌락':'🎉',
+  '열정':'🔥','모험':'🌟','성공':'🏆','명예':'🥇','유능함':'⭐','순응':'🎭',
+  '지식':'📖','부':'💎','매력':'✨','리더십':'🧭','인정':'👍','다양성':'🌍'
+};
+var DATA = [
+  {n:'가족',e:'Family',c:'박애(Benevolence)',d:'가족과의 깊은 유대, 서로를 돌보고 사랑하는 관계',f:'1_family.png'},
+  {n:'건강',e:'Health',c:'안전(Security)',d:'신체적·정신적으로 건강한 상태를 유지하는 것',f:'2_health.png'},
+  {n:'연대감',e:'Solidarity',c:'박애(Benevolence)',d:'타인과 연결되고 함께하고자 하는 욕구',f:'3_solidarity.png'},
+  {n:'감사',e:'Gratitude',c:'박애(Benevolence)',d:'주어진 것에 감사하며 삶을 바라보는 태도',f:'4_gratitude.png'},
+  {n:'안전',e:'Safety',c:'안전(Security)',d:'위험과 불안으로부터 자신을 보호하는 것',f:''},
+  {n:'균형',e:'Balance',c:'안전(Security)',d:'삶의 여러 영역에서 조화와 균형을 찾는 것',f:'6_balance.png'},
+  {n:'자연',e:'Nature',c:'보편주의(Universalism)',d:'자연 환경을 보호하고 조화롭게 살아가는 것',f:''},
+  {n:'존경',e:'Respect',c:'동조(Conformity)',d:'타인으로부터 인정받고 존중받는 것',f:'8_respect.png'},
+  {n:'예의',e:'Politeness',c:'동조(Conformity)',d:'사회적 규범과 예절을 지키며 타인을 배려하는 것',f:'9_politeness.png'},
+  {n:'친절함',e:'Kindness',c:'박애(Benevolence)',d:'타인에게 따뜻하고 배려 깊게 대하는 태도',f:'10_kindness.png'},
+  {n:'평등',e:'Equality',c:'보편주의(Universalism)',d:'모든 사람이 동등한 권리와 기회를 가져야 함',f:''},
+  {n:'공정',e:'Fairness',c:'보편주의(Universalism)',d:'모든 사람이 동등하게 대우받아야 한다는 믿음',f:''},
+  {n:'유연함',e:'Flexibility',c:'자율(Self-direction)',d:'변화에 열린 마음으로 적응하고 수용하는 것',f:'13_flexibility.png'},
+  {n:'독립',e:'Independence',c:'자율(Self-direction)',d:'스스로 결정하고 자립하여 살아가는 것',f:''},
+  {n:'용기',e:'Courage',c:'자극(Stimulation)',d:'두려움에도 불구하고 옳은 것을 행하는 것',f:''},
+  {n:'헌신',e:'Devotion',c:'박애(Benevolence)',d:'소중한 사람이나 가치에 온전히 마음을 다하는 것',f:'16_devotion.png'},
+  {n:'사랑',e:'Love',c:'박애(Benevolence)',d:'깊은 정서적 유대와 애정을 나누는 것',f:'17_love.png'},
+  {n:'신뢰',e:'Trust',c:'안전(Security)',d:'관계에서 믿음을 쌓고 유지하는 것',f:'18_trust.png'},
+  {n:'책임감',e:'Responsibility',c:'동조(Conformity)',d:'맡은 일과 관계에 대한 의무를 성실히 이행하는 것',f:'19_responsibility.png'},
+  {n:'성취',e:'Achievement',c:'성취(Achievement)',d:'목표를 달성하고 능력을 발휘하는 것',f:'20_achievement.png'},
+  {n:'정직',e:'Honesty',c:'박애(Benevolence)',d:'자신과 타인에게 솔직하고 진실되게 행동하는 것',f:'21_honesty.png'},
+  {n:'신앙',e:'Faith',c:'전통(Tradition)',d:'종교적 믿음과 영적 가치를 삶의 중심으로 삼는 것',f:'22_faith.png'},
+  {n:'우정',e:'Friendship',c:'박애(Benevolence)',d:'진실된 친구 관계를 소중히 여기고 가꾸는 것',f:'23_friendship.png'},
+  {n:'지혜',e:'Wisdom',c:'보편주의(Universalism)',d:'경험과 통찰을 통해 올바른 판단을 내리는 것',f:''},
+  {n:'봉사',e:'Service',c:'박애(Benevolence)',d:'타인과 사회를 위해 자신의 시간과 에너지를 나누는 것',f:'25_service.png'},
+  {n:'지혜',e:'Wisdom',c:'보편주의(Universalism)',d:'경험과 통찰을 통해 올바른 판단을 내리는 것',f:'26_wisdom.png'},
+  {n:'영성',e:'Spirituality',c:'전통(Tradition)',d:'내면의 깊은 의미와 연결되고자 하는 욕구',f:''},
+  {n:'배려',e:'Helpfulness',c:'박애(Benevolence)',d:'타인의 감정과 상황을 세심하게 살피는 것',f:'28_helpfulness.png'},
+  {n:'겸손',e:'Humility',c:'동조(Conformity)',d:'자신을 낮추고 타인을 존중하는 태도',f:''},
+  {n:'평화',e:'Peace',c:'보편주의(Universalism)',d:'내면과 세상의 평온함을 추구하는 것',f:'30_peace.png'},
+  {n:'인내',e:'Patience',c:'동조(Conformity)',d:'어려움 속에서도 포기하지 않고 기다리는 것',f:''},
+  {n:'아름다움',e:'Beauty',c:'쾌락주의(Hedonism)',d:'아름다움을 감상하고 창조하는 것',f:'32_beauty.png'},
+  {n:'정의',e:'Justice',c:'보편주의(Universalism)',d:'옳고 그름의 원칙에 따라 공정하게 행동하는 것',f:'33_justice.png'},
+  {n:'진정성',e:'Authenticity',c:'자율(Self-direction)',d:'가식 없이 자신답게 살아가는 것',f:''},
+  {n:'성장',e:'Growth',c:'자율(Self-direction)',d:'지속적으로 배우고 발전하는 것',f:'35_growth.png'},
+  {n:'프라이버시',e:'Privacy',c:'자율(Self-direction)',d:'개인의 공간과 정보를 스스로 통제하는 것',f:'36_privacy.png'},
+  {n:'공동체',e:'Community',c:'박애(Benevolence)',d:'공동체에 소속되어 함께 살아가는 것',f:''},
+  {n:'자유',e:'Freedom',c:'자율(Self-direction)',d:'외부 압력 없이 스스로 선택하고 행동하는 것',f:'38_freedom.png'},
+  {n:'자존감',e:'Self-respect',c:'성취(Achievement)',d:'자신을 가치있는 존재로 여기는 것',f:'39_selfrespect.png'},
+  {n:'창의성',e:'Creativity',c:'자율(Self-direction)',d:'새로운 아이디어와 표현을 탐구하는 것',f:'40_creativity.png'},
+  {n:'절약',e:'Thrift',c:'안전(Security)',d:'자원을 아끼고 미래를 대비하는 것',f:''},
+  {n:'질서',e:'Order',c:'안전(Security)',d:'규칙과 체계 속에서 안정감을 찾는 것',f:''},
+  {n:'경험',e:'Experience',c:'자극(Stimulation)',d:'다양한 경험을 통해 삶을 풍요롭게 하는 것',f:'43_experience.png'},
+  {n:'도전',e:'Challenge',c:'자극(Stimulation)',d:'새로운 도전을 통해 한계를 넓히는 것',f:'44_challenge.png'},
+  {n:'호기심',e:'Curiosity',c:'자극(Stimulation)',d:'세상에 대한 끊임없는 궁금증과 탐구심',f:'45_curiosity.png'},
+  {n:'영향력',e:'Influence',c:'권력(Power)',d:'타인과 세상에 긍정적 변화를 만드는 것',f:''},
+  {n:'유머',e:'Humor',c:'쾌락주의(Hedonism)',d:'삶을 유쾌하게 바라보고 웃음을 나누는 것',f:'47_humor.png'},
+  {n:'쾌락',e:'Pleasure',c:'쾌락주의(Hedonism)',d:'삶의 순간순간을 즐기고 기쁨을 찾는 것',f:'48_pleasure.png'},
+  {n:'열정',e:'Passion',c:'자극(Stimulation)',d:'깊은 관심과 에너지로 몰입하는 것',f:'49_passion.png'},
+  {n:'모험',e:'Adventure',c:'자극(Stimulation)',d:'설렘과 흥분을 주는 새로운 경험을 추구하는 것',f:'50_adventure.png'},
+  {n:'성공',e:'Success',c:'성취(Achievement)',d:'목표를 이루고 사회적으로 인정받는 것',f:'51_success.png'},
+  {n:'명예',e:'Honor',c:'권력(Power)',d:'사회적 지위와 명성을 얻는 것',f:'52_honor.png'},
+  {n:'유능함',e:'Capability',c:'성취(Achievement)',d:'능력을 발휘하고 탁월함을 추구하는 것',f:'53_capability.png'},
+  {n:'순응',e:'Conformity',c:'동조(Conformity)',d:'사회적 규범과 기대에 맞게 행동하는 것',f:''},
+  {n:'지식',e:'Knowledge',c:'보편주의(Universalism)',d:'배움과 이해를 통해 세상을 더 잘 알아가는 것',f:'55_knowledge.png'},
+  {n:'부',e:'Wealth',c:'권력(Power)',d:'경제적 풍요와 물질적 안정을 추구하는 것',f:'56_wealth.png'},
+  {n:'매력',e:'Charm',c:'쾌락주의(Hedonism)',d:'자신을 아름답고 매력적으로 가꾸는 것',f:'57_charm.png'},
+  {n:'리더십',e:'Leadership',c:'권력(Power)',d:'방향을 제시하고 사람들을 이끄는 것',f:'58_leadership.png'},
+  {n:'인정',e:'Recognition',c:'성취(Achievement)',d:'타인으로부터 능력과 노력을 인정받는 것',f:'59_recognition.png'},
+  {n:'다양성',e:'Diversity',c:'보편주의(Universalism)',d:'다양한 사람, 문화, 관점을 존중하는 것',f:''}
+];
+
+function getCatKey(c) {
+  for (var k in CAT_MAP) { if (CAT_MAP[k] === c) return k; }
+  return '';
+}
+
+var activeFilter = '전체';
+var cards = [];
+
+// 필터 버튼
+var fWrap = document.getElementById('filters');
+CATS.forEach(function(label) {
+  var btn = document.createElement('button');
+  btn.className = 'fbtn' + (label === '전체' ? ' on' : '');
+  btn.textContent = label;
+  btn.onclick = function() {
+    activeFilter = label;
+    document.querySelectorAll('.fbtn').forEach(function(b){ b.classList.remove('on'); });
+    btn.classList.add('on');
+    doFilter();
+  };
+  fWrap.appendChild(btn);
+});
+
+// 카드 생성
+var grid = document.getElementById('grid');
+DATA.forEach(function(v) {
+  var catKey = getCatKey(v.c);
+  var color = COL[catKey] || '#888';
+  var emoji = EMOJI[v.n] || '🔵';
+  var card = document.createElement('div');
+  card.className = 'card';
+  card.setAttribute('data-n', v.n);
+  card.setAttribute('data-e', v.e.toLowerCase());
+  card.setAttribute('data-c', v.c);
+
+  var dot = document.createElement('div');
+  dot.className = 'dot';
+  dot.style.background = color;
+
+  var iw = document.createElement('div');
+  iw.className = 'img-wrap';
+  if (v.f) {
+    var img = document.createElement('img');
+    img.alt = v.n;
+    img.src = 'images/' + v.f;
+    img.onerror = (function(wrap, em) {
+      return function() { wrap.innerHTML = '<span class="emoji">' + em + '</span>'; };
+    })(iw, emoji);
+    iw.appendChild(img);
+  } else {
+    iw.innerHTML = '<span class="emoji">' + emoji + '</span>';
+  }
+
+  var nm = document.createElement('div');
+  nm.className = 'cname';
+  nm.textContent = v.n;
+  var en = document.createElement('div');
+  en.className = 'cen';
+  en.textContent = v.e;
+
+  card.appendChild(dot);
+  card.appendChild(iw);
+  card.appendChild(nm);
+  card.appendChild(en);
+  card.onclick = (function(vv, ck, col) {
+    return function() { openModal(vv, ck, col); };
+  })(v, catKey, color);
+
+  grid.appendChild(card);
+  cards.push(card);
+});
+
+document.getElementById('cnt').textContent = DATA.length + '개';
+
+function doFilter() {
+  var q = document.getElementById('q').value.toLowerCase();
+  var catVal = CAT_MAP[activeFilter] || null;
+  var count = 0;
+  cards.forEach(function(card) {
+    var ok = (card.getAttribute('data-n').indexOf(q) >= 0 || card.getAttribute('data-e').indexOf(q) >= 0)
+             && (!catVal || card.getAttribute('data-c') === catVal);
+    card.classList.toggle('hide', !ok);
+    if (ok) count++;
+  });
+  document.getElementById('cnt').textContent = count + '개';
+  document.getElementById('empty').style.display = count === 0 ? 'block' : 'none';
+}
+
+document.getElementById('q').addEventListener('input', doFilter);
+
+function openModal(v, catKey, color) {
+  var emoji = EMOJI[v.n] || '🔵';
+  var mImg = document.getElementById('mImg');
+  mImg.innerHTML = '';
+  mImg.style.background = color + '15';
+  var circle = document.createElement('div');
+  circle.className = 'modal-circle';
+  if (v.f) {
+    var img = document.createElement('img');
+    img.alt = v.n;
+    img.src = 'images/' + v.f;
+    img.onerror = (function(c, em) {
+      return function() { c.innerHTML = '<span class="modal-emoji">' + em + '</span>'; };
+    })(circle, emoji);
+    circle.appendChild(img);
+  } else {
+    circle.innerHTML = '<span class="modal-emoji">' + emoji + '</span>';
+  }
+  mImg.appendChild(circle);
+  document.getElementById('mCat').textContent = catKey + ' 가치';
+  document.getElementById('mCat').style.color = color;
+  document.getElementById('mName').textContent = v.n;
+  document.getElementById('mEn').textContent = v.e;
+  document.getElementById('mDef').textContent = v.d;
+  document.getElementById('overlay').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('on');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('closeBtn').onclick = closeModal;
+document.getElementById('overlay').onclick = function(e) {
+  if (e.target === this) closeModal();
+};
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>
