@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>가치관 실험실 Litmus</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
   --blue: #4A80B5;
@@ -24,7 +23,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'Pretendard',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,248,243,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
@@ -464,14 +463,14 @@ libCards.forEach(c => {
 });
 
 const archives = [
-  {num:'실험 #1',name:'커플 가치관 실험',id:'1InTVhbAfdlIFNy9qquZzxEGr9TJK7Sq6'},
-  {num:'실험 #2',name:'일과 기질의 관계 실험',id:'1z302Iw_B991f9JcXZdXtoWkv8EJylzf8'},
-  {num:'실험 #3',name:'가치관 오픈 테이블',id:'1WXkjJe6U3vjjqPaJr9rNP0aYrxXhw8sf'},
-  {num:'실험 #4',name:'스타트업 가치관 빌딩 실험',id:'1Ws-DqwlYKSftivuEkEf7vhmJLgLFk7jK'},
-  {num:'실험 #5',name:'커플 가치관 실험 시즌2',id:'1CsQPHWQ4vX5ZEUhSoxmtRBjvAHa9AcQd'},
-  {num:'실험 #6',name:'가치관 경매 시즌2',id:'16o_V_PrdWTuysWRfjd-tBaHGVv5BdrUc'},
-  {num:'실험 #7',name:'인생 후반의 가치관 체크',id:'1VoPExUrU_hLOdkV-l14RJq-oftU6CqOs'},
-  {num:'실험 #8',name:'가치관 오픈 테이블 시즌2',id:'1SqL1Z952Ro7YjyJYXt9FAaCn2S3NIDkU'},
+  {num:'실험 #1',name:'커플 가치관 실험',img:'exp1.jpg'},
+  {num:'실험 #2',name:'일과 기질의 관계 실험',img:'exp2.jpg'},
+  {num:'실험 #3',name:'가치관 오픈 테이블',img:'exp3.jpg'},
+  {num:'실험 #4',name:'스타트업 가치관 빌딩 실험',img:'exp4.jpg'},
+  {num:'실험 #5',name:'커플 가치관 실험 시즌2',img:'exp5.jpg'},
+  {num:'실험 #6',name:'가치관 경매 시즌2',img:'exp6.jpg'},
+  {num:'실험 #7',name:'인생 후반의 가치관 체크',img:'exp7.jpg'},
+  {num:'실험 #8',name:'가치관 오픈 테이블 시즌2',img:'exp8.jpg'},
 ];
 const arcGrid = document.getElementById('archive-grid');
 archives.forEach(a => {
@@ -480,7 +479,8 @@ archives.forEach(a => {
   el.innerHTML = `
     <div class="arc-num">${a.num}</div>
     <div class="arc-name">${a.name}</div>
-    <div class="arc-img-placeholder">🔬</div>
+    <img src="images/${a.img}" alt="${a.name}" class="arc-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="arc-img-placeholder" style="display:none">🔬</div>
   `;
   arcGrid.appendChild(el);
 });
