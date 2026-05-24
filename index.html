@@ -46,7 +46,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:60px;dis
 .hero-title em{color:var(--blue);font-style:italic;}
 .hero-brand{font-size:13px;color:var(--muted);margin-bottom:20px;animation:fadeUp 0.6s 0.15s ease both;opacity:0;letter-spacing:0.05em;}
 .hero-sub{font-size:17px;color:var(--muted);line-height:1.7;margin-bottom:36px;animation:fadeUp 0.6s 0.2s ease both;opacity:0;font-weight:300;}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp 0.6s 0.3s ease both;opacity:0;}
+.hero-cta{display:flex;flex-direction:column;gap:10px;animation:fadeUp 0.6s 0.3s ease both;opacity:0;}
+.hero-cta-row{display:flex;gap:12px;flex-wrap:wrap;}
 .btn-primary{background:var(--blue);color:#fff;border:none;border-radius:100px;padding:13px 28px;font-size:15px;font-weight:500;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background 0.2s,transform 0.15s;}
 .btn-primary:hover{background:var(--blue-dark);transform:translateY(-2px);}
 .btn-secondary{background:transparent;color:var(--text);border:1.5px solid var(--border);border-radius:100px;padding:13px 28px;font-size:15px;font-weight:500;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;}
@@ -199,6 +200,7 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
   <ul class="nav-links">
     <li><a href="#experiment">이번 실험</a></li>
     <li><a href="#library">라이브러리</a></li>
+    <li><a href="auction.html">가치관 경매</a></li>
     <li><a href="#archive">실험 기록</a></li>
     <li><a href="#store">스토어</a></li>
   </ul>
@@ -225,12 +227,19 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
       직접 선택하고, 실험하고, 경험해보세요!
     </p>
     <div class="hero-cta">
-      <a class="btn-primary" href="https://nfyg.co/meetups/11049" target="_blank">
-        이번 실험 참여하기 →
-      </a>
-      <a class="btn-secondary" href="library.html">
-        가치관 라이브러리 보기
-      </a>
+      <div class="hero-cta-row">
+        <a class="btn-primary" href="https://nfyg.co/meetups/11049" target="_blank">
+          이번 실험 참여하기 →
+        </a>
+      </div>
+      <div class="hero-cta-row">
+        <a class="btn-secondary" href="library.html">
+          가치관 라이브러리 보기
+        </a>
+        <a class="btn-secondary" href="auction.html">
+          가치관 경매 보기
+        </a>
+      </div>
     </div>
   </div>
   <div class="hero-cards">
@@ -305,8 +314,11 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
       <div class="about-stats">
         <div class="stat-card"><div class="stat-num">500+</div><div class="stat-label">누적 참여자</div></div>
         <div class="stat-card"><div class="stat-num">4.9</div><div class="stat-label">평균 만족도</div></div>
-        <div class="stat-card"><div class="stat-num">8회</div><div class="stat-label">실험 진행</div></div>
+        <div class="stat-card"><div class="stat-num">30회+</div><div class="stat-label">실험 진행</div></div>
         <div class="stat-card"><div class="stat-num">60개</div><div class="stat-label">가치 카드</div></div>
+      </div>
+      <div style="margin-top:28px;">
+        <a href="auction.html" style="font-size:14px;color:var(--blue);text-decoration:none;font-weight:500;display:inline-flex;align-items:center;gap:6px;">가치관 경매가 궁금하다면 → <span style="font-size:12px;">직접 탐색해보세요</span></a>
       </div>
     </div>
     <div class="about-right reveal">
@@ -424,7 +436,7 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
   <p class="cta-sub reveal">다음 실험이 궁금하다면 인스타그램을 팔로우하거나<br>지금 열린 실험에 바로 참여하세요.</p>
   <div class="cta-buttons reveal">
     <a class="btn-white" href="https://nfyg.co/meetups/11049" target="_blank">이번 실험 참여하기 →</a>
-    <a class="btn-outline-white" href="https://instagram.com/ulit_offical" target="_blank">@ulit_offical 팔로우</a>
+    <a class="btn-outline-white" href="https://instagram.com/ulit_official" target="_blank">@ulit_official 팔로우</a>
   </div>
   <div class="cta-links reveal">
     <a class="cta-link" href="mailto:sungwc3@naver.com">기업 · 기관 협업 문의 →</a>
