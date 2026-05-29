@@ -112,6 +112,22 @@ section{padding:90px 6%;}
 .cta-link{font-size:14px;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s;}
 .cta-link:hover{color:#fff;}
 
+/* CTA 문의 폼 */
+.cta-form{max-width:480px;margin:0 auto 24px;text-align:left;}
+.cta-form .field{margin-bottom:14px;}
+.cta-form label{display:block;font-size:13px;font-weight:500;color:rgba(255,255,255,0.85);margin-bottom:7px;letter-spacing:0.01em;}
+.cta-form label .opt{font-weight:400;color:rgba(255,255,255,0.5);font-size:12px;}
+.cta-form input,
+.cta-form select{width:100%;background:rgba(255,255,255,0.97);border:1px solid var(--border);border-radius:12px;padding:13px 16px;font-size:14px;font-family:inherit;color:var(--text);transition:box-shadow 0.2s,border-color 0.2s;}
+.cta-form input::placeholder{color:#A8A29A;font-size:13px;}
+.cta-form input:focus,
+.cta-form select:focus{outline:none;border-color:#fff;box-shadow:0 0 0 4px rgba(255,255,255,0.25);}
+.cta-form select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%232C5F8A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:42px;cursor:pointer;}
+.cta-form .btn-submit{width:100%;margin-top:6px;background:var(--dark);color:#fff;border:none;border-radius:100px;padding:15px 32px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:transform 0.2s,box-shadow 0.2s,background 0.2s;}
+.cta-form .btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.22);}
+.cta-form .btn-submit:disabled{opacity:0.6;cursor:default;transform:none;box-shadow:none;}
+.cta-success{max-width:480px;margin:0 auto 24px;background:rgba(255,255,255,0.97);border-radius:16px;padding:36px 28px;text-align:center;color:var(--text);font-size:17px;line-height:1.65;font-weight:500;}
+
 footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
 .footer-brand{font-family:'DM Serif Display',serif;font-size:14px;color:rgba(255,255,255,0.4);}
 .footer-copy{font-size:12px;color:rgba(255,255,255,0.25);}
@@ -128,7 +144,7 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
 <nav>
   <a class="nav-back" href="index.html">← 홈으로</a>
   <a class="nav-brand" href="index.html">가치관 실험실 <span>"Litmus"</span></a>
-  <a class="nav-cta" href="mailto:sungwc3@naver.com">신청하기</a>
+  <a class="nav-cta" href="#contact">신청하기</a>
 </nav>
 
 <!-- 01. HERO -->
@@ -139,7 +155,7 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
       <h1 class="hero-title">가치관은 말이 아니라<br>선택으로 드러납니다</h1>
       <p class="hero-desc">60개의 가치관을 탐색하고, 대화하고, 경매하는 과정 속에서<br>미처 몰랐던 자신의 가치관을 직접 발견하는 몰입형 심리 워크숍입니다.</p>
       <div class="hero-cta">
-        <a class="btn-primary" href="mailto:sungwc3@naver.com">신청하기 →</a>
+        <a class="btn-primary" href="#contact">신청하기 →</a>
         <a class="btn-outline" href="#program">프로그램 살펴보기</a>
       </div>
     </div>
@@ -314,7 +330,25 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
   <p class="cta-desc reveal">가치 목록, 대화 질문, 진행 방식까지<br>대상과 목적에 따라 조정 가능합니다.</p>
   <p class="cta-note reveal">청년·진로 기관 · 기업·조직 · 시니어·복지 기관 · 커뮤니티·모임</p>
   <div class="cta-buttons reveal">
-    <a class="btn-white" href="mailto:sungwc3@naver.com">프로그램 신청하기 →</a>
+    <form class="cta-form" id="contact-form" action="https://formspree.io/f/maqkvvlq" method="POST">
+      <div class="field">
+        <label for="cf-name">이름</label>
+        <input type="text" id="cf-name" name="이름" placeholder="성함을 입력해 주세요" required>
+      </div>
+      <div class="field">
+        <label for="cf-contact">연락처</label>
+        <input type="text" id="cf-contact" name="연락처" placeholder="카카오 ID 또는 이메일 또는 전화번호" required style="border-radius: 12px">
+      </div>
+      <div class="field">
+        <label for="cf-org">소속</label>
+        <input type="text" id="cf-org" name="소속" placeholder="회사·기관·학교 등">
+      </div>
+      <div class="field">
+        <label for="cf-memo">신청 이유 및 궁금한 점</label>
+        <input type="text" id="cf-memo" name="신청 이유 및 궁금한 점" placeholder="신청 이유 및 궁금한 점">
+      </div>
+      <button type="submit" class="btn-submit">신청하기 →</button>
+    </form>
   </div>
   <div class="reveal">
     <a class="cta-link" href="library.html">가치관 라이브러리 먼저 탐색하기 →</a>
@@ -344,6 +378,39 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 },{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+<script>
+// CTA 문의 폼 — Formspree AJAX 제출 후 성공 메시지로 교체
+(function(){
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn = form.querySelector('.btn-submit');
+    btn.disabled = true;
+    btn.textContent = '접수 중…';
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res){
+      if (res.ok) { showSuccess(); }
+      else { res.json().then(function(d){
+        btn.disabled = false; btn.textContent = '신청하기 →';
+        alert((d.errors && d.errors.map(function(x){return x.message;}).join('\n')) || '전송에 실패했어요. 잠시 후 다시 시도해 주세요.');
+      }).catch(function(){ btn.disabled=false; btn.textContent='신청하기 →'; alert('전송에 실패했어요. 잠시 후 다시 시도해 주세요.'); }); }
+    }).catch(function(){
+      btn.disabled = false; btn.textContent = '신청하기 →';
+      alert('네트워크 오류로 전송에 실패했어요. 잠시 후 다시 시도해 주세요.');
+    });
+  });
+  function showSuccess(){
+    var msg = document.createElement('div');
+    msg.className = 'cta-success';
+    msg.textContent = '신청이 접수되었어요. 곧 연락드릴게요 😊';
+    form.replaceWith(msg);
+  }
+})();
 </script>
 <script src="tweaks.js" defer></script>
 </body>
