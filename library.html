@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>가치관 라이브러리 — Litmus</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="polish.css">
+<script>
+window.__LITMUS_TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{"palette":"litmus","headFont":"dm-serif","bodyFont":"noto-sans"}/*EDITMODE-END*/;
+// 환경 자동 감지: 배포된 사이트에서는 이미지 ON, 작업 미리보기에서는 OFF.
+window.LITMUS_HAS_IMAGES = !/claudeusercontent|claude\.ai|localhost/i.test(location.hostname);
+</script>
 <style>
 :root{--blue:#4A80B5;--cream:#FAF8F3;--warm:#F5EFE6;--dark:#1C1917;--text:#2D2B28;--muted:#78746E;--border:#E8E0D6;--white:#FFFFFF;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -232,7 +238,7 @@ DATA.forEach(function(v) {
 
   var iw = document.createElement('div');
   iw.className = 'img-wrap';
-  if (v.f) {
+  if (v.f && window.LITMUS_HAS_IMAGES) {
     var img = document.createElement('img');
     img.alt = v.n;
     img.src = 'images/' + v.f;
@@ -288,7 +294,7 @@ function openModal(v, catKey, color) {
   mImg.style.background = color + '15';
   var circle = document.createElement('div');
   circle.className = 'modal-circle';
-  if (v.f) {
+  if (v.f && window.LITMUS_HAS_IMAGES) {
     var img = document.createElement('img');
     img.alt = v.n;
     img.src = 'images/' + v.f;
@@ -322,5 +328,6 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeModal();
 });
 </script>
+<script src="tweaks.js" defer></script>
 </body>
 </html>

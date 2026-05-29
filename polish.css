@@ -1,0 +1,138 @@
+/* ────────────────────────────────────────────────
+   가치관 실험실 — 공통 폴리시
+   원본 디자인은 유지하면서 타이포·간격·인터랙션만 살짝 보강.
+   ──────────────────────────────────────────────── */
+
+/* 큰 한글 헤딩 자간을 약간 좁혀서 더 단단해 보이게 */
+.hero-title,
+.section-title,
+.exp-title,
+.voices-title,
+.cta-title {
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* 본문 wrap을 pretty로: 줄 끝 외돌이 단어 방지 */
+.hero-sub,
+.section-desc,
+.exp-desc,
+.hero-desc,
+.voice-text,
+.store-desc,
+.cta-sub,
+.cta-desc {
+  text-wrap: pretty;
+}
+
+/* 버튼 호버에 미세한 shadow를 더해 입체감 보강 */
+.btn-primary,
+.btn-exp,
+.btn-lib,
+.btn-white {
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  box-shadow: 0 6px 18px rgba(74, 128, 181, 0.35);
+}
+.btn-exp:hover {
+  box-shadow: 0 6px 18px rgba(240, 124, 0, 0.35);
+}
+.btn-lib:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+/* 카드 hover transition을 좀 더 부드럽게 */
+.lib-card,
+.arc-card,
+.hero-card,
+.stat-card,
+.voice-card,
+.effect-card,
+.exp-card-item {
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+/* nav 브랜드 굵기 살짝 보강 */
+.nav-brand {
+  letter-spacing: 0.005em;
+}
+
+/* 섹션 라벨에 미세한 강조 — 색상 옆 작은 bar */
+.section-label,
+.hero-label,
+.voices-label {
+  position: relative;
+  display: inline-block;
+}
+
+/* hero 우측 카드: 살짝 회전감을 주어 더 디자인적으로 */
+.hero-cards .hero-card:nth-child(1) { transform: translateY(-8px) rotate(-2deg); }
+.hero-cards .hero-card:nth-child(2) { transform: translateY(8px)  rotate(2deg);  }
+.hero-cards .hero-card:nth-child(3) { transform: translateY(-4px) rotate(1.5deg);}
+.hero-cards .hero-card:nth-child(4) { transform: translateY(4px)  rotate(-1.5deg);}
+.hero-cards .hero-card { transition: transform 0.3s ease; }
+.hero-cards .hero-card:hover { transform: translateY(0) rotate(0deg) scale(1.04); z-index: 2; }
+
+/* timeline 번호 원에 미세한 inner-shadow */
+.timeline-num {
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15), 0 2px 6px rgba(74,128,181,0.2);
+}
+
+/* about stat 카드 정렬 보강 */
+.stat-card { transition: transform 0.2s ease, background 0.2s ease; }
+.stat-card:hover { transform: translateY(-2px); background: #FDFBF6; }
+
+/* library 카드 dot도 약간 더 또렷하게 */
+.dot { box-shadow: 0 0 0 2px #fff; }
+
+/* 모바일 nav 햄버거가 가렸을 때 패널이 충돌하지 않도록 zindex 조정 */
+@media (max-width: 768px) {
+  #__litmus_tweaks_panel { width: calc(100vw - 32px); right: 16px; max-width: 320px; }
+}
+
+/* 아카이브 "더보기" 버튼 */
+.archive-more { display: flex; justify-content: center; margin-top: 32px; }
+.btn-arc-more {
+  background: transparent;
+  color: var(--dark, #1C1917);
+  border: 1px solid var(--border, #E8E0D6);
+  border-radius: 100px;
+  padding: 12px 26px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+.btn-arc-more:hover {
+  background: var(--dark, #1C1917);
+  color: #fff;
+  border-color: var(--dark, #1C1917);
+}
+.btn-arc-count {
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--blue-light, #D6E8F7);
+  color: var(--blue-dark, #2C5F8A);
+  padding: 2px 8px;
+  border-radius: 100px;
+  transition: all 0.2s ease;
+}
+.btn-arc-more:hover .btn-arc-count {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+/* 폴리시: hero-cards를 부드럽게 등장시키기 */
+@keyframes ltw-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -4px; }
+}
+.hero-cards .hero-card:nth-child(1) { animation: ltw-float 6s ease-in-out infinite; }
+.hero-cards .hero-card:nth-child(2) { animation: ltw-float 6s ease-in-out 1.5s infinite; }
+.hero-cards .hero-card:nth-child(3) { animation: ltw-float 6s ease-in-out 3s infinite; }
+.hero-cards .hero-card:nth-child(4) { animation: ltw-float 6s ease-in-out 4.5s infinite; }

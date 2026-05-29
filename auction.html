@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>가치관 경매 — Litmus</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="polish.css">
+<script>
+window.__LITMUS_TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{"palette":"litmus","headFont":"dm-serif","bodyFont":"noto-sans"}/*EDITMODE-END*/;
+// 환경 자동 감지: 배포된 사이트에서는 이미지 ON, 작업 미리보기에서는 OFF.
+window.LITMUS_HAS_IMAGES = !/claudeusercontent|claude\.ai|localhost/i.test(location.hostname);
+</script>
 <style>
 :root{--blue:#4A80B5;--blue-light:#D6E8F7;--blue-dark:#2C5F8A;--cream:#FAF8F3;--warm:#F5EFE6;--dark:#1C1917;--text:#2D2B28;--muted:#78746E;--border:#E8E0D6;--white:#FFFFFF;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -321,10 +327,24 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
 </footer>
 
 <script>
+// 이미지 없을 때(LITMUS_HAS_IMAGES=false) 빈 IMG 네트워크 호출을 막고 placeholder만 남김
+if (!window.LITMUS_HAS_IMAGES) {
+  document.querySelectorAll('img').forEach(function(img){
+    var src = img.getAttribute('src') || '';
+    if (src.indexOf('images/') === 0 || src.indexOf('drive.google.com') !== -1) {
+      img.removeAttribute('src');
+      img.style.display = 'none';
+      // 부모가 hero-img 같이 이미지 전용 컨테이너면 함께 숨김
+      var p = img.parentElement;
+      if (p && (p.classList.contains('hero-img') || p.classList.contains('timeline-img'))) p.style.display='none';
+    }
+  });
+}
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 },{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+<script src="tweaks.js" defer></script>
 </body>
 </html>

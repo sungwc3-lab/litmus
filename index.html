@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>가치관 실험실 Litmus</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="polish.css">
+<script>
+window.__LITMUS_TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{"palette":"litmus","headFont":"dm-serif","bodyFont":"noto-sans"}/*EDITMODE-END*/;
+// 환경 자동 감지: 배포된 사이트(GitHub Pages 등)에서는 이미지 ON, 이 작업 미리보기에서는 OFF.
+// 강제로 켜거나 끄려면 true/false 값으로 바꾸세요.
+window.LITMUS_HAS_IMAGES = !/claudeusercontent|claude\.ai|localhost/i.test(location.hostname);
+</script>
 <style>
 :root {
   --blue: #4A80B5;
@@ -218,7 +225,7 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
     <li><a href="#archive">실험 기록</a></li>
     <li><a href="#store">스토어</a></li>
   </ul>
-  <a class="nav-cta" href="https://nfyg.co/meetups/11049" target="_blank">실험 참여하기</a>
+  <a class="nav-cta" href="https://nfyg.co/meetups/11628" target="_blank">실험 참여하기</a>
   <button class="hamburger" id="hamburger" aria-label="메뉴">
     <span></span><span></span><span></span>
   </button>
@@ -229,7 +236,7 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
   <li><a href="auction.html">가치관 경매</a></li>
   <li><a href="#archive" onclick="closeMenu()">실험 기록</a></li>
   <li><a href="#store" onclick="closeMenu()">스토어</a></li>
-  <li class="mobile-cta"><a href="https://nfyg.co/meetups/11049" target="_blank">실험 참여하기 →</a></li>
+  <li class="mobile-cta"><a href="https://nfyg.co/meetups/11628" target="_blank">실험 참여하기 →</a></li>
 </ul>
 
 <!-- HERO -->
@@ -253,7 +260,7 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
     </p>
     <div class="hero-cta">
       <div class="hero-cta-row">
-        <a class="btn-primary" href="https://nfyg.co/meetups/11049" target="_blank">
+        <a class="btn-primary" href="https://nfyg.co/meetups/11628" target="_blank">
           이번 실험 참여하기 →
         </a>
       </div>
@@ -295,7 +302,7 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
           가치관 경매 · 선택 · 발견
         </div>
       </div>
-      <a class="btn-exp" href="https://nfyg.co/meetups/11049" target="_blank">
+      <a class="btn-exp" href="https://nfyg.co/meetups/11628" target="_blank">
         실험 참여하기 →
       </a>
     </div>
@@ -444,7 +451,7 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
       <div class="section-label">VALUE STORE</div>
       <p class="store-quote">"가치관은 머릿속 관념이 아니라,<br>손에 잡히는 도구가 되어야 합니다."</p>
       <p class="store-desc">가치 Store는 'Litmus'에서 발견한 당신만의 가치를 일상 속에서 잊지 않고 사용할 수 있도록 돕는 물리적인 도구와 굿즈를 만듭니다.</p>
-      <a class="btn-store" href="#">가치 스토어 둘러보기 — 준비 중</a>
+      <a class="btn-store" href="litmus_wadiz_story_v2.html">가치 스토어 둘러보기 →</a>
     </div>
     <div class="store-visual reveal">
       <div class="store-item"><div class="store-item-icon">🃏</div><div class="store-item-name">가치관 카드</div><div class="store-item-badge">준비 중</div></div>
@@ -460,8 +467,8 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
   <h2 class="cta-title reveal">Litmus 실험에 함께하세요</h2>
   <p class="cta-sub reveal">다음 실험이 궁금하다면 인스타그램을 팔로우하거나<br>지금 열린 실험에 바로 참여하세요.</p>
   <div class="cta-buttons reveal">
-    <a class="btn-white" href="https://nfyg.co/meetups/11049" target="_blank">이번 실험 참여하기 →</a>
-    <a class="btn-outline-white" href="https://instagram.com/ulit_official" target="_blank">@ulit_official 팔로우</a>
+    <a class="btn-white" href="https://nfyg.co/meetups/11628" target="_blank">이번 실험 참여하기 →</a>
+    <a class="btn-outline-white" href="https://www.instagram.com/ulit_offical/" target="_blank">@ulit_offical 팔로우</a>
   </div>
   <div class="cta-links reveal">
     <a class="cta-link" href="mailto:sungwc3@naver.com">기업 · 기관 협업 문의 →</a>
@@ -486,13 +493,15 @@ const libCards = [
   {name:'유연함',en:'Flexibility',emoji:'🌊',id:'1viy8WMxBOcu9V9v2twbEDn9oj9DUpboK'},
 ];
 const grid = document.getElementById('lib-grid');
-libCards.forEach(c => {
+libCards.slice(0, 6).forEach(c => {
   const el = document.createElement('a');
   el.className = 'lib-card';
   el.href = 'library.html';
+  const imgTag = window.LITMUS_HAS_IMAGES
+    ? `<img src="https://drive.google.com/uc?export=view&id=${c.id}" alt="${c.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lib-card-placeholder" style="display:none">${c.emoji}</div>`
+    : `<div class="lib-card-placeholder" style="display:flex">${c.emoji}</div>`;
   el.innerHTML = `
-    <img src="https://drive.google.com/uc?export=view&id=${c.id}" alt="${c.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="lib-card-placeholder" style="display:none">${c.emoji}</div>
+    ${imgTag}
     <div class="lib-card-name">${c.name}</div>
     <div class="lib-card-en">${c.en}</div>
   `;
@@ -510,17 +519,35 @@ const archives = [
   {num:'실험 #8',name:'가치관 오픈 테이블 시즌2',img:'exp8.jpg'},
 ];
 const arcGrid = document.getElementById('archive-grid');
-archives.forEach(a => {
+const ARC_INITIAL = 4;
+function renderArcCard(a){
   const el = document.createElement('div');
   el.className = 'arc-card reveal';
+  const imgTag = window.LITMUS_HAS_IMAGES
+    ? `<img src="images/${a.img}" alt="${a.name}" class="arc-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="arc-img-placeholder" style="display:none">🔬</div>`
+    : `<div class="arc-img-placeholder" style="display:flex">🔬</div>`;
   el.innerHTML = `
     <div class="arc-num">${a.num}</div>
     <div class="arc-name">${a.name}</div>
-    <img src="images/${a.img}" alt="${a.name}" class="arc-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="arc-img-placeholder" style="display:none">🔬</div>
+    ${imgTag}
   `;
-  arcGrid.appendChild(el);
-});
+  return el;
+}
+archives.slice(0, ARC_INITIAL).forEach(a => arcGrid.appendChild(renderArcCard(a)));
+if (archives.length > ARC_INITIAL) {
+  const more = document.createElement('div');
+  more.className = 'archive-more reveal';
+  more.innerHTML = `<button class="btn-arc-more" type="button">더보기 <span class="btn-arc-count">+${archives.length - ARC_INITIAL}</span></button>`;
+  arcGrid.parentElement.appendChild(more);
+  more.querySelector('button').addEventListener('click', () => {
+    archives.slice(ARC_INITIAL).forEach(a => {
+      const card = renderArcCard(a);
+      card.classList.add('visible');
+      arcGrid.appendChild(card);
+    });
+    more.remove();
+  });
+}
 
 // Scroll reveal
 const observer = new IntersectionObserver(entries => {
@@ -540,5 +567,6 @@ function closeMenu() {
   mobileMenu.classList.remove('on');
 }
 </script>
+<script src="tweaks.js" defer></script>
 </body>
 </html>
