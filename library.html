@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>가치관 라이브러리 — Litmus</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="polish.css">
+<link rel="stylesheet" href="polish.css?v=2">
 <script>
 window.__LITMUS_TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{"palette":"litmus","headFont":"dm-serif","bodyFont":"noto-sans"}/*EDITMODE-END*/;
 // 환경 자동 감지: 배포된 사이트에서는 이미지 ON, 작업 미리보기에서는 OFF.
@@ -26,7 +26,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:60px;dis
 .hero-label{font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:0.1em;margin-bottom:14px;}
 .hero-title{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,46px);color:#fff;line-height:1.2;margin-bottom:16px;}
 .hero-desc{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.7;font-weight:300;}
-.controls{padding:18px 6%;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:60px;z-index:90;}
+.controls{padding:18px 6%;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:102px;z-index:90;}
 .controls-inner{max-width:1260px;margin:0 auto;display:flex;flex-direction:column;gap:10px;}
 .top-row{display:flex;align-items:center;gap:12px;}
 .search-wrap{position:relative;flex:1;max-width:340px;}
@@ -66,6 +66,126 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:60px;dis
 .close-btn{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.07);border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
 .close-btn:hover{background:rgba(0,0,0,0.14);}
 .empty{display:none;text-align:center;padding:60px;color:var(--muted);}
+
+/* ===== 질문 맥락 선택 ===== */
+.ctx-overlay{display:none;position:fixed;inset:0;z-index:300;background:rgba(28,25,23,0.62);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:22px;}
+.ctx-overlay.on{display:flex;animation:fadeIn 0.3s ease;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.ctx-card{background:var(--white);border-radius:26px;max-width:540px;width:100%;padding:38px 34px 30px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,0.3);}
+.ctx-eyebrow{font-size:12px;letter-spacing:0.12em;color:var(--blue);margin-bottom:12px;font-weight:500;}
+.ctx-q{font-family:'DM Serif Display',serif;font-size:26px;color:var(--dark);line-height:1.3;margin-bottom:8px;}
+.ctx-sub{font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:26px;}
+.ctx-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;}
+.ctx-opt{border:1.5px solid var(--border);border-radius:18px;padding:20px 14px;background:var(--cream);cursor:pointer;transition:all 0.2s;text-align:center;}
+.ctx-opt:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,0.08);}
+.ctx-opt-emoji{font-size:32px;line-height:1;margin-bottom:9px;}
+.ctx-opt-name{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:3px;}
+.ctx-opt-desc{font-size:11.5px;color:var(--muted);line-height:1.5;}
+.ctx-back{background:none;border:none;font-size:13px;color:var(--muted);cursor:pointer;font-family:inherit;margin-bottom:16px;display:inline-flex;align-items:center;gap:4px;}
+.ctx-back:hover{color:var(--blue);}
+.ctx-qgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.ctx-qopt{border:1.5px solid var(--border);border-radius:18px;padding:18px 14px;background:var(--cream);cursor:pointer;transition:all 0.2s;text-align:left;}
+.ctx-qopt:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,0.08);}
+.ctx-qopt-tag{font-size:11px;font-weight:600;letter-spacing:0.06em;margin-bottom:6px;}
+.ctx-qopt-q{font-size:13.5px;color:var(--dark);line-height:1.5;font-weight:500;}
+
+/* 상단 맥락 칩 */
+.ctx-chip{display:inline-flex;align-items:center;gap:7px;padding:6px 8px 6px 13px;border-radius:100px;background:var(--dark);color:#fff;font-size:12.5px;cursor:pointer;border:none;font-family:inherit;transition:opacity 0.2s;max-width:100%;}
+.ctx-chip:hover{opacity:0.88;}
+.ctx-chip .chip-emoji{font-size:14px;flex-shrink:0;}
+.ctx-chip .chip-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:280px;}
+.ctx-chip .chip-change{font-size:11px;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.12);padding:3px 8px;border-radius:100px;flex-shrink:0;}
+.ctx-question-bar{background:#EEF5FC;border-bottom:1px solid var(--border);padding:10px 6%;font-size:13.5px;color:var(--dark);line-height:1.55;display:none;position:sticky;top:60px;z-index:91;}
+.ctx-question-bar.on{display:block;}
+.ctx-question-bar strong{font-weight:600;}
+@keyframes qbarFlash{0%{background:#4A80B5;color:#fff;}60%{background:#4A80B5;color:#fff;}100%{background:#EEF5FC;color:var(--dark);}}
+.ctx-question-bar.flash{animation:qbarFlash 0.9s ease forwards;}
+
+/* ===== 카드 선택 ===== */
+.card.selected{border-color:var(--sel-col,var(--blue));box-shadow:0 0 0 2px var(--sel-col,var(--blue)) inset, 0 10px 26px rgba(0,0,0,0.08);}
+.sel-toggle{position:absolute;top:9px;left:9px;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:var(--white);color:var(--muted);font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;transition:all 0.18s;padding:0;}
+.sel-toggle:hover{border-color:var(--blue);color:var(--blue);}
+.card.selected .sel-toggle{background:var(--sel-col,var(--blue));border-color:var(--sel-col,var(--blue));color:#fff;}
+
+/* 모달 선택 버튼 */
+.modal-sel-btn{width:100%;margin-top:22px;padding:14px;border-radius:14px;border:1.5px solid var(--blue);background:var(--blue);color:#fff;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;transition:all 0.2s;}
+.modal-sel-btn:hover{opacity:0.9;}
+.modal-sel-btn.is-sel{background:var(--white);color:var(--blue);}
+
+/* ===== 하단 플로팅 바 ===== */
+.fbar{position:fixed;left:0;right:0;bottom:0;z-index:150;background:var(--white);border-top:1px solid var(--border);box-shadow:0 -8px 30px rgba(0,0,0,0.08);transform:translateY(110%);transition:transform 0.34s cubic-bezier(.16,1,.3,1);}
+.fbar.on{transform:translateY(0);}
+.fbar-inner{max-width:1260px;margin:0 auto;padding:13px 6%;display:flex;align-items:center;gap:14px;}
+.fbar-left{flex:1;min-width:0;}
+.fbar-head{display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+.fbar-title{font-size:12.5px;font-weight:500;color:var(--dark);}
+.fbar-cnt{font-size:11px;color:var(--muted);}
+.fbar-clear{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline;text-underline-offset:2px;}
+.fbar-clear:hover{color:var(--blue);}
+.fbar-chips{display:flex;gap:6px;flex-wrap:wrap;}
+.fchip{display:inline-flex;align-items:center;gap:5px;padding:5px 7px 5px 11px;border-radius:100px;font-size:12px;color:#fff;font-weight:500;}
+.fchip button{background:rgba(255,255,255,0.25);border:none;color:#fff;width:16px;height:16px;border-radius:50%;cursor:pointer;font-size:11px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;}
+.fchip button:hover{background:rgba(255,255,255,0.45);}
+.fchip-active{outline:2px solid rgba(255,255,255,0.6);outline-offset:2px;}
+.fbar-cta{flex-shrink:0;padding:13px 22px;border-radius:13px;border:none;background:var(--dark);color:#fff;font-size:13.5px;font-weight:500;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all 0.2s;white-space:nowrap;}
+.fbar-cta:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.18);}
+.fbar-cta:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none;}
+
+/* 토스트 (최대 5개 안내) */
+.toast{position:fixed;left:50%;bottom:120px;transform:translateX(-50%) translateY(16px);z-index:400;background:var(--dark);color:#fff;padding:11px 20px;border-radius:100px;font-size:13px;opacity:0;pointer-events:none;transition:all 0.3s;}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ===== 해석 보기 오버레이 ===== */
+.interp-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:250;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto;}
+.interp-overlay.on{display:flex;}
+.interp{background:var(--white);border-radius:26px;max-width:600px;width:100%;position:relative;margin:auto;overflow:hidden;}
+.interp-top{padding:30px 34px 26px;color:#fff;position:relative;}
+.interp-top-label{font-size:11.5px;letter-spacing:0.08em;opacity:0.7;margin-bottom:13px;display:flex;align-items:center;gap:7px;}
+.interp-statement{font-family:'DM Serif Display',serif;font-size:23px;line-height:1.42;margin-bottom:16px;}
+.interp-phrases{display:flex;gap:6px;flex-wrap:wrap;}
+.interp-phrase{font-size:12px;padding:5px 11px;border-radius:100px;background:rgba(255,255,255,0.18);color:#fff;}
+.interp-body{padding:26px 34px 30px;}
+.interp-sec-lbl{font-size:11px;letter-spacing:0.06em;color:var(--muted);margin-bottom:14px;text-transform:uppercase;}
+.interp-mix{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px;}
+.mix-item{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--text);}
+.mix-dot{width:9px;height:9px;border-radius:50%;}
+.mix-item b{font-weight:700;}
+.mix-item span{color:var(--muted);font-size:11px;}
+
+/* 방향성 축 */
+.axis{margin-bottom:20px;}
+.axis-labels{display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px;}
+.axis-labels b{font-weight:700;color:var(--dark);}
+.axis-labels .dim{color:var(--muted);font-weight:400;}
+.axis-track{position:relative;height:8px;border-radius:100px;background:var(--warm);}
+.axis-fill{position:absolute;top:0;bottom:0;border-radius:100px;background:var(--blue);transition:all 0.5s ease;}
+.axis-marker{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--white);border:3px solid var(--dark);transform:translate(-50%,-50%);transition:left 0.5s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 6px rgba(0,0,0,0.2);}
+.axis-note{font-size:12px;color:var(--muted);margin-top:9px;line-height:1.6;}
+.axis-note b{color:var(--dark);font-weight:500;}
+
+/* 기록하기 */
+.record{margin-top:26px;padding-top:24px;border-top:1px solid var(--border);}
+.record-lbl{font-size:14px;font-weight:500;color:var(--dark);margin-bottom:4px;}
+.record-hint{font-size:12px;color:var(--muted);margin-bottom:13px;}
+.record-row{display:flex;gap:9px;}
+.record-input{flex:1;padding:13px 15px;border:1.5px solid var(--border);border-radius:13px;font-size:14px;font-family:inherit;background:var(--cream);color:var(--text);outline:none;resize:none;line-height:1.5;}
+.record-input:focus{border-color:var(--blue);}
+.record-save{flex-shrink:0;padding:0 20px;border-radius:13px;border:none;background:var(--blue);color:#fff;font-size:13.5px;font-weight:500;font-family:inherit;cursor:pointer;transition:all 0.2s;}
+.record-save:hover{opacity:0.9;}
+.record-save.saved{background:var(--green,#2DA06B);}
+.record-cap{display:flex;align-items:center;gap:8px;margin-top:14px;padding:11px 14px;border-radius:12px;background:var(--warm);font-size:12.5px;color:var(--muted);line-height:1.5;}
+.record-cap .cap-emoji{font-size:16px;}
+
+@media(max-width:600px){
+  .ctx-grid{grid-template-columns:1fr;}
+  .fbar-inner{flex-direction:column;align-items:stretch;gap:11px;padding:13px 5%;}
+  .fbar-cta{justify-content:center;}
+  .interp-top{padding:26px 22px 22px;}
+  .interp-body{padding:22px 22px 26px;}
+  .interp-statement{font-size:20px;}
+  .record-row{flex-direction:column;}
+  .record-save{padding:13px;}
+}
 </style>
 </head>
 <body>
@@ -80,9 +200,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:60px;dis
     <p class="hero-desc">인간의 보편적 욕구와 삶의 방향을 담은 탐색 공간입니다.<br>끌리는 가치 카드를 클릭해 천천히 탐색해보세요.</p>
   </div>
 </div>
+<div class="ctx-question-bar" id="ctxQuestionBar"></div>
 <div class="controls">
   <div class="controls-inner">
     <div class="top-row">
+      <button class="ctx-chip" id="ctxChip" style="display:none;"></button>
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
         <input class="search-input" id="q" type="text" placeholder="가치 이름 검색...">
@@ -107,9 +229,57 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:60px;dis
       <div class="modal-en" id="mEn"></div>
       <div class="modal-lbl">가치 정의</div>
       <div class="modal-def" id="mDef"></div>
+      <button class="modal-sel-btn" id="modalSelBtn"></button>
     </div>
   </div>
 </div>
+
+<!-- 질문 맥락 선택 오버레이 -->
+<div class="ctx-overlay" id="ctxOverlay">
+  <div class="ctx-card">
+    <!-- Step 1: 주제 선택 -->
+    <div id="ctxStep1">
+      <div class="ctx-eyebrow">QUESTION CARD</div>
+      <h2 class="ctx-q">어떤 주제로<br>탐색하고 있나요?</h2>
+      <p class="ctx-sub">오프라인에서 사용한 질문카드의 주제를 선택해주세요.</p>
+      <div class="ctx-grid" id="ctxGrid"></div>
+    </div>
+    <!-- Step 2: 질문카드 선택 -->
+    <div id="ctxStep2" style="display:none;">
+      <button class="ctx-back" id="ctxBackBtn">← 주제 다시 선택</button>
+      <div class="ctx-eyebrow" id="ctxStep2Eyebrow"></div>
+      <h2 class="ctx-q">어떤 질문카드를<br>사용했나요?</h2>
+      <p class="ctx-sub">해당 질문카드를 선택하면 가치 탐색이 시작됩니다.</p>
+      <div class="ctx-qgrid" id="ctxQGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 하단 플로팅 바 -->
+<div class="fbar" id="fbar">
+  <div class="fbar-inner">
+    <div class="fbar-left">
+      <div class="fbar-head">
+        <span class="fbar-title">선택한 가치</span>
+        <span class="fbar-cnt" id="fbarCnt">0 / 4</span>
+        <button class="fbar-clear" id="fbarClear">전체 해제</button>
+      </div>
+      <div class="fbar-chips" id="fbarChips"></div>
+    </div>
+    <button class="fbar-cta" id="interpBtn">해석 보기 →</button>
+  </div>
+</div>
+
+<!-- 해석 보기 오버레이 -->
+<div class="interp-overlay" id="interpOverlay">
+  <div class="interp">
+    <button class="close-btn" id="interpClose" style="z-index:3;">✕</button>
+    <div class="interp-top" id="interpTop"></div>
+    <div class="interp-body" id="interpBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
 <script>
 var CATS = ['전체','안전','동조','전통','박애','보편주의','자율','자극','쾌락주의','성취','권력'];
 var CAT_MAP = {
@@ -222,7 +392,7 @@ CATS.forEach(function(label) {
 
 // 카드 생성
 var grid = document.getElementById('grid');
-DATA.forEach(function(v) {
+DATA.forEach(function(v, idx) {
   var catKey = getCatKey(v.c);
   var color = COL[catKey] || '#888';
   var emoji = EMOJI[v.n] || '🔵';
@@ -231,6 +401,16 @@ DATA.forEach(function(v) {
   card.setAttribute('data-n', v.n);
   card.setAttribute('data-e', v.e.toLowerCase());
   card.setAttribute('data-c', v.c);
+  card.setAttribute('data-idx', idx);
+  card.style.setProperty('--sel-col', color);
+
+  var toggle = document.createElement('button');
+  toggle.className = 'sel-toggle';
+  toggle.innerHTML = '+';
+  toggle.title = '이 가치 선택하기';
+  toggle.onclick = (function(i, e) {
+    return function(ev) { ev.stopPropagation(); toggleSelect(i, e); };
+  })(idx, undefined);
 
   var dot = document.createElement('div');
   dot.className = 'dot';
@@ -257,6 +437,7 @@ DATA.forEach(function(v) {
   en.className = 'cen';
   en.textContent = v.e;
 
+  card.appendChild(toggle);
   card.appendChild(dot);
   card.appendChild(iw);
   card.appendChild(nm);
@@ -311,6 +492,8 @@ function openModal(v, catKey, color) {
   document.getElementById('mName').textContent = v.n;
   document.getElementById('mEn').textContent = v.e;
   document.getElementById('mDef').textContent = v.d;
+  currentModalIdx = DATA.indexOf(v);
+  updateModalSelBtn();
   document.getElementById('overlay').classList.add('on');
   document.body.style.overflow = 'hidden';
 }
@@ -325,9 +508,528 @@ document.getElementById('overlay').onclick = function(e) {
   if (e.target === this) closeModal();
 };
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeModal();
+  if (e.key === 'Escape') { closeModal(); closeInterp(); }
 });
+
+/* ============================================================
+   추가 기능: 질문 맥락 · 가치 선택 · 해석 · 기록
+   ============================================================ */
+var LS = {ctx:'litmus_ctx', sel:'litmus_selected', rec:'litmus_record'};
+var MAX_SEL = 4;
+var selected = {};        // { qKey: dataIdx } 객체 방식
+var currentCtx = null;    // 맥락 키 (love / career / life)
+var currentQKey = null;   // 현재 활성 질문 키 (예: 'love_1')
+var currentModalIdx = -1;
+
+var CONTEXTS = {
+  love:  {emoji:'💙', name:'연애', label:'연애'},
+  career:{emoji:'🧡', name:'진로', label:'진로'},
+  life:  {emoji:'💚', name:'인생', label:'인생'}
+};
+
+var QUESTIONS = {
+  love: [
+    {key:'love_1', tag:'끌림', q:'누군가에게 마음이 열리는 순간', full:'누군가에게 마음이 열릴 때, 가장 크게 작용하는 나의 가치는 무엇인가요?'},
+    {key:'love_2', tag:'갈등', q:'관계에서 부딪히는 순간',       full:'관계에서 갈등이 생길 때, 내가 가장 지키고 싶은 가치는 무엇인가요?'},
+    {key:'love_3', tag:'신뢰', q:'이 관계를 이어가게 만드는 것', full:'관계를 이어가게 만드는 나에게 가장 중요한 가치는 무엇인가요?'},
+    {key:'love_4', tag:'선택', q:'함께할 사람과 미래를 생각할 때',full:'함께할 사람과 미래를 생각할 때, 나에게 가장 중요한 가치는 무엇인가요?'}
+  ],
+  career: [
+    {key:'career_1', tag:'선택', q:'진로를 처음 선택할 때',          full:'진로를 처음 선택할 때, 나에게 가장 중요한 가치는 무엇인가요?'},
+    {key:'career_2', tag:'점검', q:'지금 일을 점검하고 싶을 때',     full:'가장 최근 일에서 성취나 만족을 느낀 순간, 가장 어울리는 가치는 무엇인가요?'},
+    {key:'career_3', tag:'변화', q:'변화가 필요하다고 느낄 때',      full:'지금 일에서 변화가 필요하다고 느낄 때, 내 선택을 안내해주는 가치는 무엇인가요?'},
+    {key:'career_4', tag:'미래', q:'나답게 일하는 미래를 상상할 때', full:'10년 후 나답게 일하고 있는 나를 상상할 때, 가장 중요한 가치는 무엇인가요?'}
+  ],
+  life: [
+    {key:'life_1', tag:'과거', q:'어린 시절의 나에게 중요했던 가치',  full:'어린 시절의 나에게 가장 중요했던 가치는 무엇인가요?'},
+    {key:'life_2', tag:'현재', q:'지금의 나를 가장 잘 표현하는 가치', full:'지금의 나를 가장 잘 표현해주는 가치는 무엇인가요?'},
+    {key:'life_3', tag:'관계', q:'내 삶에서 가장 중요한 관계',        full:'내 삶에서 가장 중요한 관계를 떠올릴 때, 핵심이 되는 가치는 무엇인가요?'},
+    {key:'life_4', tag:'방향', q:'앞으로의 나에게 가장 필요한 가치',  full:'앞으로의 내가 더 행복하기 위해 지금 가장 필요한 가치는 무엇인가요?'}
+  ]
+};
+
+var CAT_INTERP = {
+  '안전':    {s:'나는 안정·안전·예측 가능성을 중요하게 여기는 사람입니다.', p:['일상에 안정이 필요함','단단한 삶의 기반','마음의 평온']},
+  '동조':    {s:'나는 타인과 조화를 이루며 관계를 편안하게 유지하는 것이 중요합니다.', p:['예의·배려·신뢰','갈등보다 평화','관계의 조화']},
+  '전통':    {s:'나는 익숙한 방식과 전통적 가치에서 편안함을 느끼는 사람입니다.', p:['익숙한 질서의 안정감','관습·전통의 의미','뿌리에 대한 존중']},
+  '박애':    {s:'나는 가까운 사람들의 행복과 복지를 진심으로 중요하게 여깁니다.', p:['‘내 사람들’을 챙기는 마음','깊고 진정성 있는 관계','따뜻한 돌봄']},
+  '보편주의':{s:'나는 모두가 존중받고 평등한 세상을 중요하게 여깁니다.', p:['넓은 관점','자연·세상·인간에 대한 관심','평등과 정의']},
+  '자율':    {s:'나는 스스로 선택하고 결정하는 삶을 추구합니다.', p:['독립성','자기만의 방식','창의적이고 주체적인 에너지']},
+  '자극':    {s:'나는 새로움과 흥미로운 경험을 통해 에너지를 얻는 사람입니다.', p:['도전과 변화','반복보다 새 자극','지루함을 싫어함']},
+  '쾌락주의':{s:'나는 즐거움·감정·감각적 만족을 인생의 중요한 요소로 여깁니다.', p:['순간의 생동감','감정적 만족','즐거움 중심의 에너지']},
+  '성취':    {s:'나는 목표를 이루고 성장하는 과정에서 큰 동기를 얻습니다.', p:['성과 중심','목표 설정 → 달성','스스로를 발전시키는 의미']},
+  '권력':    {s:'나는 영향력·결정력·주도성을 통해 나의 가치를 드러내고 싶어합니다.', p:['리더십','영향력','위치·권한으로 삶을 설계']}
+};
+
+var GROWTH     = ['자율','자극','쾌락주의','성취','보편주의'];
+var STABILITY  = ['안전','동조','전통'];
+var INDIVIDUAL = ['자율','자극','쾌락주의','성취','권력'];
+var SOCIAL     = ['박애','보편주의','동조','전통','안전'];
+
+function catOf(idx){ return getCatKey(DATA[idx].c); }
+function colOf(idx){ return COL[catOf(idx)] || '#888'; }
+
+/* ---------- 질문 맥락 ---------- */
+
+(function initContext(){
+  // Step1: 주제 3개
+  var g = document.getElementById('ctxGrid');
+  Object.keys(CONTEXTS).forEach(function(key){
+    var c = CONTEXTS[key];
+    var b = document.createElement('div');
+    b.className = 'ctx-opt';
+    b.innerHTML = '<div class="ctx-opt-emoji">'+c.emoji+'</div>'+
+                  '<div class="ctx-opt-name">'+c.name+'</div>';
+    b.onclick = function(){ showStep2(key); };
+    g.appendChild(b);
+  });
+
+  // 항상 오버레이 띄우기 (매 진입마다 주제·질문 선택)
+  document.getElementById('ctxOverlay').classList.add('on');
+})();
+
+function showStep2(themeKey){
+  var c = CONTEXTS[themeKey];
+  document.getElementById('ctxStep1').style.display = 'none';
+  document.getElementById('ctxStep2').style.display = 'block';
+  document.getElementById('ctxStep2Eyebrow').textContent = c.emoji + ' ' + c.name + ' 질문카드';
+  var qg = document.getElementById('ctxQGrid');
+  qg.innerHTML = '';
+  QUESTIONS[themeKey].forEach(function(q){
+    var b = document.createElement('div');
+    b.className = 'ctx-qopt';
+    b.innerHTML = '<div class="ctx-qopt-tag" style="color:'+getThemeColor(themeKey)+'">'+q.tag+'</div>'+
+                  '<div class="ctx-qopt-q">'+q.q+'</div>';
+    b.onclick = function(){ setContext(themeKey, q); };
+    qg.appendChild(b);
+  });
+}
+
+document.getElementById('ctxBackBtn').onclick = function(){
+  document.getElementById('ctxStep2').style.display = 'none';
+  document.getElementById('ctxStep1').style.display = 'block';
+};
+
+function getThemeColor(key){
+  return key === 'love' ? '#E8457A' : key === 'career' ? '#F07C00' : '#2DA06B';
+}
+
+// 오버레이에서 질문카드 선택 시 — 새 주제/질문 시작
+function setContext(themeKey, q){
+  // 주제가 바뀌면 선택 리셋, 같은 주제면 유지하고 해당 질문으로 이동
+  if (currentCtx !== themeKey) {
+    selected = {};
+    persistSel();
+  }
+  applyContext(themeKey, q);
+}
+
+// UI 적용 (리셋 없이 상태만 반영)
+function applyContext(themeKey, q){
+  currentCtx = themeKey;
+  currentQKey = q.key;
+  localStorage.setItem(LS.ctx, q.key);
+  var c = CONTEXTS[themeKey];
+
+  // 상단 칩
+  var chip = document.getElementById('ctxChip');
+  chip.style.display = 'inline-flex';
+  chip.innerHTML = '<span class="chip-emoji">'+c.emoji+'</span>'+
+                   '<span class="chip-label">'+c.name+' · '+q.tag+'</span>'+
+                   '<span class="chip-change">변경</span>';
+
+  // 질문 바
+  updateQuestionBar();
+
+  // 필터·검색 초기화
+  document.getElementById('q').value = '';
+  activeFilter = '전체';
+  document.querySelectorAll('.fbtn').forEach(function(b){
+    b.classList.toggle('on', b.textContent === '전체');
+  });
+  doFilter();
+
+  // 오버레이 닫기 & Step 초기화
+  document.getElementById('ctxOverlay').classList.remove('on');
+  document.getElementById('ctxStep2').style.display = 'none';
+  document.getElementById('ctxStep1').style.display = 'block';
+
+  syncSelUI();
+}
+
+// 질문 바 텍스트 갱신
+function updateQuestionBar(){
+  if (!currentCtx || !currentQKey) return;
+  var qs = QUESTIONS[currentCtx];
+  var q = qs && qs.find(function(x){ return x.key === currentQKey; });
+  if (!q) return;
+  var bar = document.getElementById('ctxQuestionBar');
+  var qIdx = qs.indexOf(q);
+  bar.className = 'ctx-question-bar on';
+  bar.innerHTML =
+    '<span style="font-size:11px;color:var(--muted);margin-right:8px;">질문 '+(qIdx+1)+' / '+qs.length+'</span>'+
+    '<strong>'+q.tag+'</strong> — '+q.full;
+}
+
+document.getElementById('ctxChip').onclick = function(){
+  document.getElementById('ctxOverlay').classList.add('on');
+};
+document.getElementById('ctxOverlay').onclick = function(e){
+  if (e.target === this && currentCtx) this.classList.remove('on');
+};
+
+/* ---------- 가치 선택 ---------- */
+function toggleSelect(idx){
+  if (!currentQKey) { showToast('먼저 질문카드를 선택해주세요'); return; }
+  // 이미 이 질문에 같은 값이면 해제, 아니면 교체
+  if (selected[currentQKey] === idx) {
+    delete selected[currentQKey];
+  } else {
+    selected[currentQKey] = idx;
+  }
+  persistSel();
+  syncSelUI();
+}
+function clearSelection(){
+  selected = {};
+  persistSel();
+  syncSelUI();
+}
+function persistSel(){ localStorage.setItem(LS.sel, JSON.stringify(selected)); }
+
+// 선택된 값을 순서 배열로 반환 (현재 테마 기준)
+function selectedValues(){
+  if (!currentCtx) return [];
+  return QUESTIONS[currentCtx].map(function(q){ return selected[q.key]; })
+                               .filter(function(v){ return v !== undefined; });
+}
+// 총 선택 수
+function selectedCount(){
+  return Object.keys(selected).length;
+}
+
+function syncSelUI(){
+  cards.forEach(function(card){
+    var i = parseInt(card.getAttribute('data-idx'),10);
+    // 현재 질문의 선택값과 비교
+    var on = (selected[currentQKey] === i);
+    card.classList.toggle('selected', on);
+    card.querySelector('.sel-toggle').innerHTML = on ? '✓' : '+';
+  });
+  renderFbar();
+  updateModalSelBtn();
+}
+
+
+
+function renderFbar(){
+  if (!currentCtx || !currentQKey) {
+    document.getElementById('fbar').classList.remove('on');
+    return;
+  }
+  var qs = QUESTIONS[currentCtx];
+  var qIdx = qs.findIndex(function(q){ return q.key === currentQKey; });
+  var totalDone = selectedCount();
+  var allDone = (totalDone === qs.length);
+
+  document.getElementById('fbar').classList.add('on');
+
+  // 현재 질문 선택 여부
+  var curSel = selected[currentQKey];
+
+  // 카운트 표시
+  document.getElementById('fbarCnt').textContent = totalDone + ' / ' + qs.length;
+
+  // 칩 영역 — 완료된 이전 질문들
+  var wrap = document.getElementById('fbarChips');
+  wrap.innerHTML = '';
+  qs.forEach(function(q, i){
+    var val = selected[q.key];
+    if (val === undefined) return; // 미선택 질문은 칩 없음
+    var isCurrent = (q.key === currentQKey);
+    var chip = document.createElement('span');
+    chip.className = 'fchip' + (isCurrent ? ' fchip-active' : '');
+    chip.style.background = colOf(val);
+    chip.style.cursor = 'pointer';
+    chip.title = q.tag + ' 질문으로 돌아가기';
+    chip.innerHTML =
+      '<span style="font-size:10px;opacity:0.7;margin-right:2px;">Q'+(i+1)+'</span>'+
+      DATA[val].n;
+    // 칩 클릭 → 해당 질문으로 이동
+    chip.onclick = (function(qObj){
+      return function(){ goToQuestion(qObj.key); };
+    })(q);
+    wrap.appendChild(chip);
+  });
+
+  // CTA 버튼
+  var btn = document.getElementById('interpBtn');
+  if (allDone) {
+    btn.textContent = '해석 보기 →';
+    btn.disabled = false;
+    btn.onclick = goToResult;
+  } else {
+    var hasNext = (qIdx < qs.length - 1);
+    if (curSel !== undefined && hasNext) {
+      btn.textContent = '다음 질문 →';
+      btn.disabled = false;
+      btn.onclick = goNextQuestion;
+    } else if (curSel !== undefined && !hasNext) {
+      // 마지막 질문인데 아직 이전 질문 미완 → 해석은 아직
+      btn.textContent = '해석 보기 →';
+      btn.disabled = (totalDone < qs.length);
+      btn.onclick = goToResult;
+    } else {
+      btn.textContent = '가치를 선택해주세요';
+      btn.disabled = true;
+      btn.onclick = null;
+    }
+  }
+}
+
+// 질문 바 flash
+function flashQuestionBar(){
+  var bar = document.getElementById('ctxQuestionBar');
+  bar.classList.remove('flash');
+  void bar.offsetWidth; // reflow로 animation 재시작
+  bar.classList.add('flash');
+}
+
+// 다음 질문으로 전환
+function goNextQuestion(){
+  if (!currentCtx) return;
+  var qs = QUESTIONS[currentCtx];
+  var idx = qs.findIndex(function(q){ return q.key === currentQKey; });
+  if (idx < qs.length - 1) {
+    currentQKey = qs[idx + 1].key;
+    localStorage.setItem(LS.ctx, currentQKey);
+    updateQuestionBar();
+    flashQuestionBar();
+    updateCtxChip();
+    // 필터·검색 초기화
+    document.getElementById('q').value = '';
+    activeFilter = '전체';
+    document.querySelectorAll('.fbtn').forEach(function(b){
+      b.classList.toggle('on', b.textContent === '전체');
+    });
+    doFilter();
+    syncSelUI();
+    // 스크롤 상단
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+}
+
+// 특정 질문 키로 이동 (칩 클릭)
+function goToQuestion(qKey){
+  currentQKey = qKey;
+  localStorage.setItem(LS.ctx, qKey);
+  updateQuestionBar();
+  flashQuestionBar();
+  updateCtxChip();
+  document.getElementById('q').value = '';
+  activeFilter = '전체';
+  document.querySelectorAll('.fbtn').forEach(function(b){
+    b.classList.toggle('on', b.textContent === '전체');
+  });
+  doFilter();
+  syncSelUI();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// 상단 칩 텍스트 갱신
+function updateCtxChip(){
+  if (!currentCtx || !currentQKey) return;
+  var qs = QUESTIONS[currentCtx];
+  var q = qs && qs.find(function(x){ return x.key === currentQKey; });
+  if (!q) return;
+  var c = CONTEXTS[currentCtx];
+  var chip = document.getElementById('ctxChip');
+  chip.style.display = 'inline-flex';
+  chip.innerHTML = '<span class="chip-emoji">'+c.emoji+'</span>'+
+                   '<span class="chip-label">'+c.name+' · '+q.tag+'</span>'+
+                   '<span class="chip-change">변경</span>';
+}
+
+// result.html 이동
+function goToResult(){
+  if (!currentCtx) return;
+  var qs = QUESTIONS[currentCtx];
+  var vals = qs.map(function(q){ return selected[q.key]; })
+               .filter(function(v){ return v !== undefined; });
+  if (vals.length === 0) return;
+  var url = 'result.html?theme=' + currentCtx + '&v=' + vals.join(',');
+  window.location.href = url;
+}
+
+document.getElementById('fbarClear').onclick = clearSelection;
+
+/* 모달 선택 버튼 */
+function updateModalSelBtn(){
+  var btn = document.getElementById('modalSelBtn');
+  if (currentModalIdx < 0) return;
+  var on = (selected[currentQKey] === currentModalIdx);
+  btn.classList.toggle('is-sel', on);
+  btn.textContent = on ? '✓ 선택됨 — 해제하기' : '＋ 이 가치 선택하기';
+}
+document.getElementById('modalSelBtn').onclick = function(){
+  if (currentModalIdx >= 0) toggleSelect(currentModalIdx);
+};
+
+/* 토스트 */
+var toastTimer;
+function showToast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('on'); }, 2200);
+}
+
+/* ---------- 해석 보기 ---------- */
+document.getElementById('interpClose').onclick = closeInterp;
+document.getElementById('interpOverlay').onclick = function(e){
+  if (e.target === this) closeInterp();
+};
+
+function countIn(set){
+  return Object.values(selected).filter(function(i){ return set.indexOf(catOf(i)) >= 0; }).length;
+}
+
+function openInterp(){
+  var vals = Object.values(selected);
+  if (!vals.length) return;
+
+  // 1) 카테고리(컬러) 빈도 집계 → 가장 많이 선택된 카테고리
+  var counts = {};
+  vals.forEach(function(i){ var k = catOf(i); counts[k] = (counts[k]||0)+1; });
+  var dom = null, domN = 0;
+  Object.values(counts).forEach(function(n){ if(n > domN) domN = n; });
+  Object.keys(counts).forEach(function(k){ if(counts[k] === domN) dom = k; });
+  var domCol = COL[dom] || '#444';
+  var info = CAT_INTERP[dom];
+
+  // 상단 (지배 카테고리 해석)
+  var ctx = CONTEXTS[currentCtx];
+  var top = document.getElementById('interpTop');
+  top.style.background = domCol;
+  top.innerHTML =
+    '<div class="interp-top-label">'+
+      (ctx ? ctx.emoji+' '+ctx.name+' · ' : '')+
+      '가장 두드러진 가치 — '+dom+'</div>'+
+    '<div class="interp-statement">'+info.s+'</div>'+
+    '<div class="interp-phrases">'+
+      info.p.map(function(x){ return '<span class="interp-phrase">'+x+'</span>'; }).join('')+
+    '</div>';
+
+  // 본문: 카테고리 구성 + 방향성 축
+  var mix = Object.keys(counts).sort(function(a,b){ return counts[b]-counts[a]; }).map(function(k){
+    return '<span class="mix-item"><span class="mix-dot" style="background:'+COL[k]+'"></span>'+
+           '<b>'+k+'</b> <span>'+counts[k]+'</span></span>';
+  }).join('');
+
+  var g = countIn(GROWTH), st = countIn(STABILITY);
+  var ind = countIn(INDIVIDUAL), soc = countIn(SOCIAL);
+
+  var body = document.getElementById('interpBody');
+  body.innerHTML =
+    '<div class="interp-sec-lbl">선택한 가치의 구성</div>'+
+    '<div class="interp-mix">'+mix+'</div>'+
+    '<div class="interp-sec-lbl">나의 방향성</div>'+
+    axisHTML('성장', '안정', g, st)+
+    axisHTML('개인', '사회', ind, soc)+
+    recordHTML();
+
+  bindRecord();
+  document.getElementById('interpOverlay').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+
+function axisHTML(leftLbl, rightLbl, leftN, rightN){
+  var tot = leftN + rightN;
+  var pct = tot > 0 ? Math.round(rightN/tot*100) : 50; // 0=왼쪽, 100=오른쪽
+  // 중앙(50%)에서 마커까지 채움
+  var fillLeft = Math.min(pct,50), fillW = Math.abs(pct-50);
+  var lean, note;
+  if (tot === 0) { lean = '균형'; note = '이 축에 해당하는 가치가 없어요.'; }
+  else if (pct < 42) { lean = leftLbl; }
+  else if (pct > 58) { lean = rightLbl; }
+  else { lean = '균형'; }
+  if (tot > 0) {
+    note = '<b>'+leftLbl+'</b> '+leftN+' · <b>'+rightLbl+'</b> '+rightN+
+           ' — 당신의 가치들은 <b>'+lean+'</b>'+(lean==='균형'?' 지점에':' 쪽으로')+' 기울어 있어요.';
+  }
+  return '<div class="axis">'+
+    '<div class="axis-labels"><span class="'+(lean===leftLbl?'':'dim')+'"><b>'+leftLbl+'</b></span>'+
+      '<span class="'+(lean===rightLbl?'':'dim')+'"><b>'+rightLbl+'</b></span></div>'+
+    '<div class="axis-track">'+
+      '<div class="axis-fill" style="left:'+fillLeft+'%;width:'+fillW+'%;"></div>'+
+      '<div class="axis-marker" style="left:'+pct+'%;"></div>'+
+    '</div>'+
+    '<div class="axis-note">'+note+'</div>'+
+  '</div>';
+}
+
+/* ---------- 기록하기 ---------- */
+function recordHTML(){
+  var saved = localStorage.getItem(LS.rec) || '';
+  return '<div class="record">'+
+    '<div class="record-lbl">오늘 발견한 나의 가치관을 한 줄로 적어보세요</div>'+
+    '<div class="record-hint">짧은 문장이어도 좋아요. 지금의 마음을 남겨두면 다음에 비교할 수 있어요.</div>'+
+    '<div class="record-row">'+
+      '<textarea class="record-input" id="recInput" rows="2" placeholder="예: 나는 새로움 속에서 나답게 살고 싶다.">'+
+        saved.replace(/</g,'&lt;')+'</textarea>'+
+      '<button class="record-save" id="recSave">저장</button>'+
+    '</div>'+
+    '<div class="record-cap"><span class="cap-emoji">📸</span>'+
+      '이 화면을 캡처해서 기록해두면, 오늘의 가치관을 오래 간직할 수 있어요.</div>'+
+  '</div>';
+}
+function bindRecord(){
+  var input = document.getElementById('recInput');
+  var btn = document.getElementById('recSave');
+  if (!input || !btn) return;
+  btn.onclick = function(){
+    localStorage.setItem(LS.rec, input.value);
+    btn.textContent = '저장됨 ✓';
+    btn.classList.add('saved');
+    setTimeout(function(){ btn.textContent = '저장'; btn.classList.remove('saved'); }, 1800);
+  };
+}
+
+function closeInterp(){
+  document.getElementById('interpOverlay').classList.remove('on');
+  document.body.style.overflow = '';
+}
+
+/* ---------- 초기 복원 ---------- */
+(function restore(){
+  try {
+    var s = JSON.parse(localStorage.getItem(LS.sel) || '{}');
+    if (s && typeof s === 'object' && !Array.isArray(s)) {
+      selected = {};
+      Object.keys(s).forEach(function(k){
+        var v = s[k];
+        if (typeof v === 'number' && v >= 0 && v < DATA.length) selected[k] = v;
+      });
+    }
+  } catch(e){ selected = {}; }
+  syncSelUI();
+})();
 </script>
-<script src="tweaks.js" defer></script>
+<script src="tweaks.js?v=2" defer></script>
+<template id="__bundler_thumbnail" data-bg-color="#FAF8F3">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#FAF8F3"/>
+    <g transform="translate(600 400)">
+      <circle cx="-150" cy="-90" r="70" fill="#4A80B5"/>
+      <circle cx="0" cy="-90" r="70" fill="#E8915B"/>
+      <circle cx="150" cy="-90" r="70" fill="#5D9B6E"/>
+      <circle cx="-150" cy="90" r="70" fill="#B57FC0"/>
+      <circle cx="0" cy="90" r="70" fill="#D96A8E"/>
+      <circle cx="150" cy="90" r="70" fill="#C84B4B"/>
+    </g>
+    <text x="600" y="720" text-anchor="middle" font-family="Georgia, 'DM Serif Display', serif" font-size="58" fill="#1C1917">Litmus</text>
+  </svg>
+</template>
 </body>
 </html>
