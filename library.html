@@ -123,13 +123,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:60px;dis
 .fbar-clear{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline;text-underline-offset:2px;}
 .fbar-clear:hover{color:var(--blue);}
 .fbar-chips{display:flex;gap:6px;flex-wrap:wrap;}
-.fchip{display:inline-flex;align-items:center;gap:5px;padding:5px 7px 5px 11px;border-radius:100px;font-size:12px;color:#fff;font-weight:500;}
-.fchip button{background:rgba(255,255,255,0.25);border:none;color:#fff;width:16px;height:16px;border-radius:50%;cursor:pointer;font-size:11px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;}
-.fchip button:hover{background:rgba(255,255,255,0.45);}
+.fchip{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:100px;font-size:12px;color:#fff;font-weight:500;}
 .fchip-active{outline:2px solid rgba(255,255,255,0.6);outline-offset:2px;}
+.fbar-btns{display:flex;gap:8px;flex-shrink:0;}
 .fbar-cta{flex-shrink:0;padding:13px 22px;border-radius:13px;border:none;background:var(--dark);color:#fff;font-size:13.5px;font-weight:500;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all 0.2s;white-space:nowrap;}
 .fbar-cta:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.18);}
 .fbar-cta:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none;}
+.fbar-cta-sub{flex-shrink:0;padding:13px 18px;border-radius:13px;border:1.5px solid var(--border);background:var(--white);color:var(--text);font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;display:none;align-items:center;gap:7px;transition:all 0.2s;white-space:nowrap;}
+.fbar-cta-sub:hover{border-color:var(--blue);color:var(--blue);}
+.fbar-cta-sub.on{display:flex;}
 
 /* 토스트 (최대 5개 안내) */
 .toast{position:fixed;left:50%;bottom:120px;transform:translateX(-50%) translateY(16px);z-index:400;background:var(--dark);color:#fff;padding:11px 20px;border-radius:100px;font-size:13px;opacity:0;pointer-events:none;transition:all 0.3s;}
@@ -249,7 +251,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:60px;dis
       <button class="ctx-back" id="ctxBackBtn">← 주제 다시 선택</button>
       <div class="ctx-eyebrow" id="ctxStep2Eyebrow"></div>
       <h2 class="ctx-q">어떤 질문카드를<br>사용했나요?</h2>
-      <p class="ctx-sub">해당 질문카드를 선택하면 가치 탐색이 시작됩니다.</p>
+      <p class="ctx-sub">순서대로 탐색해보세요. 2개 이상 완료하면 결과를 볼 수 있어요.</p>
       <div class="ctx-qgrid" id="ctxQGrid"></div>
     </div>
   </div>
@@ -266,7 +268,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:60px;dis
       </div>
       <div class="fbar-chips" id="fbarChips"></div>
     </div>
-    <button class="fbar-cta" id="interpBtn">해석 보기 →</button>
+    <div class="fbar-btns">
+      <button class="fbar-cta-sub" id="nextQBtn">다음 질문 →</button>
+      <button class="fbar-cta" id="interpBtn">해석 보기 →</button>
+    </div>
   </div>
 </div>
 
@@ -681,14 +686,18 @@ document.getElementById('ctxOverlay').onclick = function(e){
 /* ---------- 가치 선택 ---------- */
 function toggleSelect(idx){
   if (!currentQKey) { showToast('먼저 질문카드를 선택해주세요'); return; }
-  // 이미 이 질문에 같은 값이면 해제, 아니면 교체
+  // 이미 이 질문에 같은 값이면 해제만 (자동 이동 없음)
   if (selected[currentQKey] === idx) {
     delete selected[currentQKey];
-  } else {
-    selected[currentQKey] = idx;
+    persistSel();
+    syncSelUI();
+    return;
   }
+  // 새 가치 선택 → 저장 후 다음 미선택 질문으로 자동 이동
+  selected[currentQKey] = idx;
   persistSel();
   syncSelUI();
+  setTimeout(function(){ goNextUnselected(); }, 320);
 }
 function clearSelection(){
   selected = {};
@@ -731,6 +740,7 @@ function renderFbar(){
   var qIdx = qs.findIndex(function(q){ return q.key === currentQKey; });
   var totalDone = selectedCount();
   var allDone = (totalDone === qs.length);
+  var enoughDone = (totalDone >= 2);
 
   document.getElementById('fbar').classList.add('on');
 
@@ -764,26 +774,27 @@ function renderFbar(){
 
   // CTA 버튼
   var btn = document.getElementById('interpBtn');
-  if (allDone) {
-    btn.textContent = '해석 보기 →';
+  var nextBtn = document.getElementById('nextQBtn');
+  var hasUnselected = qs.some(function(q){ return selected[q.key] === undefined; });
+
+  // 결과보기 버튼
+  if (enoughDone) {
+    btn.textContent = allDone ? '해석 보기 →' : '지금 결과 보기 →';
     btn.disabled = false;
     btn.onclick = goToResult;
   } else {
-    var hasNext = (qIdx < qs.length - 1);
-    if (curSel !== undefined && hasNext) {
-      btn.textContent = '다음 질문 →';
-      btn.disabled = false;
-      btn.onclick = goNextQuestion;
-    } else if (curSel !== undefined && !hasNext) {
-      // 마지막 질문인데 아직 이전 질문 미완 → 해석은 아직
-      btn.textContent = '해석 보기 →';
-      btn.disabled = (totalDone < qs.length);
-      btn.onclick = goToResult;
-    } else {
-      btn.textContent = '가치를 선택해주세요';
-      btn.disabled = true;
-      btn.onclick = null;
-    }
+    btn.textContent = '가치를 선택해주세요 (2개 이상)';
+    btn.disabled = true;
+    btn.onclick = null;
+  }
+
+  // 다음 질문 버튼 — 미선택 질문이 있을 때만 표시
+  if (hasUnselected && enoughDone) {
+    nextBtn.classList.add('on');
+    nextBtn.onclick = goNextUnselected;
+  } else {
+    nextBtn.classList.remove('on');
+    nextBtn.onclick = null;
   }
 }
 
@@ -793,6 +804,19 @@ function flashQuestionBar(){
   bar.classList.remove('flash');
   void bar.offsetWidth; // reflow로 animation 재시작
   bar.classList.add('flash');
+}
+
+// 미선택 질문 중 첫 번째로 이동 (없으면 아무것도 안 함)
+function goNextUnselected(){
+  if (!currentCtx) return;
+  var qs = QUESTIONS[currentCtx];
+  var next = qs.find(function(q){ return selected[q.key] === undefined; });
+  if (next) {
+    goToQuestion(next.key);
+    flashQuestionBar();
+  }
+  // 모두 선택됐으면 자동 이동 없이 fbar에서 결과보기 버튼 활성화만
+  renderFbar();
 }
 
 // 다음 질문으로 전환
@@ -872,7 +896,10 @@ function updateModalSelBtn(){
   btn.textContent = on ? '✓ 선택됨 — 해제하기' : '＋ 이 가치 선택하기';
 }
 document.getElementById('modalSelBtn').onclick = function(){
-  if (currentModalIdx >= 0) toggleSelect(currentModalIdx);
+  if (currentModalIdx >= 0) {
+    toggleSelect(currentModalIdx);
+    closeModal();
+  }
 };
 
 /* 토스트 */
@@ -903,8 +930,10 @@ function openInterp(){
   var counts = {};
   vals.forEach(function(i){ var k = catOf(i); counts[k] = (counts[k]||0)+1; });
   var dom = null, domN = 0;
-  Object.values(counts).forEach(function(n){ if(n > domN) domN = n; });
-  Object.keys(counts).forEach(function(k){ if(counts[k] === domN) dom = k; });
+  selected.forEach(function(i){
+    var k = catOf(i);
+    if (counts[k] > domN) { domN = counts[k]; dom = k; }
+  });
   var domCol = COL[dom] || '#444';
   var info = CAT_INTERP[dom];
 
