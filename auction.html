@@ -144,7 +144,7 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
 <nav>
   <a class="nav-back" href="index.html">← 홈으로</a>
   <a class="nav-brand" href="index.html">가치관 실험실 <span>"Litmus"</span></a>
-  <a class="nav-cta" href="#contact">신청하기</a>
+  <a class="nav-cta" href="#contact">문의하기</a>
 </nav>
 
 <!-- 01. HERO -->
@@ -155,7 +155,7 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
       <h1 class="hero-title">가치관은 말이 아니라<br>선택으로 드러납니다</h1>
       <p class="hero-desc">60개의 가치관을 탐색하고, 대화하고, 경매하는 과정 속에서<br>미처 몰랐던 자신의 가치관을 직접 발견하는 몰입형 심리 워크숍입니다.</p>
       <div class="hero-cta">
-        <a class="btn-primary" href="#contact">신청하기 →</a>
+        <a class="btn-primary" href="#contact">문의하기 →</a>
         <a class="btn-outline" href="#program">프로그램 살펴보기</a>
       </div>
     </div>
@@ -347,7 +347,7 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
         <label for="cf-memo">신청 이유 및 궁금한 점</label>
         <input type="text" id="cf-memo" name="신청 이유 및 궁금한 점" placeholder="신청 이유 및 궁금한 점">
       </div>
-      <button type="submit" class="btn-submit">신청하기 →</button>
+      <button type="submit" class="btn-submit">문의하기 →</button>
     </form>
   </div>
   <div class="reveal">
@@ -396,11 +396,11 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }).then(function(res){
       if (res.ok) { showSuccess(); }
       else { res.json().then(function(d){
-        btn.disabled = false; btn.textContent = '신청하기 →';
+        btn.disabled = false; btn.textContent = '문의하기 →';
         alert((d.errors && d.errors.map(function(x){return x.message;}).join('\n')) || '전송에 실패했어요. 잠시 후 다시 시도해 주세요.');
-      }).catch(function(){ btn.disabled=false; btn.textContent='신청하기 →'; alert('전송에 실패했어요. 잠시 후 다시 시도해 주세요.'); }); }
+      }).catch(function(){ btn.disabled=false; btn.textContent='문의하기 →'; alert('전송에 실패했어요. 잠시 후 다시 시도해 주세요.'); }); }
     }).catch(function(){
-      btn.disabled = false; btn.textContent = '신청하기 →';
+      btn.disabled = false; btn.textContent = '문의하기 →';
       alert('네트워크 오류로 전송에 실패했어요. 잠시 후 다시 시도해 주세요.');
     });
   });
