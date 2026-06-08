@@ -143,8 +143,17 @@ section{padding:80px 6%;}
 .arc-card:hover::before{opacity:1;}
 .arc-num{font-size:12px;color:var(--blue);font-weight:500;margin-bottom:8px;letter-spacing:0.05em;}
 .arc-name{font-size:16px;font-weight:500;color:var(--dark);line-height:1.35;}
-.arc-img{width:100%;height:120px;object-fit:cover;border-radius:10px;margin-top:14px;background:var(--warm);}
-.arc-img-placeholder{width:100%;height:120px;border-radius:10px;margin-top:14px;background:var(--warm);display:flex;align-items:center;justify-content:center;font-size:32px;}
+.arc-img{width:100%;height:140px;object-fit:cover;border-radius:10px;margin-top:12px;background:var(--warm);}
+.arc-img-placeholder{width:100%;height:140px;border-radius:10px;margin-top:12px;background:var(--warm);display:flex;align-items:center;justify-content:center;font-size:32px;}
+.arc-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-top:6px;font-weight:300;}
+.arc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.arc-tag{font-size:11px;background:var(--blue-light);color:#185FA5;border-radius:100px;padding:3px 10px;}
+.arc-expandable{max-height:0;overflow:hidden;transition:max-height 0.35s ease;}
+.arc-card:hover .arc-expandable{max-height:200px;}
+.arc-expand-inner{padding-top:12px;margin-top:12px;border-top:1px solid var(--border);}
+.arc-record{display:flex;flex-direction:column;gap:5px;}
+.arc-record-row{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);}
+.arc-record-icon{font-size:13px;color:var(--blue);}
 
 /* VOICES */
 .voices{background:var(--dark);padding:80px 6%;}
@@ -509,14 +518,69 @@ libCards.slice(0, 6).forEach(c => {
 });
 
 const archives = [
-  {num:'실험 #1',name:'커플 가치관 실험',img:'exp1.jpg'},
-  {num:'실험 #2',name:'일과 기질의 관계 실험',img:'exp2.jpg'},
-  {num:'실험 #3',name:'가치관 오픈 테이블',img:'exp3.jpg'},
-  {num:'실험 #4',name:'스타트업 가치관 빌딩 실험',img:'exp4.jpg'},
-  {num:'실험 #5',name:'커플 가치관 실험 시즌2',img:'exp5.jpg'},
-  {num:'실험 #6',name:'가치관 경매 시즌2',img:'exp6.jpg'},
-  {num:'실험 #7',name:'인생 후반의 가치관 체크',img:'exp7.jpg'},
-  {num:'실험 #8',name:'가치관 오픈 테이블 시즌2',img:'exp8.jpg'},
+  {
+    num:'실험 #1', name:'커플 가치관 실험', img:'exp1.jpg',
+    category:'관계 실험',
+    desc:'PREPARE/ENRICH 검사를 색다른 공간과 컨셉으로 재해석한 관계 탐색 실험',
+    tags:['#관계실험','#커플','#PREPARE_ENRICH'],
+    record:{date:'2024년 6월', place:'YPT 파티룸', target:'결혼 적령기 커플'}
+  },
+  {
+    num:'실험 #2', name:'일과 기질의 관계 실험', img:'exp2.jpg',
+    category:'일과 성장 실험',
+    desc:'기질과 가치관이 일에 미치는 영향을 탐색하는 실험',
+    tags:['#일과성장실험','#TCI','#가치관경매','#기업'],
+    record:{date:'2024년 7월', place:'로컬 모티브', target:'NHN 직원'}
+  },
+  {
+    num:'실험 #3', name:'스타트업 가치관 팀 빌딩 실험', img:'exp3.jpg',
+    category:'일과 성장 실험',
+    desc:'팀의 기질, 강점, 가치를 연결하여 조직의 방향성을 탐색하는 실험',
+    tags:['#일과성장실험','#TCI','#강점검사','#가치관경매','#스타트업'],
+    record:{date:'2024년 8월', place:'쑥쑥찰칵 오피스', target:'쑥쑥찰칵 임직원'}
+  },
+  {
+    num:'실험 #4', name:'가치관 경매 시즌 1–5', img:'exp4.jpg',
+    category:'커뮤니티 실험',
+    desc:'가치관을 직접 선택하고 거래하며 자신의 기준을 발견하는 실험',
+    tags:['#커뮤니티실험','#가치관경매','#넷플연가'],
+    record:{date:'2024년 9월 — 현재', place:'홍대 · 을지로 사생활', target:'20–30대 직장인', note:'넷플연가 5회 진행'}
+  },
+  {
+    num:'실험 #5', name:'가치관 오픈 테이블', img:'exp5.jpg',
+    category:'커뮤니티 실험',
+    desc:'TCI와 가치관 경매를 통해 서로의 기준을 나누는 오픈 커뮤니티 실험',
+    tags:['#커뮤니티실험','#TCI','#가치관경매'],
+    record:{date:'2025년 3월', place:'로컬 모티브', target:'30–40대 커뮤니티'}
+  },
+  {
+    num:'실험 #6', name:'커플 가치관 실험 2 · 커플의 맛', img:'exp6.jpg',
+    category:'관계 실험',
+    desc:'커플 심리검사를 다이닝 코스로 재해석한 관계 탐색 실험',
+    tags:['#관계실험','#커플','#심리검사','#다이닝'],
+    record:{date:'2025년 7월', place:'스페이스 룸', target:'미혼 및 기혼 커플'}
+  },
+  {
+    num:'실험 #7', name:'가치관 딥다이브', img:'exp7.jpg',
+    category:'일과 성장 실험',
+    desc:'TCI, 가치관 경매, 감정 탐색, 현실치료를 통해 자신을 깊이 이해하는 4회기 탐색 프로그램',
+    tags:['#일과성장실험','#TCI','#가치관경매','#감정탐색','#현실치료'],
+    record:{date:'2025년 9월', place:'을지로 사생활', target:'30대 직장인'}
+  },
+  {
+    num:'실험 #8', name:'사업가의 가치관 실험', img:'exp8.jpg',
+    category:'일과 성장 실험',
+    desc:'성과를 넘어 사업을 지속하게 만드는 선택의 기준을 탐색하는 실험',
+    tags:['#일과성장실험','#가치관경매','#소상공인','#성과보고회'],
+    record:{date:'2025년 12월 17일', place:'페이스쉐어 서울역센터 루비홀', target:'소상공인 대표 50명'}
+  },
+  {
+    num:'실험 #9', name:'가치관 오픈 테이블 S2', img:'exp9.jpg',
+    category:'커뮤니티 실험',
+    desc:'소규모 그룹에서 깊이 있는 가치관 대화를 나누는 실험',
+    tags:['#커뮤니티실험','#가치관경매'],
+    record:{date:'2026년 2월', place:'토닥토닥 힐링센터', target:'40–50대 직장인'}
+  },
 ];
 const arcGrid = document.getElementById('archive-grid');
 const ARC_INITIAL = 4;
@@ -526,10 +590,25 @@ function renderArcCard(a){
   const imgTag = window.LITMUS_HAS_IMAGES
     ? `<img src="images/${a.img}" alt="${a.name}" class="arc-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="arc-img-placeholder" style="display:none">🔬</div>`
     : `<div class="arc-img-placeholder" style="display:flex">🔬</div>`;
+  const tagsHtml = a.tags.map(t=>`<span class="arc-tag">${t}</span>`).join('');
+  const r = a.record;
+  const recordHtml = `
+    ${r.date ? `<div class="arc-record-row"><span class="arc-record-icon">📅</span>${r.date}</div>` : ''}
+    ${r.place ? `<div class="arc-record-row"><span class="arc-record-icon">📍</span>${r.place}</div>` : ''}
+    ${r.target ? `<div class="arc-record-row"><span class="arc-record-icon">👥</span>${r.target}</div>` : ''}
+    ${r.note ? `<div class="arc-record-row"><span class="arc-record-icon">📌</span>${r.note}</div>` : ''}
+  `;
   el.innerHTML = `
     <div class="arc-num">${a.num}</div>
     <div class="arc-name">${a.name}</div>
+    <div class="arc-desc">${a.desc}</div>
+    <div class="arc-tags">${tagsHtml}</div>
     ${imgTag}
+    <div class="arc-expandable">
+      <div class="arc-expand-inner">
+        <div class="arc-record">${recordHtml}</div>
+      </div>
+    </div>
   `;
   return el;
 }
