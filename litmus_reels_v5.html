@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Litmus Reels v4</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.reel {
+  width: 1080px;
+  height: 1920px;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  flex-shrink: 0;
+}
+.cut {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.cut.active { opacity: 1; }
+.bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+.kenburns { animation: kenburns 4s ease-out forwards; }
+@keyframes kenburns {
+  from { transform: scale(1.0); }
+  to { transform: scale(1.1); }
+}
+.fixed { transform: scale(1.0); }
+.pan-right { animation: panRight 4s ease-out forwards; }
+@keyframes panRight {
+  from { transform: scale(1.05) translateX(-2%); }
+  to { transform: scale(1.05) translateX(2%); }
+}
+.pan-up { animation: panUp 4s ease-out forwards; }
+@keyframes panUp {
+  from { transform: scale(1.05) translateY(2%); }
+  to { transform: scale(1.05) translateY(-2%); }
+}
+.zoom-in { animation: zoomIn 4s ease-out forwards; }
+@keyframes zoomIn {
+  from { transform: scale(1.0); }
+  to { transform: scale(1.15); }
+}
+.bg1  { background-image: url('https://raw.githubusercontent.com/sungwc3-lab/litmus/main/images/bg1.png'); }
+.bg2  { background-image: url('https://raw.githubusercontent.com/sungwc3-lab/litmus/main/images/bg2.jpg'); background-size: 150%; background-position: center; }
+.bg3  { background-image: url('https://raw.githubusercontent.com/sungwc3-lab/litmus/main/images/bg3.png'); background-position: center top; }
+.bg4  { background-image: url('https://raw.githubusercontent.com/sungwc3-lab/litmus/main/images/bg4.jpg'); }
+.bg5  { background-image: url('https://raw.githubusercontent.com/sungwc3-lab/litmus/main/images/bg5.png'); background-position: center top; }
+.bg6  { background-image: url('https://raw.githubusercontent.com/sungwc3-lab/litmus/main/images/bg6.png'); }
+.bg7  { background-image: url('https://raw.githubusercontent.com/sungwc3-lab/litmus/main/images/bg7.jpg'); }
+.bg8  { background-image: url('https://raw.githubusercontent.com/sungwc3-lab/litmus/main/images/bg8.png'); background-position: center center; }
+.bg9  { background-image: url('https://raw.githubusercontent.com/sungwc3-lab/litmus/main/images/bg9.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center center; }
+.gradient {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+}
+.text-block {
+  position: absolute;
+  bottom: 160px;
+  left: 80px; right: 80px;
+  opacity: 0;
+}
+.text-block.show { animation: fadeInUp 0.6s ease 0.6s forwards; }
+.sub {
+  font-size: 32px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.12em;
+  margin-bottom: 20px;
+}
+.main {
+  font-size: 56px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.6;
+  word-break: keep-all;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+.main.sm {
+  font-size: 48px;
+  font-weight: 500;
+}
+.cta-title {
+  font-size: 52px;
+  font-weight: 700;
+  color: #1C1917;
+  line-height: 1.5;
+  margin-bottom: 36px;
+  word-break: keep-all;
+}
+.cta-sub {
+  font-size: 34px;
+  font-weight: 400;
+  color: #78746E;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+}
+.cta-brand {
+  margin-top: 36px;
+  font-size: 34px;
+  font-weight: 600;
+  color: #4A80B5;
+  letter-spacing: 0.06em;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.brand {
+  position: absolute;
+  top: 60px; right: 50px;
+  font-size: 28px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em;
+  z-index: 10;
+}
+.progress {
+  position: absolute;
+  top: 60px; left: 50px;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+.progress-dot {
+  width: 48px; height: 6px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 3px;
+  transition: background 0.3s;
+}
+.progress-dot.active { background: rgba(255,255,255,0.9); }
+
+/* 컷 10 엔딩 */
+.cut-ending { background: #FAF8F3; }
+.ending-block {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 80px;
+  text-align: center;
+  opacity: 0;
+}
+.ending-block.show { animation: fadeInUp 0.8s ease 0.4s forwards; }
+.ending-line {
+  width: 80px; height: 4px;
+  background: #4A80B5;
+  margin-bottom: 60px;
+  opacity: 0.6;
+}
+.ending-footer {
+  position: absolute;
+  bottom: 70px; left: 0; right: 0;
+  text-align: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  color: #B0A89E;
+  letter-spacing: 6px;
+}
+</style>
+</head>
+<body>
+<div class="reel">
+
+  <div class="cut active" id="cut1">
+    <div class="bg bg1 kenburns"></div>
+    <div class="gradient"></div>
+    <div class="text-block show">
+      <p class="sub">시로 마음을 전하는 심리 브랜드</p>
+      <p class="main">"THE POETRY<br>PHARMACY"</p>
+    </div>
+  </div>
+
+  <div class="cut" id="cut2">
+    <div class="bg bg2 kenburns"></div>
+    <div class="gradient"></div>
+    <div class="text-block">
+      <p class="main">영국의 한 작은 마을에는<br>조금 특별한 약국이 있습니다.</p>
+    </div>
+  </div>
+
+  <div class="cut" id="cut3">
+    <div class="bg bg3 pan-right"></div>
+    <div class="gradient"></div>
+    <div class="text-block">
+      <p class="main">이곳에서는<br>감기약도, 두통약도<br>처방하지 않습니다.</p>
+    </div>
+  </div>
+
+  <div class="cut" id="cut4">
+    <div class="bg bg4 zoom-in"></div>
+    <div class="gradient"></div>
+    <div class="text-block">
+      <p class="main">대신<br>불안한 마음에는<br>시 한 편을 처방합니다.</p>
+    </div>
+  </div>
+
+  <div class="cut" id="cut5">
+    <div class="bg bg5 kenburns"></div>
+    <div class="gradient"></div>
+    <div class="text-block">
+      <p class="main sm">시인 데보라 알마는<br>사람들이 자신의 감정을<br>조금 더 다정하게 이해하길 바랐습니다.</p>
+    </div>
+  </div>
+
+  <div class="cut" id="cut6">
+    <div class="bg bg6 pan-up"></div>
+    <div class="gradient"></div>
+    <div class="text-block">
+      <p class="main sm">감정은 내가 무엇을 소중하게 여기는지<br>알려주는 신호이기도 하니까요.<br><br>그래서 그녀는<br>시를 사람들에게 건네기 시작했습니다.</p>
+    </div>
+  </div>
+
+  <div class="cut" id="cut7">
+    <div class="bg bg7 fixed"></div>
+    <div class="gradient"></div>
+    <div class="text-block">
+      <p class="main">시를 읽는다고<br>문제가 사라지진 않습니다.<br><br>하지만<br>내 마음이 무엇을 말하는지<br>조금 더 선명하게 볼 수는 있습니다.</p>
+    </div>
+  </div>
+
+  <div class="cut" id="cut8">
+    <div class="bg bg8 kenburns"></div>
+    <div class="gradient"></div>
+    <div class="text-block">
+      <p class="main">THE POETRY PHARMACY는<br>마음을 치료하는 곳이 아니라<br>자신의 가치를 만나게 하는 공간입니다.</p>
+    </div>
+  </div>
+
+  <div class="cut" id="cut9">
+    <div class="bg bg9 kenburns"></div>
+    <div class="gradient"></div>
+    <div class="text-block">
+      <p class="main">유리트는 시 대신 가치로<br>당신에게 질문합니다.</p>
+    </div>
+  </div>
+
+  <div class="cut cut-ending" id="cut10">
+    <div class="ending-block">
+      <div class="ending-line"></div>
+      <p class="cta-title">"지금 당신에게<br>필요한 가치는 무엇인가요?"</p>
+      <p class="cta-sub">가치관 실험실 Litmus<br>내 삶의 기준을 발견하는 공간</p>
+      <p class="cta-brand">@ulit_official</p>
+    </div>
+    <div class="ending-footer">VALUE LAB · LITMUS</div>
+  </div>
+
+  <div class="brand">가치관 실험실 "Litmus"</div>
+  <div class="progress">
+    <div class="progress-dot active" id="dot1"></div>
+    <div class="progress-dot" id="dot2"></div>
+    <div class="progress-dot" id="dot3"></div>
+    <div class="progress-dot" id="dot4"></div>
+    <div class="progress-dot" id="dot5"></div>
+    <div class="progress-dot" id="dot6"></div>
+    <div class="progress-dot" id="dot7"></div>
+    <div class="progress-dot" id="dot8"></div>
+    <div class="progress-dot" id="dot9"></div>
+    <div class="progress-dot" id="dot10"></div>
+  </div>
+
+</div>
+
+<script>
+var cuts = [
+  { id: 'cut1',  dot: 'dot1',  duration: 2500 },
+  { id: 'cut2',  dot: 'dot2',  duration: 2500 },
+  { id: 'cut3',  dot: 'dot3',  duration: 2500 },
+  { id: 'cut4',  dot: 'dot4',  duration: 3000 },
+  { id: 'cut5',  dot: 'dot5',  duration: 3000 },
+  { id: 'cut6',  dot: 'dot6',  duration: 2500 },
+  { id: 'cut7',  dot: 'dot7',  duration: 3500 },
+  { id: 'cut8',  dot: 'dot8',  duration: 3000 },
+  { id: 'cut9',  dot: 'dot9',  duration: 2500 },
+  { id: 'cut10', dot: 'dot10', duration: 4000 }
+];
+var current = 0;
+
+function showCut(index) {
+  cuts.forEach(function(c, i) {
+    var el = document.getElementById(c.id);
+    var dot = document.getElementById(c.dot);
+    if (i === index) {
+      el.classList.add('active');
+      dot.classList.add('active');
+      var bg = el.querySelector('.bg');
+      if (bg) { bg.style.animation = 'none'; bg.offsetHeight; bg.style.animation = ''; }
+      var tb = el.querySelector('.text-block');
+      var eb = el.querySelector('.ending-block');
+      if (tb) { tb.style.opacity = '0'; tb.classList.remove('show'); setTimeout(function() { tb.classList.add('show'); }, 100); }
+      if (eb) { eb.style.opacity = '0'; eb.classList.remove('show'); setTimeout(function() { eb.classList.add('show'); }, 100); }
+    } else {
+      el.classList.remove('active');
+      dot.classList.remove('active');
+      var tb = el.querySelector('.text-block');
+      var eb = el.querySelector('.ending-block');
+      if (tb) { tb.classList.remove('show'); tb.style.opacity = '0'; }
+      if (eb) { eb.classList.remove('show'); eb.style.opacity = '0'; }
+    }
+  });
+}
+
+function next() {
+  current = (current + 1) % cuts.length;
+  showCut(current);
+  setTimeout(next, cuts[current].duration);
+}
+
+setTimeout(next, cuts[0].duration);
+</script>
+</body>
+</html>
