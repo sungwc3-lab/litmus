@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Litmus 가치관 라이브러리</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+  @import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #FAF8F3;
+    color: #222;
+    min-height: 100vh;
+  }
+
+  header {
+    background: #fff;
+    border-bottom: 2px solid #4A80B5;
+    padding: 20px 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .brand { font-size: 18px; font-weight: 700; color: #4A80B5; letter-spacing: 0.08em; }
+  .brand-sub { font-size: 12px; color: #aaa; font-weight: 300; }
+
+  .intro {
+    text-align: center;
+    padding: 36px 20px 24px;
+  }
+
+  .intro h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 10px;
+  }
+
+  .intro p {
+    font-size: 14px;
+    color: #666;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 0 20px 24px;
+  }
+
+  .filter-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1.5px solid #ddd;
+    background: #fff;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .filter-btn.active, .filter-btn:hover {
+    border-color: #4A80B5;
+    color: #4A80B5;
+    background: #F0F5FB;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+    padding: 0 20px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    border: 1.5px solid #eee;
+    padding: 16px 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+  }
+
+  .card:hover { border-color: #4A80B5; box-shadow: 0 2px 8px rgba(74,128,181,0.15); transform: translateY(-2px); }
+
+  .card-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .card-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+    text-align: center;
+  }
+
+  .card-type {
+    font-size: 10px;
+    color: #aaa;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  /* 모달 */
+  .modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-bg.open { display: flex; }
+
+  .modal {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 28px;
+    max-width: 360px;
+    width: 100%;
+    position: relative;
+  }
+
+  .modal-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+  }
+
+  .modal-type {
+    font-size: 11px;
+    color: #aaa;
+    font-weight: 300;
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .modal-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 14px;
+  }
+
+  .modal-def {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    font-size: 20px;
+    color: #aaa;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+    line-height: 1;
+  }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 11px;
+    color: #bbb;
+    font-weight: 300;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="brand">LITMUS</span>
+  <span class="brand-sub">가치관 실험실</span>
+</header>
+
+<div class="intro">
+  <h1>가치관 라이브러리</h1>
+  <p>카드를 클릭해서 나에게 끌리는 가치관을 찾아보세요.</p>
+</div>
+
+<div class="filter-row">
+  <button class="filter-btn active" onclick="filterCards('all')">전체</button>
+  <button class="filter-btn" onclick="filterCards('안전')" style="--c:#888">안전</button>
+  <button class="filter-btn" onclick="filterCards('동조')" style="--c:#e88">동조</button>
+  <button class="filter-btn" onclick="filterCards('전통')" style="--c:#c8a">전통</button>
+  <button class="filter-btn" onclick="filterCards('박애')" style="--c:#fb0">박애</button>
+  <button class="filter-btn" onclick="filterCards('보편주의')" style="--c:#4c4">보편주의</button>
+  <button class="filter-btn" onclick="filterCards('자율')" style="--c:#48f">자율</button>
+  <button class="filter-btn" onclick="filterCards('자극')" style="--c:#f44">자극</button>
+  <button class="filter-btn" onclick="filterCards('쾌락주의')" style="--c:#a74">쾌락주의</button>
+  <button class="filter-btn" onclick="filterCards('성취')" style="--c:#888">성취</button>
+  <button class="filter-btn" onclick="filterCards('권력')" style="--c:#f80">권력</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="modal-bg" id="modalBg" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <i id="modalDot"></i>
+    <div class="modal-type" id="modalType"></div>
+    <div class="modal-name" id="modalName"></div>
+    <div class="modal-def" id="modalDef"></div>
+  </div>
+</div>
+
+<footer>가치관 실험실 LITMUS · @ulit_offical</footer>
+
+<script>
+const TYPE_COLOR = {
+  '안전': '#9B9B9B',
+  '동조': '#E88B8B',
+  '전통': '#C8AA6E',
+  '박애': '#F5C842',
+  '보편주의': '#4DBD74',
+  '자율': '#4A80B5',
+  '자극': '#F04444',
+  '쾌락주의': '#A07840',
+  '성취': '#7B7B7B',
+  '권력': '#F58020',
+};
+
+const TYPE_ICON = {
+  '안전': 'ti-shield',
+  '동조': 'ti-users',
+  '전통': 'ti-building',
+  '박애': 'ti-heart',
+  '보편주의': 'ti-world',
+  '자율': 'ti-compass',
+  '자극': 'ti-bolt',
+  '쾌락주의': 'ti-star',
+  '성취': 'ti-trophy',
+  '권력': 'ti-crown',
+};
+
+function getTypeKey(t) {
+  if (t.includes('안전')) return '안전';
+  if (t.includes('동조')) return '동조';
+  if (t.includes('전통')) return '전통';
+  if (t.includes('박애')) return '박애';
+  if (t.includes('보편주의')) return '보편주의';
+  if (t.includes('자율')) return '자율';
+  if (t.includes('자극')) return '자극';
+  if (t.includes('쾌락주의')) return '쾌락주의';
+  if (t.includes('성취')) return '성취';
+  if (t.includes('권력')) return '권력';
+  return '기타';
+}
+
+const values = [
+  {name:'유머',type:'8. 쾌락주의(Hedonism)',def:'재치로 상황을 유연하게 바라보고 즐거움을 나누는 태도'},
+  {name:'리더십',type:'10. 권력(Power)',def:'함께하는 사람들을 이끌고 책임지는 능력'},
+  {name:'부',type:'10. 권력(Power)',def:'안정된 삶을 위해 경제적 여유와 풍요를 추구하는 것'},
+  {name:'경험',type:'7.자극(Stimulation)',def:'다양한 시도와 만남 속에서 새로운 자극과 즐거움을 찾는 것'},
+  {name:'신앙',type:'4. 박애(Benevolence)',def:'삶의 의미와 내면적 평화를 믿음으로 찾는 것'},
+  {name:'야망',type:'9. 성취(Achievement)',def:'더 큰 목표를 향해 끊임없이 도전하는 에너지'},
+  {name:'청결',type:'1. 안전(Security)',def:'위생과 질서를 유지하며 쾌적한 환경을 조성하는 습관'},
+  {name:'열정',type:'7.자극(Stimulation)',def:'새롭고 설레는 경험에 온 마음을 쏟으며 살아가는 것'},
+  {name:'자유',type:'6. 자율(Self-direction)',def:'외부의 구속 없이 스스로의 기준에 따라 선택하고 행동하는 것'},
+  {name:'감사',type:'1. 안전(Security)',def:'타인의 선행에 감사하고 보답하려는 태도'},
+  {name:'자율성',type:'6. 자율(Self-direction)',def:'타인에게 의존하지 않고 스스로의 힘으로 살아가는 것'},
+  {name:'봉사',type:'4. 박애(Benevolence)',def:'주변 사람을 돕고 공동체에 기여하는 것'},
+  {name:'헌신',type:'3. 전통(Tradition)',def:'내가 믿고 소중히 여기는 것에 온 마음을 다하는 것'},
+  {name:'성장',type:'6. 자율(Self-direction)',def:'스스로를 돌아보고 꾸준히 더 나은 방향으로 발전하는 것'},
+  {name:'근본',type:'3. 전통(Tradition)',def:'오래된 것을 소중히 여기고 그 안에서 삶의 방향을 찾는 것'},
+  {name:'성실',type:'2.동조(Conformity)',def:'주어진 역할과 책임을 충실히 이행하며 신뢰를 쌓는 태도'},
+  {name:'배려',type:'5. 보편주의(Universalism)',def:'타인의 입장을 이해하고 작은 부분까지 신경 쓰는 태도'},
+  {name:'지성',type:'9. 성취(Achievement)',def:'세상을 깊이 이해하고 날카롭게 사고하는 능력'},
+  {name:'예의',type:'2.동조(Conformity)',def:'타인을 존중하고 예의 바른 태도로 관계를 맺는 것'},
+  {name:'도전',type:'7.자극(Stimulation)',def:'실패를 두려워하지 않고 새로운 목표에 계속 도전하는 것'},
+  {name:'정직함',type:'4. 박애(Benevolence)',def:'거짓 없이 자신과 타인에게 진실한 태도를 지키는 것'},
+  {name:'친절함',type:'2.동조(Conformity)',def:'타인에게 따뜻하고 배려 있는 태도로 대하는 것'},
+  {name:'자존감',type:'6. 자율(Self-direction)',def:'자신의 존재와 능력을 긍정적으로 평가하고 존중하는 태도'},
+  {name:'품위',type:'10. 권력(Power)',def:'어떤 상황에서도 예의와 자기 존중을 잃지 않으려는 태도'},
+  {name:'창의성',type:'6. 자율(Self-direction)',def:'기존 틀을 벗어나 새롭게 생각하고 시도하는 것'},
+  {name:'건강',type:'1. 안전(Security)',def:'신체적·정신적으로 균형 있고 활기찬 상태를 유지하는 것'},
+  {name:'책임감',type:'4. 박애(Benevolence)',def:'맡은 일과 약속을 끝까지 지켜내려는 태도'},
+  {name:'사랑',type:'4. 박애(Benevolence)',def:'정서적 유대와 신뢰를 바탕으로 깊은 연결을 형성하는 힘'},
+  {name:'용서',type:'4. 박애(Benevolence)',def:'상처나 분노를 내려놓고 관계의 회복을 선택하는 마음'},
+  {name:'변화',type:'7.자극(Stimulation)',def:'익숙함에 머무르지 않고 새로운 변화와 자극을 즐기는 것'},
+  {name:'정의',type:'5. 보편주의(Universalism)',def:'옳고 공정한 것을 지키려는 신념'},
+  {name:'모험',type:'8. 쾌락주의(Hedonism)',def:'낯선 것에 기꺼이 뛰어들어 그 순간을 온전히 누리는 것'},
+  {name:'우정',type:'4. 박애(Benevolence)',def:'이해와 신뢰를 바탕으로 진심으로 연결된 관계'},
+  {name:'프라이버시',type:'6. 자율(Self-direction)',def:'개인의 공간과 마음을 지키고 존중 받는 것'},
+  {name:'재미',type:'8. 쾌락주의(Hedonism)',def:'삶 속에서 즐거움과 웃음을 발견하고 표현하는 것'},
+  {name:'신뢰',type:'4. 박애(Benevolence)',def:'약속을 지키고 진심으로 믿을 수 있는 관계를 만드는 것'},
+  {name:'평화',type:'5. 보편주의(Universalism)',def:'갈등 없는 평화로운 세계를 희망'},
+  {name:'호기심',type:'7.자극(Stimulation)',def:'세상과 사람, 새로운 지식에 흥미를 느끼는 태도'},
+  {name:'의미',type:'4. 박애(Benevolence)',def:'내 삶이 의미 있고 가치 있다는 느낌을 찾아가는 것'},
+  {name:'유능한',type:'9. 성취(Achievement)',def:'자신의 능력을 발휘하고 결과로 인정받는 것'},
+  {name:'지혜',type:'5. 보편주의(Universalism)',def:'경험과 성찰을 통해 현명하게 선택하는 능력'},
+  {name:'영향력',type:'9. 성취(Achievement)',def:'자신의 능력과 행동으로 주변에 긍정적인 영향을 미치는 것'},
+  {name:'아름다움',type:'5. 보편주의(Universalism)',def:'세상의 미적 가치와 조화를 느끼고 즐기는 것'},
+  {name:'연대감',type:'1. 안전(Security)',def:'함께 속해 있다는 소속감과 협력의 기쁨을 느끼는 것'},
+  {name:'수용',type:'3. 전통(Tradition)',def:'삶이 내게 주어진 방식을 받아들이고 현재에 만족하는 것'},
+  {name:'인정',type:'10. 권력(Power)',def:'나의 존재와 노력이 다른 사람에게 존중 받는 것'},
+  {name:'쾌락',type:'8. 쾌락주의(Hedonism)',def:'즐거움과 만족을 통해 삶의 활력을 느끼는 경험'},
+  {name:'가족',type:'1. 안전(Security)',def:'서로 돌보고 지지하며 안정적인 관계를 유지하는 것'},
+  {name:'성공',type:'9. 성취(Achievement)',def:'목표를 성취하고 그 결과로 성장과 만족을 경험하는 상태'},
+  {name:'겸손',type:'3. 전통(Tradition)',def:'자신의 한계를 인식하고 타인의 존중하는 태도'},
+  {name:'평등',type:'5. 보편주의(Universalism)',def:'모든 사람을 차별 없이 공정하게 대우하려는 신념'},
+  {name:'자연주의',type:'5. 보편주의(Universalism)',def:'인간과 자연이 조화를 이루며 살아가야 한다는 생활 철학'},
+  {name:'환경보호',type:'5. 보편주의(Universalism)',def:'지구와 생태계를 지키기 위해 책임 있게 행동하는 실천'},
+  {name:'조화',type:'2.동조(Conformity)',def:'관계와 사회 안에서 서로 어울려 살아가는 것'},
+  {name:'복지',type:'1. 안전(Security)',def:'사회의 안녕을 증진하고 기본적인 삶의 질을 보장하는 것'},
+  {name:'존재감',type:'10. 권력(Power)',def:'사회속에서 자신만의 힘으로 영향력을 발휘하는 것'},
+  {name:'균형',type:'3. 전통(Tradition)',def:'한쪽에 치우치지 않고 조화로운 상태를 유지하는 것'},
+  {name:'안정',type:'1. 안전(Security)',def:'내가 속한 공동체가 안전하게 보호받는 상태'},
+  {name:'자기효능감',type:'6. 자율(Self-direction)',def:'자신의 목표를 스스로 해낼 수 있다고 믿는 힘'},
+  {name:'평온',type:'5. 보편주의(Universalism)',def:'내면의 갈등 없이 조화롭고 평온한 상태를 유지하는 것'},
+];
+
+let currentFilter = 'all';
+
+function renderGrid(filter) {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  values.forEach((v, i) => {
+    const key = getTypeKey(v.type);
+    if (filter !== 'all' && key !== filter) return;
+    const color = TYPE_COLOR[key] || '#aaa';
+    const icon = TYPE_ICON[key] || 'ti-circle';
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <i class="ti ${icon} card-icon" style="color:${color}"></i>
+      <div class="card-name">${v.name}</div>
+      <div class="card-type">${key}</div>
+    `;
+    card.onclick = () => openModal(v, color, key, icon);
+    grid.appendChild(card);
+  });
+}
+
+function filterCards(type) {
+  currentFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderGrid(type);
+}
+
+function openModal(v, color, key, icon) {
+  document.getElementById('modalDot').className = `ti ${icon} modal-icon`;
+  document.getElementById('modalDot').style.color = color;
+  document.getElementById('modalType').textContent = key;
+  document.getElementById('modalName').textContent = v.name;
+  document.getElementById('modalDef').textContent = v.def;
+  document.getElementById('modalBg').classList.add('open');
+}
+
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modalBg')) {
+    document.getElementById('modalBg').classList.remove('open');
+  }
+}
+
+renderGrid('all');
+</script>
+</body>
+</html>
