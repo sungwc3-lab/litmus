@@ -492,22 +492,75 @@ footer{background:var(--dark);padding:32px 6%;display:flex;align-items:center;ju
 
 <script>
 const libCards = [
-  {name:'가족',en:'Family',emoji:'👨‍👩‍👧',id:'1i4z2pXOizY1OvWcKBxzhNxSEd4r6u11_'},
-  {name:'건강',en:'Health',emoji:'💪',id:'1fbNYvt_UWISm0QGt52Dl_G7mC5DlmZ20'},
-  {name:'연대감',en:'Solidarity',emoji:'🤝',id:'1KYwGpfdRSGJcfwrbrHaBEZlSJCBFj3Q2'},
-  {name:'균형',en:'Balance',emoji:'⚖️',id:'1OuwWWhbqaoTI9w-AnN728OX6IpBsfy38'},
-  {name:'존경',en:'Respect',emoji:'🙏',id:'1BlESOrO6DUe28Do09WZr8hBzfSDdhNcr'},
-  {name:'예의',en:'Courtesy',emoji:'🎩',id:'1scOuPIgRpyMzOVoRFaGXv-trasYONOle'},
-  {name:'친절함',en:'Kindness',emoji:'🌸',id:'1uBDj0nZCCqr3zQmkQictuUSRq31Z6hC2'},
-  {name:'유연함',en:'Flexibility',emoji:'🌊',id:'1viy8WMxBOcu9V9v2twbEDn9oj9DUpboK'},
+  {name:'가족',en:'Family',emoji:'👨‍👩‍👧',f:'1_family.png'},
+  {name:'건강',en:'Health',emoji:'💪',f:'2_health.png'},
+  {name:'연대감',en:'belonging',emoji:'🤝',f:'3_belonging.png'},
+  {name:'감사',en:'Appreciation',emoji:'🙏',f:'4_appreciation.png'},
+  {name:'복지',en:'Welfare',emoji:'🛟',f:'5_welfare.png'},
+  {name:'안정',en:'Stability',emoji:'🪨',f:'6_stability.png'},
+  {name:'청결',en:'cleanliness',emoji:'🧼',f:'7_cleanliness.png'},
+  {name:'조화',en:'Harmony',emoji:'🎼',f:'8_harmony.png'},
+  {name:'예의',en:'Politeness',emoji:'🌸',f:'9_politeness.png'},
+  {name:'친절함',en:'Kindness',emoji:'💙',f:'10_kindness.png'},
+  {name:'성실',en:'Diligence',emoji:'🐝',f:'11_diligence.png'},
+  {name:'균형',en:'Balance',emoji:'⚖️',f:'12_balance.png'},
+  {name:'수용',en:'Acceptance',emoji:'🌊',f:'13_acceptance.png'},
+  {name:'근본',en:'Heritage',emoji:'🌳',f:'14_heritage.png'},
+  {name:'겸손',en:'Humility',emoji:'🌾',f:'15_humility.png'},
+  {name:'헌신',en:'Devotion',emoji:'❤️',f:'16_devotion.png'},
+  {name:'사랑',en:'love',emoji:'💛',f:'17_love.png'},
+  {name:'신뢰',en:'Trust',emoji:'🔗',f:'18_trust.png'},
+  {name:'책임감',en:'Responsibility',emoji:'🎯',f:'19_responsibility.png'},
+  {name:'의미',en:'Meaning',emoji:'🕯️',f:'20_meaning.png'},
+  {name:'정직함',en:'Honesty',emoji:'✨',f:'21_honesty.png'},
+  {name:'신앙',en:'Faith',emoji:'✝️',f:'22_faith.png'},
+  {name:'우정',en:'friendship',emoji:'🫂',f:'23_friendship.png'},
+  {name:'용서',en:'Forgiving',emoji:'🤍',f:'24_forgiving.png'},
+  {name:'봉사',en:'Service',emoji:'🤲',f:'25_service.png'},
+  {name:'지혜',en:'Wisdom',emoji:'🦉',f:'26_wisdom.png'},
+  {name:'평온',en:'Calm',emoji:'🍃',f:'27_calm.png'},
+  {name:'배려',en:'Empathy',emoji:'💙',f:'28_empathy.png'},
+  {name:'평등',en:'Equality',emoji:'🌈',f:'29_equality.png'},
+  {name:'평화',en:'peace',emoji:'☮️',f:'30_peace.png'},
+  {name:'자연주의',en:'nature',emoji:'🌿',f:'31_nature.png'},
+  {name:'아름다움',en:'beauty',emoji:'🌺',f:'32_beauty.png'},
+  {name:'정의',en:'justice',emoji:'⚖️',f:'33_justice.png'},
+  {name:'환경보호',en:'environment',emoji:'🌍',f:'34_environment.png'},
+  {name:'성장',en:'growth',emoji:'🌱',f:'35_growth.png'},
+  {name:'프라이버시',en:'Privacy',emoji:'🔒',f:'36_privacy.png'},
+  {name:'자율성',en:'Independence',emoji:'🦅',f:'37_independence.png'},
+  {name:'자유',en:'Freedom',emoji:'🕊️',f:'38_freedom.png'},
+  {name:'자존감',en:'Self-respect',emoji:'💜',f:'39_selfrespect.png'},
+  {name:'창의성',en:'Creativity',emoji:'🎨',f:'40_creativity.png'},
+  {name:'자기효능감',en:'Self-efficacy',emoji:'🔋',f:'41_selfefficacy.png'},
+  {name:'열정',en:'Passion',emoji:'🔥',f:'42_passion.png'},
+  {name:'경험',en:'experience',emoji:'🗺️',f:'43_experience.png'},
+  {name:'도전',en:'Challenge',emoji:'🚩',f:'44_challenge.png'},
+  {name:'호기심',en:'Curiosity',emoji:'🔭',f:'45_curiosity.png'},
+  {name:'변화',en:'Change',emoji:'🔄',f:'46_change.png'},
+  {name:'유머',en:'Humor',emoji:'😄',f:'47_humor.png'},
+  {name:'쾌락',en:'Pleasure',emoji:'🎉',f:'48_pleasure.png'},
+  {name:'재미',en:'Enjoyment',emoji:'🎈',f:'49_enjoyment.png'},
+  {name:'모험',en:'Adventure',emoji:'🌟',f:'50_adventure.png'},
+  {name:'성공',en:'Success',emoji:'🏆',f:'51_success.png'},
+  {name:'영향력',en:'Influence',emoji:'⚡',f:'52_influence.png'},
+  {name:'유능한',en:'Capability',emoji:'⭐',f:'53_capability.png'},
+  {name:'야망',en:'Ambition',emoji:'🚀',f:'54_ambition.png'},
+  {name:'지성',en:'Intelligence',emoji:'📖',f:'55_intelligence.png'},
+  {name:'부',en:'Wealth',emoji:'💎',f:'56_wealth.png'},
+  {name:'존재감',en:'Presence',emoji:'👑',f:'57_presence.png'},
+  {name:'리더십',en:'Leadership',emoji:'🧭',f:'58_leadership.png'},
+  {name:'인정',en:'Esteem',emoji:'👍',f:'59_esteem.png'},
+  {name:'품위',en:'Dignity',emoji:'🎗️',f:'60_dignity.png'},
 ];
 const grid = document.getElementById('lib-grid');
-libCards.slice(0, 6).forEach(c => {
+const shuffled = libCards.slice().sort(() => Math.random() - 0.5);
+shuffled.slice(0, 6).forEach(c => {
   const el = document.createElement('a');
   el.className = 'lib-card';
   el.href = 'library.html';
   const imgTag = window.LITMUS_HAS_IMAGES
-    ? `<img src="https://drive.google.com/uc?export=view&id=${c.id}" alt="${c.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lib-card-placeholder" style="display:none">${c.emoji}</div>`
+    ? `<img src="images/${c.f}" alt="${c.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lib-card-placeholder" style="display:none">${c.emoji}</div>`
     : `<div class="lib-card-placeholder" style="display:flex">${c.emoji}</div>`;
   el.innerHTML = `
     ${imgTag}
