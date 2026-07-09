@@ -33,44 +33,45 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;padding:0 6%;dis
 /* MAIN */
 .main{max-width:720px;margin:0 auto;padding:40px 6% 80px;}
 
-/* 섹션 공통 */
-.sec{margin-bottom:32px;}
-.sec-label{font-size:11px;font-weight:500;letter-spacing:0.08em;color:var(--blue);text-transform:uppercase;margin-bottom:14px;}
-.sec-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:28px;}
-
-/* 상단 요약 */
-.summary-list{display:flex;flex-direction:column;gap:10px;}
-.summary-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--cream);border-radius:12px;}
-.summary-tag{font-size:11px;font-weight:600;letter-spacing:0.05em;min-width:36px;}
-.summary-arrow{color:var(--muted);font-size:14px;flex-shrink:0;}
-.summary-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
-.summary-name{font-size:15px;font-weight:500;color:var(--dark);}
-.summary-cat{font-size:11px;color:var(--muted);margin-left:4px;}
+/* 통합 결과 카드 */
+.result-card{background:var(--white);border-radius:24px;overflow:hidden;margin-bottom:28px;box-shadow:0 1px 3px rgba(0,0,0,0.04);}
+.result-header{padding:32px 30px 28px;color:#fff;}
+.result-eyebrow{font-size:11.5px;letter-spacing:0.08em;opacity:0.72;margin-bottom:13px;text-transform:uppercase;}
+.result-name-big{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;}
+.result-name-big .n{font-family:'DM Serif Display',serif;font-size:30px;}
+.result-name-big .e{font-size:13px;opacity:0.65;}
+.result-names{font-size:15px;line-height:1.7;margin-bottom:12px;}
+.result-cat-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:5px 12px;border-radius:100px;background:rgba(255,255,255,0.18);margin-bottom:18px;}
+.result-cat-tag .dot{width:6px;height:6px;border-radius:50%;background:#fff;}
+.result-statement{font-family:'DM Serif Display',serif;font-size:19px;line-height:1.5;margin-bottom:16px;}
+.result-tie{font-size:16px;line-height:1.75;font-weight:300;}
+.result-phrases{display:flex;gap:6px;flex-wrap:wrap;}
+.result-phrase{font-size:12px;padding:5px 11px;border-radius:100px;background:rgba(255,255,255,0.18);}
+.result-body{padding:26px 30px 30px;}
+.result-sec-label{font-size:11px;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
+.result-divider{border-top:1px solid var(--border);padding-top:22px;margin-top:4px;}
 
 /* 방향성 */
 .axis{margin-bottom:22px;}
 .axis:last-child{margin-bottom:0;}
-.axis-labels{display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px;}
-.axis-labels b{font-weight:700;color:var(--dark);}
-.axis-labels .dim b{color:var(--muted);font-weight:400;}
-.axis-track{position:relative;height:8px;border-radius:100px;background:var(--warm);}
-.axis-fill{position:absolute;top:0;bottom:0;border-radius:100px;background:var(--blue);}
-.axis-marker{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--white);border:3px solid var(--dark);transform:translate(-50%,-50%);box-shadow:0 2px 6px rgba(0,0,0,0.2);}
-.axis-note{font-size:12px;color:var(--muted);margin-top:9px;line-height:1.6;}
-.axis-note b{color:var(--dark);font-weight:500;}
+.axis-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.axis-icon{font-size:18px;line-height:1;}
+.axis-lean{font-size:14px;font-weight:500;color:var(--dark);}
+.axis-track{position:relative;height:6px;border-radius:100px;background:var(--warm);margin-bottom:9px;}
+.axis-fill{position:absolute;top:0;bottom:0;border-radius:100px;}
+.axis-marker{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:var(--white);transform:translate(-50%,-50%);}
+.axis-desc{font-size:12.5px;color:var(--muted);line-height:1.6;}
 
-/* 컬러 해석 */
-.color-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
-.color-circle{width:44px;height:44px;border-radius:50%;flex-shrink:0;}
-.color-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--dark);}
-.color-sub{font-size:13px;color:var(--muted);margin-top:2px;}
-.color-statement{font-size:15px;color:var(--dark);line-height:1.75;margin-bottom:16px;padding:16px;background:var(--cream);border-radius:12px;border-left:3px solid var(--blue);}
-.color-tags{display:flex;gap:7px;flex-wrap:wrap;}
-.color-tag{font-size:12px;padding:5px 12px;border-radius:100px;background:var(--warm);color:var(--text);}
+/* 분야별 해석 */
+.domain-item{display:flex;gap:12px;margin-bottom:16px;}
+.domain-item:last-child{margin-bottom:0;}
+.domain-avatar{flex-shrink:0;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
+.domain-t{font-size:14px;font-weight:500;color:var(--dark);line-height:1.5;margin-bottom:3px;}
+.domain-d{font-size:12.5px;color:var(--muted);line-height:1.6;}
 
-/* 상황별 해석 */
-.ctx-interp{font-size:15px;color:var(--text);line-height:1.8;font-weight:300;}
-.ctx-interp strong{font-weight:500;color:var(--dark);}
+/* 공유하기 버튼 */
+.share-btn{width:100%;padding:16px;border-radius:14px;border:none;background:var(--dark);color:#fff;font-size:15px;font-weight:500;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;}
+.share-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,0.15);}
 
 /* 다시하기 버튼 */
 .reset-btn{display:block;text-align:center;margin:0 auto;padding:14px 32px;border-radius:100px;background:var(--dark);color:#fff;font-size:14px;font-weight:500;text-decoration:none;font-family:inherit;border:none;cursor:pointer;transition:all 0.2s;}
@@ -83,26 +84,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;padding:0 6%;dis
 /* 히어로 하단 링크 */
 .hero-back{display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s;}
 .hero-back:hover{color:rgba(255,255,255,0.85);}
-
-/* 캡처 안내 */
-.capture-box{display:flex;align-items:flex-start;gap:12px;background:var(--warm);border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin-top:32px;}
-.capture-icon{font-size:22px;flex-shrink:0;line-height:1;margin-top:1px;}
-.capture-text{font-size:13px;color:var(--muted);line-height:1.65;}
-.capture-text strong{color:var(--dark);font-weight:500;display:block;margin-bottom:2px;}
-
-/* 분야별 해석 */
-.domain-item{display:flex;gap:12px;margin-bottom:16px;}
-.domain-item:last-child{margin-bottom:0;}
-.domain-avatar{flex-shrink:0;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
-.domain-t{font-size:14px;font-weight:500;color:var(--dark);line-height:1.5;margin-bottom:3px;}
-.domain-d{font-size:12.5px;color:var(--muted);line-height:1.6;}
-
-/* 동률(다양성) 안내 */
-.tie-box{font-size:15px;color:var(--dark);line-height:1.75;padding:16px;background:var(--cream);border-radius:12px;}
-
-/* 공유하기 버튼 */
-.share-btn{width:100%;padding:16px;border-radius:14px;border:none;background:var(--dark);color:#fff;font-size:15px;font-weight:500;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;margin-top:32px;}
-.share-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,0.15);}
 </style>
 </head>
 <body>
@@ -237,6 +218,15 @@ var CTX_INTERP = {
 var TIE_MSG = '다양한 가치를 골고루 선택하셨네요. 하나의 색깔로 정의되기보다, 여러 방향을 함께 품고 있는 분이에요.';
 var DOMAIN_LABEL = {love:'사랑', career:'커리어', life:'자신'};
 
+var AXIS_DESC = {
+  growth:   '익숙한 반복보다 새로운 시도와 배움에서 동기를 얻는 편이에요. 변화가 있는 환경일수록 오히려 편안함을 느껴요.',
+  stability:'새로운 자극보다 안정되고 예측 가능한 상태에서 편안함을 느끼는 편이에요. 익숙한 리듬을 지키는 게 중요해요.',
+  gsBalance:'성장과 안정, 어느 한쪽에 치우치지 않고 두 가지를 함께 추구하는 편이에요.',
+  individual:'공동체의 기준보다 나 자신의 판단과 기준을 우선하는 편이에요. 혼자만의 시간과 공간이 꼭 필요해요.',
+  social:   '혼자보다 관계와 공동체 안에서 에너지를 얻는 편이에요. 함께하는 사람들과의 연결이 중요한 기준이 돼요.',
+  isBalance:'나 자신과 주변 사람들 사이에서 균형 잡힌 태도를 보이는 편이에요.'
+};
+
 var GROWTH     = ['자율','자극','쾌락주의','성취','보편주의'];
 var STABILITY  = ['안전','동조','전통'];
 var INDIVIDUAL = ['자율','자극','쾌락주의','성취','권력'];
@@ -292,40 +282,7 @@ function render(){
 
   var html = '';
 
-  /* ① 상단 요약 */
-  html += '<div class="sec">';
-  html += '<div class="sec-label">선택한 가치</div>';
-  html += '<div class="sec-card"><div class="summary-list">';
-  idxs.forEach(function(idx, i){
-    var v = DATA[idx];
-    var cat = catOf(idx);
-    var col = colOf(idx);
-    var tag = qs[i] ? qs[i].tag : (i+1)+'번';
-    html += '<div class="summary-item">';
-    html += '<span class="summary-tag" style="color:'+col+'">'+tag+'</span>';
-    html += '<span class="summary-arrow">→</span>';
-    html += '<span class="summary-dot" style="background:'+col+'"></span>';
-    html += '<span class="summary-name">'+v.n+'</span>';
-    html += '<span class="summary-cat">'+cat+'</span>';
-    html += '</div>';
-  });
-  html += '</div></div></div>';
-
-  /* ② 방향성 */
   var cats = idxs.map(catOf);
-  var gN = cats.filter(function(c){ return GROWTH.indexOf(c)>=0; }).length;
-  var stN = cats.filter(function(c){ return STABILITY.indexOf(c)>=0; }).length;
-  var indN = cats.filter(function(c){ return INDIVIDUAL.indexOf(c)>=0; }).length;
-  var socN = cats.filter(function(c){ return SOCIAL.indexOf(c)>=0; }).length;
-
-  html += '<div class="sec">';
-  html += '<div class="sec-label">방향성</div>';
-  html += '<div class="sec-card">';
-  html += axisHTML('성장','안정', gN, stN);
-  html += axisHTML('개인','사회', indN, socN);
-  html += '</div></div>';
-
-  /* ③ 컬러 해석 (동률이면 다양성 메시지로 대체) */
   var counts = {};
   cats.forEach(function(c){ counts[c] = (counts[c]||0)+1; });
   var domN = 0;
@@ -333,34 +290,42 @@ function render(){
   var domCandidates = Object.keys(counts).filter(function(k){ return counts[k] === domN; });
   var isTie = domCandidates.length > 1;
   var dom = isTie ? null : domCandidates[0];
-  var domCol = dom ? (COL[dom] || '#888') : 'var(--muted)';
+  var domCol = dom ? (COL[dom] || '#888') : '#4A4642';
   var interp = dom ? CAT_INTERP[dom] : null;
 
-  html += '<div class="sec">';
-  html += '<div class="sec-label">에너지 타입</div>';
-  html += '<div class="sec-card">';
-  if (isTie) {
-    html += '<div class="tie-box">'+TIE_MSG+'</div>';
+  html += '<div class="result-card">';
+
+  /* 헤더: 내가 선택한 가치 + (동률이 아니면) 카테고리 해석 */
+  html += '<div class="result-header" style="background:'+domCol+'">';
+  html += '<div class="result-eyebrow">내가 선택한 가치</div>';
+
+  if (idxs.length === 1) {
+    var v0 = DATA[idxs[0]];
+    html += '<div class="result-name-big"><span class="n">'+v0.n+'</span><span class="e">'+v0.e+'</span></div>';
   } else {
-    html += '<div class="color-header">';
-    html += '<div class="color-circle" style="background:'+domCol+'"></div>';
-    html += '<div><div class="color-title">'+dom+'</div><div class="color-sub">지금 나를 움직이는 에너지</div></div>';
-    html += '</div>';
-    if(interp){
-      html += '<div class="color-statement">'+interp.s+'</div>';
-      html += '<div class="color-tags">';
-      interp.p.forEach(function(t){ html += '<span class="color-tag">'+t+'</span>'; });
+    html += '<div class="result-names">'+idxs.map(function(idx){ return DATA[idx].n; }).join(' · ')+'</div>';
+  }
+
+  if (!isTie) {
+    html += '<div class="result-cat-tag"><span class="dot"></span>'+dom+' 카테고리</div>';
+    if (interp) {
+      html += '<div class="result-statement">'+interp.s+'</div>';
+      html += '<div class="result-phrases">';
+      interp.p.forEach(function(t){ html += '<span class="result-phrase">'+t+'</span>'; });
       html += '</div>';
     }
+  } else {
+    html += '<div class="result-tie">'+TIE_MSG+'</div>';
   }
-  html += '</div></div>';
+  html += '</div>'; // result-header
 
-  /* ④ 분야별 해석 — 사랑·커리어·자신, 대표 카테고리가 있을 때만 */
+  /* 바디 */
+  html += '<div class="result-body">';
+
+  /* 분야별 해석 — 대표 카테고리가 있을 때만 */
   var domainInterp = dom ? CTX_INTERP[dom] : null;
   if (domainInterp) {
-    html += '<div class="sec">';
-    html += '<div class="sec-label">분야별로 다르게 나타나요</div>';
-    html += '<div class="sec-card">';
+    html += '<div class="result-sec-label">분야별로 다르게 나타나요</div>';
     ['love','career','life'].forEach(function(k){
       var it = domainInterp[k];
       if (!it) return;
@@ -369,11 +334,27 @@ function render(){
       html += '<div><div class="domain-t">'+it.t+'</div>'+(it.d ? '<div class="domain-d">'+it.d+'</div>' : '')+'</div>';
       html += '</div>';
     });
-    html += '</div></div>';
   }
 
-  /* 결과 공유하기 */
+  /* 방향성 */
+  var gN = cats.filter(function(c){ return GROWTH.indexOf(c)>=0; }).length;
+  var stN = cats.filter(function(c){ return STABILITY.indexOf(c)>=0; }).length;
+  var indN = cats.filter(function(c){ return INDIVIDUAL.indexOf(c)>=0; }).length;
+  var socN = cats.filter(function(c){ return SOCIAL.indexOf(c)>=0; }).length;
+
+  html += '<div class="'+(domainInterp ? 'result-divider' : '')+'" style="margin-top:'+(domainInterp?'6px':'0')+';">';
+  html += '<div class="result-sec-label">나의 방향성</div>';
+  html += axisHTML('성장','안정', gN, stN, '🌱','🪨','growth','stability','gsBalance');
+  html += axisHTML('개인','사회', indN, socN, '🧭','🤝','individual','social','isBalance');
+  html += '</div>';
+
+  /* 공유하기 */
+  html += '<div class="result-divider" style="margin-top:22px;">';
   html += '<button class="share-btn" id="shareBtn"><span>📤</span><span>이 결과 공유하기</span></button>';
+  html += '</div>';
+
+  html += '</div>'; // result-body
+  html += '</div>'; // result-card
 
   /* 다시하기 */
   html += '<a class="reset-btn" href="library.html">↩ 다시 탐색하기</a>';
@@ -402,30 +383,28 @@ function render(){
   }
 }
 
-function axisHTML(leftLbl, rightLbl, leftN, rightN){
+function axisHTML(leftLbl, rightLbl, leftN, rightN, leftIcon, rightIcon, leftKey, rightKey, balanceKey){
   var tot = leftN + rightN;
   var pct = tot > 0 ? Math.round(rightN/tot*100) : 50;
   var fillLeft = Math.min(pct,50);
   var fillW = Math.abs(pct-50);
-  var lean;
-  if(tot===0) lean='균형';
-  else if(pct<42) lean=leftLbl;
-  else if(pct>58) lean=rightLbl;
-  else lean='균형';
-  var note = tot===0
-    ? '이 축에 해당하는 가치가 없어요.'
-    : '<b>'+leftLbl+'</b> '+leftN+' · <b>'+rightLbl+'</b> '+rightN+' — 당신의 가치들은 <b>'+lean+'</b>'+(lean==='균형'?' 지점에':' 쪽으로')+' 기울어 있어요.';
+  var lean, icon, descKey;
+  if(tot===0){ lean='균형'; icon='⚖️'; descKey=balanceKey; }
+  else if(pct<42){ lean=leftLbl; icon=leftIcon; descKey=leftKey; }
+  else if(pct>58){ lean=rightLbl; icon=rightIcon; descKey=rightKey; }
+  else { lean='균형'; icon='⚖️'; descKey=balanceKey; }
+  var desc = AXIS_DESC[descKey] || '';
+  var leanText = lean === '균형' ? '균형 잡힌 상태예요' : lean+' 쪽으로 기울어 있어요';
 
   return '<div class="axis">'+
-    '<div class="axis-labels">'+
-      '<span class="'+(lean===leftLbl?'':'dim')+'"><b>'+leftLbl+'</b></span>'+
-      '<span class="'+(lean===rightLbl?'':'dim')+'"><b>'+rightLbl+'</b></span>'+
+    '<div class="axis-row"><span class="axis-icon">'+icon+'</span>'+
+      '<span class="axis-lean">'+leanText+'</span>'+
     '</div>'+
     '<div class="axis-track">'+
-      '<div class="axis-fill" style="left:'+fillLeft+'%;width:'+fillW+'%;"></div>'+
-      '<div class="axis-marker" style="left:'+pct+'%;"></div>'+
+      '<div class="axis-fill" style="left:'+fillLeft+'%;width:'+fillW+'%;background:var(--dark);"></div>'+
+      '<div class="axis-marker" style="left:'+pct+'%;border:2.5px solid var(--dark);"></div>'+
     '</div>'+
-    '<div class="axis-note">'+note+'</div>'+
+    '<div class="axis-desc">'+desc+'</div>'+
   '</div>';
 }
 
