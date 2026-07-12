@@ -16,23 +16,6 @@
     --border:#E8E0D6; --white:#FFFFFF;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  .upload-input{display:none;}
-  .upload-slot{cursor:pointer; position:relative; transition:box-shadow .15s ease;}
-  .upload-slot:hover{box-shadow:0 0 0 2px var(--blue) inset;}
-  .upload-slot:hover::after{
-    content:"클릭하여 업로드";
-    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    background:rgba(74,128,181,0.88); color:#fff; font-size:11px; font-weight:700;
-    border-radius:inherit; z-index:5; text-align:center; padding:6px;
-  }
-  #save-guide-btn{
-    position:fixed; bottom:24px; right:24px; z-index:9999;
-    background:var(--blue); color:#fff; border:none;
-    padding:14px 24px; border-radius:100px; font-weight:700; font-size:14px;
-    font-family:'Pretendard Variable','Pretendard',sans-serif;
-    cursor:pointer; box-shadow:0 8px 24px rgba(0,0,0,0.25);
-  }
-  #save-guide-btn:hover{background:var(--blue-dark);}
   body{
     font-family:'Pretendard Variable','Pretendard',sans-serif;
     background:#E8E4DE;
@@ -507,8 +490,7 @@
     </div>
 
     <div class="cover-cards">
-      <div class="mini-card upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 업로드">
-        <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
+      <div class="mini-card">
         <img src="images/fr1.png" alt="가치카드 이미지"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="mini-card-fallback">
@@ -516,12 +498,11 @@
           <div>
             <div class="mini-card-word">가족</div>
             <div class="mini-card-en">Family</div>
-            <div class="mini-card-path">클릭하여 업로드</div>
+            <div class="mini-card-path">images/fr1.png</div>
           </div>
         </div>
       </div>
-      <div class="mini-card upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 업로드">
-        <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
+      <div class="mini-card">
         <img src="images/fr2.png" alt="가치카드 이미지"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="mini-card-fallback">
@@ -529,12 +510,11 @@
           <div>
             <div class="mini-card-word">경험</div>
             <div class="mini-card-en">Experience</div>
-            <div class="mini-card-path">클릭하여 업로드</div>
+            <div class="mini-card-path">images/fr2.png</div>
           </div>
         </div>
       </div>
-      <div class="mini-card upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 업로드">
-        <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
+      <div class="mini-card">
         <img src="images/fr3.png" alt="가치카드 이미지"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="mini-card-fallback">
@@ -542,7 +522,7 @@
           <div>
             <div class="mini-card-word">부</div>
             <div class="mini-card-en">Wealth</div>
-            <div class="mini-card-path">클릭하여 업로드</div>
+            <div class="mini-card-path">images/fr3.png</div>
           </div>
         </div>
       </div>
@@ -653,13 +633,12 @@
             <div class="method-body">20장씩 세 묶음에서 1장씩 골라 3장 완성 → 1장으로 압축</div>
             <div class="method-point-single">소거하며 좁혀가는 과정 자체가 신중한 선택을 유도해요</div>
           </div>
-          <div class="img-slot side upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 업로드">
-            <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
+          <div class="img-slot side">
             <img src="images/method-dummy.jpg" alt="더미 방식 진행 이미지"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
             <div class="img-slot-fallback">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#78746E" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#78746E"/><path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#78746E" stroke-width="1.6"/></svg>
-              <code>클릭하여 업로드</code>
+              <code>images/method-dummy.jpg</code>
             </div>
           </div>
         </div>
@@ -674,13 +653,12 @@
             <div class="method-body">카드를 빠르게 넘기며 즉각 선택</div>
             <div class="method-point-single">고민할 틈이 없을수록 더 솔직한 반응이 나와요</div>
           </div>
-          <div class="img-slot side upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 업로드">
-            <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
+          <div class="img-slot side">
             <img src="images/method-select.jpg" alt="선택 방식 진행 이미지"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
             <div class="img-slot-fallback">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#78746E" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#78746E"/><path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#78746E" stroke-width="1.6"/></svg>
-              <code>클릭하여 업로드</code>
+              <code>images/method-select.jpg</code>
             </div>
           </div>
         </div>
@@ -695,13 +673,12 @@
             <div class="method-body">코인으로 가치를 입찰, 최고 입찰자가 낙찰</div>
             <div class="method-point-single">무엇을 끝까지 놓지 못하는지가 곧 그 사람의 가치관이에요</div>
           </div>
-          <div class="img-slot side upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 업로드">
-            <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
+          <div class="img-slot side">
             <img src="images/method-auction.jpg" alt="경매 방식 진행 이미지"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
             <div class="img-slot-fallback">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#78746E" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#78746E"/><path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#78746E" stroke-width="1.6"/></svg>
-              <code>클릭하여 업로드</code>
+              <code>images/method-auction.jpg</code>
             </div>
           </div>
         </div>
@@ -970,13 +947,12 @@
       <div class="page-title">가치의 방향성 해석</div>
       <div class="page-desc">가치카드는 두 가지 관점으로 해석할 수 있습니다 — ① 방향성(심리적 나침반), ② 컬러(에너지 타입). 이 페이지에서는 방향성 해석을 다룹니다.</div>
 
-      <div class="img-slot big upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 업로드">
-        <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
+      <div class="img-slot big">
         <img src="images/direction-graph.png" alt="가치의 방향성 원형 차트"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="img-slot-fallback">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#78746E" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#78746E"/><path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#78746E" stroke-width="1.6"/></svg>
-          방향성 원형 차트 이미지<br><code>클릭하여 업로드</code>
+          방향성 원형 차트 이미지<br><code>images/direction-graph.png</code>
         </div>
       </div>
 
@@ -1095,48 +1071,6 @@
       </div>
     </div>
   </div>
-
-
-  <button id="save-guide-btn" onclick="saveCompletedFile()">완성본 저장 (HTML)</button>
-
-  <script>
-    function triggerUpload(e, el){
-      if(e.target.tagName === 'INPUT') return;
-      el.querySelector('.upload-input').click();
-    }
-
-    function handleUpload(e){
-      const file = e.target.files[0];
-      if(!file) return;
-      const container = e.target.closest('.upload-slot');
-      const img = container.querySelector('img');
-      const fallback = container.querySelector('.mini-card-fallback, .img-slot-fallback');
-      const reader = new FileReader();
-      reader.onload = function(ev){
-        img.src = ev.target.result;
-        img.style.display = 'block';
-        if(fallback) fallback.style.display = 'none';
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function saveCompletedFile(){
-      const clone = document.documentElement.cloneNode(true);
-      const btn = clone.querySelector('#save-guide-btn');
-      if(btn) btn.remove();
-      clone.querySelectorAll('.upload-input').forEach(function(i){ i.remove(); });
-      const htmlStr = '<!DOCTYPE html>\n' + clone.outerHTML;
-      const blob = new Blob([htmlStr], {type:'text/html'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = '가이드북_11p_완성본.html';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-  </script>
 <script>
 (function(){
   function init(){
