@@ -250,7 +250,8 @@
   .toc-row.sub{padding:7px 0 7px 20px; border-bottom:none;}
   .toc-row.sub .toc-name{font-size:11.5px; color:var(--muted); font-weight:400;}
   .toc-part{
-    font-size:11px; font-weight:700; color:var(--blue); width:20px; flex-shrink:0;
+    font-size:11px; font-weight:700; color:var(--blue); width:34px; flex-shrink:0;
+    white-space:nowrap;
   }
   .toc-name{font-size:13.5px; font-weight:600; color:var(--dark); flex-shrink:0;}
   .toc-fill{flex:1; border-bottom:1px dotted #EDE6DA; margin-bottom:4px;}
@@ -536,31 +537,53 @@
   </div>
 </div>
 
-  <!-- ================= 목차 ================= -->
+
+  <!-- ================= 목차 및 구성 ================= -->
   <div class="page">
     <div class="content">
       <div class="page-head">
         <div class="part-label">Contents</div>
         <div class="page-num">02</div>
       </div>
-      <div class="page-title">목차</div>
-      <div class="page-desc">가이드북 전체 구성입니다.</div>
+      <div class="page-title">목차 및 구성</div>
 
+      <div class="body-text" style="margin-bottom:10px;">
+        가치 실험 Card Kit은 오프라인 카드와 QR 페이지로 구성되어 있습니다.
+      </div>
+
+      <div class="sub-head" style="margin-top:2px;"><span class="dot blue"></span>구성품</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px;">
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:10px; padding:10px 12px;">
+          <div style="font-size:11.5px; font-weight:700; color:var(--dark);">가치카드 60장</div>
+          <div style="font-size:9.5px; color:var(--muted); margin-top:2px;">핵심 도구</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:10px; padding:10px 12px;">
+          <div style="font-size:11.5px; font-weight:700; color:var(--dark);">질문카드 12장</div>
+          <div style="font-size:9.5px; color:var(--muted); margin-top:2px;">사랑·진로·인생, 주제별 4장씩</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:10px; padding:10px 12px;">
+          <div style="font-size:11.5px; font-weight:700; color:var(--dark);">카드 설명서 1장</div>
+          <div style="font-size:9.5px; color:var(--muted); margin-top:2px;">카드 사용법 요약</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:10px; padding:10px 12px;">
+          <div style="font-size:11.5px; font-weight:700; color:var(--dark);">가치카드 안내 페이지</div>
+          <div style="font-size:9.5px; color:var(--muted); margin-top:2px;">온라인 / QR — 이 페이지</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:10px; padding:10px 12px; grid-column:1 / -1;">
+          <div style="font-size:11.5px; font-weight:700; color:var(--dark);">가치카드 해석 페이지</div>
+          <div style="font-size:9.5px; color:var(--muted); margin-top:2px;">온라인 / QR — 내가 고른 카드의 의미를 바로 확인</div>
+        </div>
+      </div>
+
+      <div class="sub-head"><span class="dot orange"></span>목차</div>
       <div class="toc-list" style="gap:0;">
         <div class="toc-row"><span class="toc-part">01</span><span class="toc-name">왜 가치카드인가</span><span class="toc-fill"></span><span class="toc-page">03</span></div>
-        <div class="toc-row sub"><span class="toc-name">Litmus의 철학 · 왜 가치를 탐색하는가 · 카드가 더 잘 작동하는 이유</span></div>
-
-        <div class="toc-row"><span class="toc-part">02</span><span class="toc-name">가치카드 사용법</span><span class="toc-fill"></span><span class="toc-page">04</span></div>
-        <div class="toc-row sub"><span class="toc-name">더미 방식 · 선택 방식 · 경매 방식 · 카드 세트 구성(20·30장)</span></div>
-
-        <div class="toc-row"><span class="toc-part">03</span><span class="toc-name">프로그램 활용</span><span class="toc-fill"></span><span class="toc-page">06</span></div>
-        <div class="toc-row sub"><span class="toc-name">가치 라이브러리 탐색 · 가치관 경매</span></div>
-
-        <div class="toc-row"><span class="toc-part">04</span><span class="toc-name">상담 장면별 활용</span><span class="toc-fill"></span><span class="toc-page">07</span></div>
-        <div class="toc-row sub"><span class="toc-name">개인상담 · 부모교육 · 집단상담 · 분야별 확장</span></div>
-
-        <div class="toc-row"><span class="toc-part">05</span><span class="toc-name">가치 해석 가이드</span><span class="toc-fill"></span><span class="toc-page">09</span></div>
-        <div class="toc-row sub"><span class="toc-name">방향성 해석(4분면 그래프) · 컬러 해석 · 참고 자료 · 웹사이트</span></div>
+        <div class="toc-row"><span class="toc-part">02</span><span class="toc-name">가치카드 고르는 법</span><span class="toc-fill"></span><span class="toc-page">04</span></div>
+        <div class="toc-row"><span class="toc-part">03-1</span><span class="toc-name">가치카드 활용법 - 질문카드</span><span class="toc-fill"></span><span class="toc-page">05</span></div>
+        <div class="toc-row"><span class="toc-part">03-2</span><span class="toc-name">가치카드 활용법 - 주제 딥다이브</span><span class="toc-fill"></span><span class="toc-page">06</span></div>
+        <div class="toc-row"><span class="toc-part">03-3</span><span class="toc-name">가치카드 활용법 - 함께</span><span class="toc-fill"></span><span class="toc-page">07</span></div>
+        <div class="toc-row"><span class="toc-part">04-1</span><span class="toc-name">가치 해석 가이드 - 방향성 해석</span><span class="toc-fill"></span><span class="toc-page">08</span></div>
+        <div class="toc-row"><span class="toc-part">04-2</span><span class="toc-name">가치 해석 가이드 - 컬러 해석</span><span class="toc-fill"></span><span class="toc-page">09</span></div>
       </div>
 
       <div class="footer-brand">
@@ -577,7 +600,7 @@
         <div class="part-label">Part 01 — 왜 가치카드인가</div>
         <div class="page-num">03</div>
       </div>
-      <div class="page-title">관념을, 언어로</div>
+      <div class="page-title">01 - 왜 가치카드인가</div>
 
       <div class="sub-head"><span class="dot blue"></span>Litmus의 철학</div>
       <div class="body-text">
@@ -587,9 +610,9 @@
 
       <div class="sub-head"><span class="dot orange"></span>왜 가치를 탐색하는가</div>
       <div class="body-text">
-        상담에서 마주하는 것은 대부분 '행동'입니다. 하지만 행동은 결과일 뿐, 그 뒤엔 항상 <b>가치</b>가 있습니다.
-        게임을 놓지 못하는 건 '자유'를 다른 방식으로 채우지 못했기 때문일 수 있고, 부모와 자녀가 부딪히는 건 서로 다른 가치를 같다고 착각했기 때문일 수 있습니다.
-        행동을 바꾸려 하기보다, <b>행동 뒤에 있는 가치를 발견하도록 돕는 것</b> — 이것이 가치 탐색이 상담에서 갖는 힘입니다.
+        우리가 마주하는 것은 대부분 '행동'입니다. 하지만 행동은 결과일 뿐, 그 뒤엔 항상 <b>가치</b>가 있습니다.
+        무언가를 놓지 못하는 건 어떤 가치를 다른 방식으로 채우지 못했기 때문일 수 있고, 누군가와 부딪히는 건 서로 다른 가치를 같다고 착각했기 때문일 수 있습니다.
+        행동을 바꾸려 하기보다, <b>행동 뒤에 있는 가치를 발견하는 것</b> — 이것이 가치 탐색이 가진 힘입니다.
       </div>
 
       <div class="sub-head"><span class="dot green"></span>카드가 더 잘 작동하는 이유</div>
@@ -601,9 +624,6 @@
           <tr><td>결과</td><td>추상적이고 모호한 대답</td><td>구체적 단어로 시작되는 대화</td></tr>
         </tbody>
       </table>
-      <div class="body-text" style="margin-top:10px;">
-        정해진 단어(카드)가 있으면 사람들은 그 단어를 실마리 삼아 자기 이야기를 시작합니다. 직접 고르고 실험하고 경험하는 것 — 이것이 Litmus가 실물 카드를 고집하는 이유입니다.
-      </div>
 
       <div class="footer-brand">
         <span>가치 실험 Card Kit 가이드북</span>
@@ -612,15 +632,16 @@
     </div>
   </div>
 
+
 <!-- ================= Part 2 : 가치카드 사용법 (통합 1p) ================= -->
   <div class="page">
     <div class="content">
       <div class="page-head">
-        <div class="part-label">Part 02 — 가치카드 사용법 <span style="color:var(--muted); font-weight:500;">1/2</span></div>
+        <div class="part-label">Part 02 — 가치카드 고르는 법</div>
         <div class="page-num">04</div>
       </div>
-      <div class="page-title">같은 카드, 다른 리듬</div>
-      <div class="page-desc">60장을 어떻게 고르게 하느냐에 따라 완전히 다른 경험이 됩니다. 상황에 맞는 방식을 골라 쓰세요.</div>
+      <div class="page-title">02 - 가치카드 고르는 법</div>
+      <div class="page-desc" style="margin-top:2px;">60장을 어떻게 고르게 하느냐에 따라 완전히 다른 경험이 됩니다. 상황에 맞는 방식을 골라 쓰세요.</div>
 
       <div class="method-row">
         <div class="method-col blue">
@@ -702,48 +723,37 @@
     </div>
   </div>
 
-  <!-- ================= Part 2-② : 카드 세트 구성 ================= -->
+
+  <!-- ================= Part 3-1 : 가치카드 활용법 - 질문카드 ================= -->
   <div class="page">
     <div class="content">
       <div class="page-head">
-        <div class="part-label">Part 02 — 가치카드 사용법 <span style="color:var(--muted); font-weight:500;">2/2</span></div>
+        <div class="part-label">Part 03-1 — 가치카드 활용법 - 질문카드</div>
         <div class="page-num">05</div>
       </div>
-      <div class="page-title">카드 세트 구성</div>
-      <div class="page-desc">60장 전체 라이브러리에서, 대상에 맞춰 추린 두 세트를 씁니다.</div>
+      <div class="page-title">03-1 - 가치카드 활용법 - 질문카드</div>
+      <div class="page-desc">기본은 간단해요 — 질문카드 12장(사랑·진로·인생) 중 1장을 고르면, 질문과 세부 질문까지 카드 안에 이미 다 준비되어 있어요.</div>
 
-      <div class="sub-head" style="margin-top:4px;"><span class="dot blue"></span>20장 · 청소년용 구성 예시</div>
-      <div class="body-text" style="font-size:10.5px; margin-bottom:4px;">학생 캠프 세션용. 유형당 2장씩 균등하게 배분해, 빠른 라운드 반복과 첫 체험에 적합</div>
-      <div class="cat-card-grid">
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#F07C00;"></span><b>안전</b> — 가족, 건강</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#E8B93C;"></span><b>동조</b> — 예의, 친절함</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#B08D57;"></span><b>전통</b> — 헌신, 겸손</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#2DA06B;"></span><b>박애</b> — 사랑, 우정</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#3E9C6C;"></span><b>보편주의</b> — 배려, 평화</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#4A80B5;"></span><b>자율</b> — 자유, 자존감</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#3B6BA8;"></span><b>자극</b> — 도전, 호기심</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#7B5EA7;"></span><b>쾌락주의</b> — 재미, 유머</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#D6558C;"></span><b>성취</b> — 성공, 유능한</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#C23B3B;"></span><b>권력</b> — 인정, 리더십</div>
+      <div class="img-slot big" style="height:60mm;">
+        <img src="images/method-dummy.jpg" alt="질문카드 12장"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-slot-fallback">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#78746E" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#78746E"/><path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#78746E" stroke-width="1.6"/></svg>
+          질문카드 12장 이미지<br><code>images/method-dummy.jpg</code>
+        </div>
       </div>
 
-      <div class="sub-head" style="margin-top:12px;"><span class="dot orange"></span>30장 · 과사용 특화 구성 예시</div>
-      <div class="body-text" style="font-size:10.5px; margin-bottom:4px;">스마트폰이 빠르게 채워주는 유형(자율·자극·쾌락주의·동조·박애)은 두껍게, 나머지는 최소한만 유지</div>
-      <div class="cat-card-grid">
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#4A80B5;"></span><b>자율</b> — 성장, 자율성, 자유, 자존감, 창의성</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#3B6BA8;"></span><b>자극</b> — 열정, 경험, 도전, 호기심, 변화</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#7B5EA7;"></span><b>쾌락주의</b> — 유머, 쾌락, 재미, 모험</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#E8B93C;"></span><b>동조</b> — 조화, 예의, 친절함, 성실</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#2DA06B;"></span><b>박애</b> — 사랑, 신뢰, 우정</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#D6558C;"></span><b>성취</b> — 성공, 유능한, 야망</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#3E9C6C;"></span><b>보편주의</b> — 평화, 배려</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#F07C00;"></span><b>안전</b> — 가족, 건강</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#B08D57;"></span><b>전통</b> — 헌신</div>
-        <div class="cat-card-row"><span class="cat-card-dot" style="background:#C23B3B;"></span><b>권력</b> — 인정</div>
-      </div>
+      <div class="sub-head" style="margin-top:12px;"><span class="dot blue"></span>주제별 구성</div>
+      <table class="cmp-table">
+        <tbody>
+          <tr><td>사랑</td><td>끌림 · 갈등 · 신뢰 · 선택</td></tr>
+          <tr><td>진로</td><td>선택 · 점검 · 변화 · 미래</td></tr>
+          <tr><td>인생</td><td>과거 · 현재 · 관계 · 방향</td></tr>
+        </tbody>
+      </table>
 
       <div class="body-text" style="margin-top:10px; font-size:11px;">
-        30장은 균등 배분이 아니라, 과사용과 직결된 유형(자율·자극·쾌락주의·동조·박애)에 무게를 두고 나머지는 비중을 줄인 구성입니다.
+        카드 한 장 안에 핵심 질문과 탐색 질문 4개가 모두 담겨 있어요. 고른 카드를 그대로 펼쳐보면 됩니다.
       </div>
 
       <div class="footer-brand">
@@ -753,60 +763,119 @@
     </div>
   </div>
 
-  <!-- ================= Part 3 : 프로그램 활용 (통합 1p) ================= -->
-
+  <!-- ================= Part 3-2 : 가치카드 활용법 - 주제 딥다이브 ================= -->
   <div class="page">
     <div class="content">
       <div class="page-head">
-        <div class="part-label">Part 03 — 프로그램 활용</div>
+        <div class="part-label">Part 03-2 — 가치카드 활용법 - 주제 딥다이브</div>
         <div class="page-num">06</div>
       </div>
-      <div class="page-title">프로그램 활용</div>
+      <div class="page-title">03-2 - 가치카드 활용법 - 주제 딥다이브</div>
+      <div class="page-desc">질문카드에 없는, 나만의 주제로 더 깊게 다뤄보고 싶을 때. 질문을 직접 만들고, 그 주제에 맞는 카드를 추려서 진행하면 됩니다.</div>
 
-      <div class="sub-head"><span class="dot blue"></span>가치 라이브러리 탐색</div>
-      <div class="body-text" style="margin-bottom:10px;">
-        가치 라이브러리 탐색은 하나의 질문에 대한 답을, 60장의 가치카드 중에서 찾아가는 프로그램입니다. 주제만 바꾸면 어떤 대화로도 열 수 있어요 — 말로 꺼내기 어려웠던 답이, 카드를 훑는 순간 손끝에서 먼저 나옵니다.
+      <div class="sub-head" style="margin-top:2px;"><span class="dot blue"></span>① 질문 만들기</div>
+      <div class="body-text" style="margin:4px 0 8px; background:var(--warm); border-radius:10px; padding:10px 14px; text-align:center; font-weight:700; color:var(--dark); font-size:12px;">
+        "[상황]에서, 나에게 가장 중요한 가치는 무엇인가요?"
+      </div>
+      <table class="cmp-table">
+        <tbody>
+          <tr><td>가족</td><td>가족 안에서 내가 가장 지키고 싶은 가치는?</td></tr>
+          <tr><td>친구</td><td>친구에게 가장 바라는 가치는?</td></tr>
+          <tr><td>직장</td><td>함께 일하기 좋은 사람은 어떤 가치를 가진 사람인가요?</td></tr>
+          <tr><td>팀/조직</td><td>우리 팀이 함께 중요하게 여기는 가치는?</td></tr>
+        </tbody>
+      </table>
+
+      <div class="sub-head" style="margin-top:12px;"><span class="dot orange"></span>② 주제에 맞는 카드 추리기</div>
+      <div class="body-text" style="font-size:10.5px; margin-bottom:6px;">60장 다 안 써도 돼요. 주제와 어울리는 컬러 위주로 20~30장만 추려두면 더 집중된 대화가 가능해요.</div>
+
+      <div class="scene-card">
+        <div class="scene-card-title">💕 연인·부부</div>
+        <div class="q-item">
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#2DA06B;"></span>박애&nbsp;&nbsp;
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#4A80B5;"></span>자율&nbsp;&nbsp;
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#E8B93C;"></span>동조&nbsp;&nbsp;
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#F07C00;"></span>안전&nbsp;&nbsp;
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#7B5EA7;"></span>쾌락주의
+        </div>
+        <div class="q-item" style="margin-top:4px;">카드 예시: 사랑, 신뢰, 자유, 예의, 가족</div>
       </div>
 
-      <div class="auction-steps" style="margin-bottom:10px;">
-        <div class="auction-step">
-          <div class="auction-step-num blue-num">1</div>
-          <div class="auction-step-body"><b>주제 선택</b> — 오늘 다룰 질문을 정합니다</div>
+      <div class="scene-card">
+        <div class="scene-card-title">🎓 청소년 진로</div>
+        <div class="q-item">
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3B6BA8;"></span>자극&nbsp;&nbsp;
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#D6558C;"></span>성취&nbsp;&nbsp;
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#4A80B5;"></span>자율&nbsp;&nbsp;
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#C23B3B;"></span>권력&nbsp;&nbsp;
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3E9C6C;"></span>보편주의
         </div>
-        <div class="auction-step">
-          <div class="auction-step-num blue-num">2</div>
-          <div class="auction-step-body"><b>가치카드 선택</b> — 참가자가 주제에 맞는 카드를 고릅니다</div>
-        </div>
-        <div class="auction-step">
-          <div class="auction-step-num blue-num">3</div>
-          <div class="auction-step-body"><b>세부 질문을 통한 대화</b> — 왜 그 카드를 골랐는지, 무엇을 의미하는지 이야기합니다</div>
-        </div>
+        <div class="q-item" style="margin-top:4px;">카드 예시: 호기심, 도전, 성공, 리더십</div>
       </div>
 
-      <div class="sub-head"><span class="dot green"></span>가치관 경매</div>
-      <div class="body-text" style="margin-bottom:8px;">
-        제한된 코인 안에서 자신에게 중요한 가치를 직접 입찰하는 방식입니다.
+      <div class="scene-card">
+        <div class="scene-card-title">🌱 자기이해·성장</div>
+        <div class="q-item">
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#4A80B5;"></span>자율&nbsp;&nbsp;
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3E9C6C;"></span>보편주의&nbsp;&nbsp;
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3B6BA8;"></span>자극&nbsp;&nbsp;
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#7B5EA7;"></span>쾌락주의&nbsp;&nbsp;
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#D6558C;"></span>성취
+        </div>
+        <div class="q-item" style="margin-top:4px;">카드 예시: 자존감, 창의성, 지혜</div>
+      </div>
+
+      <div class="body-text" style="font-size:9.5px; font-style:italic; color:var(--muted);">
+        (직장인·부모-자녀·상담·팀빌딩·목표설정도 같은 방식으로 직접 구성해보세요)
+      </div>
+
+      <div class="footer-brand">
+        <span>가치 실험 Card Kit 가이드북</span>
+        <span>LITMUS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Part 3-3 : 가치카드 활용법 - 함께 ================= -->
+  <div class="page">
+    <div class="content">
+      <div class="page-head">
+        <div class="part-label">Part 03-3 — 가치카드 활용법 - 함께</div>
+        <div class="page-num">07</div>
+      </div>
+      <div class="page-title">03-3 - 가치카드 활용법 - 함께</div>
+      <div class="page-desc">가치카드는 가족 모임, 친구들과의 술자리, 팀 회식처럼 여러 명이 모였을 때도 활용할 수 있어요. 가치관 경매의 방식으로, 서로 정해진 예산 안에서 선택하면서 재미있게 참여할 수 있어요.</div>
+
+      <div class="img-slot big" style="height:44mm; margin:6px 0 12px;">
+        <img src="images/method-auction.jpg" alt="가치관 경매 진행 이미지"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-slot-fallback">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#78746E" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#78746E"/><path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#78746E" stroke-width="1.6"/></svg>
+          가치관 경매 진행 이미지<br><code>images/method-auction.jpg</code>
+        </div>
       </div>
 
       <div class="auction-steps">
         <div class="auction-step">
           <div class="auction-step-num">1</div>
-          <div class="auction-step-body"><b>준비</b> — 코인 지급, 입찰 방식·동점 처리 규칙 안내</div>
+          <div class="auction-step-body"><b>가치카드 선택</b> — 참여자들이 중요하게 생각하는, 경매할 카드를 선택합니다</div>
         </div>
         <div class="auction-step">
           <div class="auction-step-num">2</div>
-          <div class="auction-step-body"><b>경매 진행</b> — 가치를 하나씩 순서대로 입찰 → 낙찰</div>
+          <div class="auction-step-body"><b>예산 및 방법 설명</b> — 참가자별 예산과 입찰 방법을 안내합니다</div>
         </div>
         <div class="auction-step">
           <div class="auction-step-num">3</div>
-          <div class="auction-step-body"><b>리뷰</b> — 질문을 통한 의미 확인<br>
-            <span class="auction-step-q">Q. 왜 이 가치에 끝까지 코인을 걸었나요? 낙찰받지 못한 이유는 무엇이었나요?</span>
-          </div>
+          <div class="auction-step-body"><b>진행</b> — 카드를 하나씩 공개하고, 갖고 싶은 사람이 금액을 부릅니다. 가장 높게 부른 사람이 가져갑니다</div>
+        </div>
+        <div class="auction-step">
+          <div class="auction-step-num">4</div>
+          <div class="auction-step-body"><b>리뷰</b> — 받은 카드를 왜 골랐는지, 한 사람씩 짧게 이야기 나눠보세요</div>
         </div>
       </div>
 
-      <div class="body-text" style="margin-top:14px; background:var(--warm); border-radius:10px; padding:12px 14px;">
-        가치관 선택에 대한 보편적 가치이론 해석은 <b>Part 5 — 가치 해석 가이드</b>에서 자세히 다룹니다.
+      <div class="body-text" style="margin-top:10px; font-size:10.5px;">
+        예산은 꼭 "가상 화폐"가 아니어도 괜찮아요 — 칩, 동전, 종이 화폐 등 손에 잡히는 무엇이든 활용할 수 있어요.
       </div>
 
       <div class="footer-brand">
@@ -815,136 +884,15 @@
       </div>
     </div>
   </div>
-
-  
-  <!-- ================= Part 4-① : 상담 장면별 활용 (1/2, 개인상담) ================= -->
-  <div class="page">
-    <div class="content">
-      <div class="page-head">
-        <div class="part-label">Part 04 — 상담 장면별 활용 <span style="color:var(--muted); font-weight:500;">1/2</span></div>
-        <div class="page-num">07</div>
-      </div>
-      <div class="page-title">상담 장면별 활용</div>
-      <div class="page-desc">질문만 바꾸면 다양한 프로그램으로 확장됩니다. 상담자는 선택을 해석하기보다, 그 의미를 함께 탐색하는 질문으로 자기이해를 돕습니다.</div>
-
-      <div class="sub-head"><span class="dot blue"></span>개인상담</div>
-      <div class="tag-row">
-        <span class="tag-pill">자기이해</span><span class="tag-pill">가치 명료화</span>
-        <span class="tag-pill">상담 목표 설정</span><span class="tag-pill">행동 변화 동기 강화</span>
-      </div>
-
-      <div class="scene-card">
-        <div class="scene-card-title">진로상담</div>
-        <div class="scene-card-q">일을 선택할 때 절대 포기하고 싶지 않은 가치는 무엇인가요?</div>
-        <div class="scene-card-sub">
-          <div class="q-item">왜 이 가치가 나에게 중요할까요?</div>
-          <div class="q-item">이 가치를 중요하게 생각하게 된 계기가 있었나요?</div>
-          <div class="q-item">이전 직장에서 이 가치가 가장 충족됐던 경험이 있었나요?</div>
-          <div class="q-item">현재는 얼마나 충족되고 있다고 느끼나요? (10점 척도)</div>
-          <div class="q-item">이 가치가 충족되지 않을 때 어떤 감정을 느끼나요?</div>
-        </div>
-      </div>
-
-      <div class="scene-card">
-        <div class="scene-card-title">우울·무기력 상담</div>
-        <div class="scene-card-q">예전에는 있었지만 지금은 잃어버린 가치가 있다면 무엇인가요?</div>
-        <div class="scene-card-sub">
-          <div class="q-item">언제부터 이 가치가 멀어졌나요?</div>
-          <div class="q-item">그 당시에는 어떤 삶을 살고 있었나요?</div>
-          <div class="q-item">지금 가장 그리운 것은 무엇인가요?</div>
-          <div class="q-item">이 가치를 다시 회복하려면 무엇부터 시작할 수 있을까요?</div>
-        </div>
-      </div>
-
-      <div class="scene-card">
-        <div class="scene-card-title">스마트폰·게임 과몰입 상담</div>
-        <div class="scene-card-q">지금의 행동이 내가 원하는 가치를 채워주고 있나요?</div>
-        <div class="scene-card-sub">
-          <div class="q-item">게임이나 스마트폰이 어떤 가치를 채워주고 있나요?</div>
-          <div class="q-item">반대로 어떤 가치를 빼앗고 있나요?</div>
-          <div class="q-item">내가 진짜 원하는 것은 무엇일까요?</div>
-          <div class="q-item">그 가치를 다른 방법으로 채울 수 있을까요?</div>
-        </div>
-      </div>
-
-      <div class="footer-brand">
-        <span>가치 실험 Card Kit 가이드북</span>
-        <span>LITMUS</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= Part 4-② : 상담 장면별 활용 (2/2, 부모교육·집단상담·확장) ================= -->
-  <div class="page">
-    <div class="content">
-      <div class="page-head">
-        <div class="part-label">Part 04 — 상담 장면별 활용 <span style="color:var(--muted); font-weight:500;">2/2</span></div>
-        <div class="page-num">08</div>
-      </div>
-      <div class="page-title">부모교육 · 집단상담 · 확장</div>
-
-      <div class="sub-head"><span class="dot orange"></span>부모교육 및 가족상담</div>
-      <div class="tag-row">
-        <span class="tag-pill">부모-자녀 이해</span><span class="tag-pill">투영 자각</span>
-        <span class="tag-pill">대화 시작점</span><span class="tag-pill">관계 프레임 전환</span>
-      </div>
-      <div class="scene-card">
-        <div class="scene-card-title">진행 방법</div>
-        <div class="scene-card-q">부모가 ① 내가 중요시하는 가치, ② 아이가 중요시할 것 같은 가치를 각각 고르고 비교합니다.</div>
-        <div class="scene-card-sub">
-          <div class="q-item">정말 아이의 가치일까요, 내가 기대하는 가치일까요?</div>
-          <div class="q-item">아이에게 직접 물어본 적이 있나요?</div>
-        </div>
-      </div>
-
-      <div class="sub-head" style="margin-top:12px;"><span class="dot green"></span>집단상담</div>
-      <div class="tag-row">
-        <span class="tag-pill">자기이해</span><span class="tag-pill">또래이해</span>
-        <span class="tag-pill">가치 차이 수용</span><span class="tag-pill">집단 역동 경험</span>
-      </div>
-      <div class="scene-card">
-        <div class="scene-card-title">활동</div>
-        <div class="scene-card-q">미니 가치관 경매 · 가치 토론을 통해 또래 간 가치 차이를 자연스럽게 체감합니다.</div>
-        <div class="scene-card-sub">
-          <div class="q-item">나와 가장 다른 가치를 가진 사람은 누구였나요?</div>
-          <div class="q-item">그 이야기를 들으며 새롭게 이해한 점은?</div>
-        </div>
-      </div>
-
-      <div class="sub-head" style="margin-top:12px;"><span class="dot" style="background:var(--dark);"></span>다양한 분야로 확장하기</div>
-      <div class="ext-table-row">
-        <table class="cmp-table">
-          <tbody>
-            <tr><td>연애</td><td>함께 살아갈 사람에게 중요한 가치는?</td></tr>
-            <tr><td>부부상담</td><td>서로 다른 가치로 갈등했던 경험은?</td></tr>
-            <tr><td>청소년</td><td>10년 뒤에도 갖고 싶은 가치는?</td></tr>
-          </tbody>
-        </table>
-        <table class="cmp-table">
-          <tbody>
-            <tr><td>대학생</td><td>대학생활에서 얻고 싶은 가치는?</td></tr>
-            <tr><td>직장인</td><td>회사에서 지켜지고 싶은 가치는?</td></tr>
-            <tr><td>기업교육</td><td>팀이 함께 중요하게 여기는 가치는?</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="footer-brand">
-        <span>가치 실험 Card Kit 가이드북</span>
-        <span>LITMUS</span>
-      </div>
-    </div>
-  </div>
-
 
   <!-- ================= Part 5-① : 방향성 해석 (이미지 삽입 + 두 축) ================= -->
   <div class="page">
     <div class="content">
       <div class="page-head">
-        <div class="part-label">Part 05 — 가치 해석 가이드 <span style="color:var(--muted); font-weight:500;">1/2</span></div>
-        <div class="page-num">09</div>
+        <div class="part-label">Part 04-1 — 가치 해석 가이드 - 방향성 해석</div>
+        <div class="page-num">08</div>
       </div>
-      <div class="page-title">가치의 방향성 해석</div>
+      <div class="page-title">04-1 - 가치 해석 가이드 - 방향성 해석</div>
       <div class="page-desc">가치카드는 두 가지 관점으로 해석할 수 있습니다 — ① 방향성(심리적 나침반), ② 컬러(에너지 타입). 이 페이지에서는 방향성 해석을 다룹니다.</div>
 
       <div class="img-slot big">
@@ -986,10 +934,10 @@
   <div class="page">
     <div class="content">
       <div class="page-head">
-        <div class="part-label">Part 05 — 가치 해석 가이드 <span style="color:var(--muted); font-weight:500;">2/2</span></div>
-        <div class="page-num">10</div>
+        <div class="part-label">Part 04-2 — 가치 해석 가이드 - 컬러 해석</div>
+        <div class="page-num">09</div>
       </div>
-      <div class="page-title">가치의 컬러 해석</div>
+      <div class="page-title">04-2 - 가치 해석 가이드 - 컬러 해석</div>
       <div class="page-desc">10가지 컬러는 각각 특정한 심리적 에너지와 욕구를 나타냅니다.</div>
 
       <div class="color-grid-full">
@@ -1055,13 +1003,13 @@
         </div>
       </div>
 
-      <a class="link-box" href="https://ulit.kr" target="_blank" rel="noopener">
+      <a class="link-box" href="https://ulit.kr/interpret.html" target="_blank" rel="noopener">
         <div class="link-box-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10 14a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07l-1.29 1.29" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"/><path d="M14 10a5 5 0 0 0-7.07 0L4.1 12.83a5 5 0 0 0 7.07 7.07l1.29-1.29" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"/></svg>
         </div>
         <div>
-          <div class="link-box-title">Litmus 웹사이트 — 카드 라이브러리 · 프로그램 안내</div>
-          <div class="link-box-url">ulit.kr</div>
+          <div class="link-box-title">가치 해석 조회하기 — 내가 고른 카드 바로 검색</div>
+          <div class="link-box-url">ulit.kr/interpret.html</div>
         </div>
       </a>
 
@@ -1083,7 +1031,7 @@
     applyScale();
   }
   function applyScale(){
-    var maxW = window.innerWidth - 16; // 좌우 여백 8px씩
+    var maxW = window.innerWidth - 16;
     document.querySelectorAll('.page-frame').forEach(function(wrapper){
       var page = wrapper.querySelector('.page');
       page.style.transform = 'none';
