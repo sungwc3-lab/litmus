@@ -16,6 +16,15 @@
     --border:#E8E0D6; --white:#FFFFFF;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  .upload-input{display:none;}
+  .upload-slot{cursor:pointer; position:relative; transition:box-shadow .15s ease;}
+  .upload-slot:hover{box-shadow:0 0 0 2px var(--blue) inset;}
+  .upload-slot:hover::after{
+    content:"클릭하여 이미지 삽입";
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    background:rgba(74,128,181,0.88); color:#fff; font-size:11px; font-weight:700;
+    border-radius:inherit; z-index:5; text-align:center; padding:6px;
+  }
   body{
     font-family:'Pretendard Variable','Pretendard',sans-serif;
     background:#E8E4DE;
@@ -25,6 +34,7 @@
     align-items:center;
     gap:32px;
   }
+  html{ scroll-behavior:smooth; }
   .page{
     width:148mm;
     height:210mm;
@@ -33,6 +43,7 @@
     position:relative;
     overflow:hidden;
     flex-shrink:0;
+    scroll-margin-top:20px;
   }
 
   /* ===== 표지 ===== */
@@ -83,7 +94,7 @@
     display:flex; gap:10px;
   }
   .mini-card{
-    width:29mm; height:40mm; background:var(--white);
+    width:29mm; height:44mm; background:var(--white);
     border:1px solid var(--border); border-radius:12px;
     overflow:hidden; position:relative;
     box-shadow:0 6px 20px rgba(0,0,0,0.06);
@@ -92,7 +103,7 @@
   .mini-card:nth-child(1){--r:-6deg;}
   .mini-card:nth-child(2){--r:2deg; margin-top:6px;}
   .mini-card:nth-child(3){--r:8deg;}
-  .mini-card img{width:100%; height:100%; object-fit:cover; display:block;}
+  .mini-card img{width:100%; height:100%; object-fit:contain; display:block;}
   .mini-card-fallback{
     position:absolute; inset:0; padding:10px;
     display:none; flex-direction:column; justify-content:space-between;
@@ -243,6 +254,8 @@
 
   /* ===== 목차 ===== */
   .toc-list{display:flex; flex-direction:column; margin-top:6px;}
+  .toc-link{ display:block; text-decoration:none; color:inherit; border-radius:6px; }
+  .toc-link:hover{ background:var(--warm); }
   .toc-row{
     display:flex; align-items:baseline; gap:10px;
     padding:11px 0; border-bottom:1px solid var(--border);
@@ -491,7 +504,8 @@
     </div>
 
     <div class="cover-cards">
-      <div class="mini-card">
+      <div class="mini-card upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 삽입">
+        <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
         <img src="images/fr1.png" alt="가치카드 이미지"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="mini-card-fallback">
@@ -503,7 +517,8 @@
           </div>
         </div>
       </div>
-      <div class="mini-card">
+      <div class="mini-card upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 삽입">
+        <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
         <img src="images/fr2.png" alt="가치카드 이미지"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="mini-card-fallback">
@@ -515,7 +530,8 @@
           </div>
         </div>
       </div>
-      <div class="mini-card">
+      <div class="mini-card upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 삽입">
+        <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
         <img src="images/fr3.png" alt="가치카드 이미지"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="mini-card-fallback">
@@ -539,7 +555,7 @@
 
 
   <!-- ================= 목차 및 구성 ================= -->
-  <div class="page">
+  <div class="page" id="p02">
     <div class="content">
       <div class="page-head">
         <div class="part-label">Contents</div>
@@ -577,13 +593,13 @@
 
       <div class="sub-head"><span class="dot orange"></span>목차</div>
       <div class="toc-list" style="gap:0;">
-        <div class="toc-row"><span class="toc-part">01</span><span class="toc-name">왜 가치카드인가</span><span class="toc-fill"></span><span class="toc-page">03</span></div>
-        <div class="toc-row"><span class="toc-part">02</span><span class="toc-name">가치카드 고르는 법</span><span class="toc-fill"></span><span class="toc-page">04</span></div>
-        <div class="toc-row"><span class="toc-part">03-1</span><span class="toc-name">가치카드 활용법 - 질문카드</span><span class="toc-fill"></span><span class="toc-page">05</span></div>
-        <div class="toc-row"><span class="toc-part">03-2</span><span class="toc-name">가치카드 활용법 - 주제 딥다이브</span><span class="toc-fill"></span><span class="toc-page">06</span></div>
-        <div class="toc-row"><span class="toc-part">03-3</span><span class="toc-name">가치카드 활용법 - 함께</span><span class="toc-fill"></span><span class="toc-page">07</span></div>
-        <div class="toc-row"><span class="toc-part">04-1</span><span class="toc-name">가치 해석 가이드 - 방향성 해석</span><span class="toc-fill"></span><span class="toc-page">08</span></div>
-        <div class="toc-row"><span class="toc-part">04-2</span><span class="toc-name">가치 해석 가이드 - 컬러 해석</span><span class="toc-fill"></span><span class="toc-page">09</span></div>
+        <a class="toc-link" href="#p03"><div class="toc-row"><span class="toc-part">01</span><span class="toc-name">왜 가치카드인가</span><span class="toc-fill"></span><span class="toc-page">03</span></div></a>
+        <a class="toc-link" href="#p04"><div class="toc-row"><span class="toc-part">02</span><span class="toc-name">가치카드 고르는 법</span><span class="toc-fill"></span><span class="toc-page">04</span></div></a>
+        <a class="toc-link" href="#p05"><div class="toc-row"><span class="toc-part">03-1</span><span class="toc-name">가치카드 활용법 - 질문카드</span><span class="toc-fill"></span><span class="toc-page">05</span></div></a>
+        <a class="toc-link" href="#p06"><div class="toc-row"><span class="toc-part">03-2</span><span class="toc-name">가치카드 활용법 - 주제 딥다이브</span><span class="toc-fill"></span><span class="toc-page">06</span></div></a>
+        <a class="toc-link" href="#p07"><div class="toc-row"><span class="toc-part">03-3</span><span class="toc-name">가치카드 활용법 - 함께</span><span class="toc-fill"></span><span class="toc-page">07</span></div></a>
+        <a class="toc-link" href="#p08"><div class="toc-row"><span class="toc-part">04-1</span><span class="toc-name">가치 해석 가이드 - 방향성 해석</span><span class="toc-fill"></span><span class="toc-page">08</span></div></a>
+        <a class="toc-link" href="#p09"><div class="toc-row"><span class="toc-part">04-2</span><span class="toc-name">가치 해석 가이드 - 컬러 해석</span><span class="toc-fill"></span><span class="toc-page">09</span></div></a>
       </div>
 
       <div class="footer-brand">
@@ -594,7 +610,7 @@
   </div>
 
   <!-- ================= Part 1 : 왜 가치카드인가 ================= -->
-  <div class="page">
+  <div class="page" id="p03">
     <div class="content">
       <div class="page-head">
         <div class="part-label">Part 01 — 왜 가치카드인가</div>
@@ -634,7 +650,7 @@
 
 
 <!-- ================= Part 2 : 가치카드 사용법 (통합 1p) ================= -->
-  <div class="page">
+  <div class="page" id="p04">
     <div class="content">
       <div class="page-head">
         <div class="part-label">Part 02 — 가치카드 고르는 법</div>
@@ -654,7 +670,8 @@
             <div class="method-body">20장씩 세 묶음에서 1장씩 골라 3장 완성 → 1장으로 압축</div>
             <div class="method-point-single">소거하며 좁혀가는 과정 자체가 신중한 선택을 유도해요</div>
           </div>
-          <div class="img-slot side">
+          <div class="img-slot side upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 삽입">
+            <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
             <img src="images/method-dummy.jpg" alt="더미 방식 진행 이미지"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
             <div class="img-slot-fallback">
@@ -674,7 +691,8 @@
             <div class="method-body">카드를 빠르게 넘기며 즉각 선택</div>
             <div class="method-point-single">고민할 틈이 없을수록 더 솔직한 반응이 나와요</div>
           </div>
-          <div class="img-slot side">
+          <div class="img-slot side upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 삽입">
+            <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
             <img src="images/method-select.jpg" alt="선택 방식 진행 이미지"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
             <div class="img-slot-fallback">
@@ -694,7 +712,8 @@
             <div class="method-body">코인으로 가치를 입찰, 최고 입찰자가 낙찰</div>
             <div class="method-point-single">무엇을 끝까지 놓지 못하는지가 곧 그 사람의 가치관이에요</div>
           </div>
-          <div class="img-slot side">
+          <div class="img-slot side upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 삽입">
+            <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
             <img src="images/method-auction.jpg" alt="경매 방식 진행 이미지"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
             <div class="img-slot-fallback">
@@ -725,7 +744,7 @@
 
 
   <!-- ================= Part 3-1 : 가치카드 활용법 - 질문카드 ================= -->
-  <div class="page">
+  <div class="page" id="p05">
     <div class="content">
       <div class="page-head">
         <div class="part-label">Part 03-1 — 가치카드 활용법 - 질문카드</div>
@@ -734,7 +753,8 @@
       <div class="page-title">03-1 - 가치카드 활용법 - 질문카드</div>
       <div class="page-desc">기본은 간단해요 — 질문카드 12장(사랑·진로·인생) 중 1장을 고르면, 질문과 세부 질문까지 카드 안에 이미 다 준비되어 있어요.</div>
 
-      <div class="img-slot big" style="height:60mm;">
+      <div class="img-slot big upload-slot" style="height:80mm;" onclick="triggerUpload(event,this)" title="클릭하여 이미지 삽입">
+        <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
         <img src="images/method-dummy.jpg" alt="질문카드 12장"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="img-slot-fallback">
@@ -764,7 +784,7 @@
   </div>
 
   <!-- ================= Part 3-2 : 가치카드 활용법 - 주제 딥다이브 ================= -->
-  <div class="page">
+  <div class="page" id="p06">
     <div class="content">
       <div class="page-head">
         <div class="part-label">Part 03-2 — 가치카드 활용법 - 주제 딥다이브</div>
@@ -788,41 +808,26 @@
 
       <div class="sub-head" style="margin-top:12px;"><span class="dot orange"></span>② 주제에 맞는 카드 추리기</div>
       <div class="body-text" style="font-size:10.5px; margin-bottom:6px;">60장 다 안 써도 돼요. 주제와 어울리는 컬러 위주로 20~30장만 추려두면 더 집중된 대화가 가능해요.</div>
+      <div class="body-text" style="font-size:10px; margin-bottom:8px; background:var(--warm); border-radius:8px; padding:8px 12px;">
+        💡 카드 앞면 테두리의 컬러를 확인하면, 아래 컬러 점과 대조해서 바로 골라낼 수 있어요.
+      </div>
 
       <div class="scene-card">
         <div class="scene-card-title">💕 연인·부부</div>
-        <div class="q-item">
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#2DA06B;"></span>박애&nbsp;&nbsp;
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#4A80B5;"></span>자율&nbsp;&nbsp;
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#E8B93C;"></span>동조&nbsp;&nbsp;
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#F07C00;"></span>안전&nbsp;&nbsp;
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#7B5EA7;"></span>쾌락주의
-        </div>
-        <div class="q-item" style="margin-top:4px;">카드 예시: 사랑, 신뢰, 자유, 예의, 가족</div>
+        <div class="q-item">컬러 추천: <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#2DA06B;"></span>박애 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#4A80B5;"></span>자율 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#E8B93C;"></span>동조 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#F07C00;"></span>안전 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#7B5EA7;"></span>쾌락주의</div>
+        <div class="q-item" style="margin-top:3px;">주요 카드: 사랑, 신뢰, 자유</div>
       </div>
 
       <div class="scene-card">
         <div class="scene-card-title">🎓 청소년 진로</div>
-        <div class="q-item">
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3B6BA8;"></span>자극&nbsp;&nbsp;
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#D6558C;"></span>성취&nbsp;&nbsp;
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#4A80B5;"></span>자율&nbsp;&nbsp;
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#C23B3B;"></span>권력&nbsp;&nbsp;
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3E9C6C;"></span>보편주의
-        </div>
-        <div class="q-item" style="margin-top:4px;">카드 예시: 호기심, 도전, 성공, 리더십</div>
+        <div class="q-item">컬러 추천: <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3B6BA8;"></span>자극 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#D6558C;"></span>성취 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#4A80B5;"></span>자율 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#C23B3B;"></span>권력 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3E9C6C;"></span>보편주의</div>
+        <div class="q-item" style="margin-top:3px;">주요 카드: 호기심, 도전, 성공</div>
       </div>
 
       <div class="scene-card">
         <div class="scene-card-title">🌱 자기이해·성장</div>
-        <div class="q-item">
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#4A80B5;"></span>자율&nbsp;&nbsp;
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3E9C6C;"></span>보편주의&nbsp;&nbsp;
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3B6BA8;"></span>자극&nbsp;&nbsp;
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#7B5EA7;"></span>쾌락주의&nbsp;&nbsp;
-          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#D6558C;"></span>성취
-        </div>
-        <div class="q-item" style="margin-top:4px;">카드 예시: 자존감, 창의성, 지혜</div>
+        <div class="q-item">컬러 추천: <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#4A80B5;"></span>자율 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3E9C6C;"></span>보편주의 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3B6BA8;"></span>자극 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#7B5EA7;"></span>쾌락주의 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#D6558C;"></span>성취</div>
+        <div class="q-item" style="margin-top:3px;">주요 카드: 자존감, 창의성, 지혜</div>
       </div>
 
       <div class="body-text" style="font-size:9.5px; font-style:italic; color:var(--muted);">
@@ -837,7 +842,7 @@
   </div>
 
   <!-- ================= Part 3-3 : 가치카드 활용법 - 함께 ================= -->
-  <div class="page">
+  <div class="page" id="p07">
     <div class="content">
       <div class="page-head">
         <div class="part-label">Part 03-3 — 가치카드 활용법 - 함께</div>
@@ -846,13 +851,18 @@
       <div class="page-title">03-3 - 가치카드 활용법 - 함께</div>
       <div class="page-desc">가치카드는 가족 모임, 친구들과의 술자리, 팀 회식처럼 여러 명이 모였을 때도 활용할 수 있어요. 가치관 경매의 방식으로, 서로 정해진 예산 안에서 선택하면서 재미있게 참여할 수 있어요.</div>
 
-      <div class="img-slot big" style="height:44mm; margin:6px 0 12px;">
+      <div class="img-slot big upload-slot" style="height:44mm; margin:6px 0 12px;" onclick="triggerUpload(event,this)" title="클릭하여 이미지 삽입">
+        <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
         <img src="images/method-auction.jpg" alt="가치관 경매 진행 이미지"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="img-slot-fallback">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#78746E" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#78746E"/><path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#78746E" stroke-width="1.6"/></svg>
           가치관 경매 진행 이미지<br><code>images/method-auction.jpg</code>
         </div>
+      </div>
+
+      <div class="body-text" style="margin:8px 0 12px; font-size:11px; background:var(--warm); border-radius:10px; padding:10px 14px;">
+        <b>왜 효과적인가</b> — 예산이 무제한이라면 고민 없이 다 가져가겠지만, 한정된 예산 안에서는 "이것만은 놓치고 싶지 않다"는 게 자연스럽게 드러나요. 그 순간의 선택이 곧 그 사람의 우선순위예요.
       </div>
 
       <div class="auction-steps">
@@ -862,15 +872,15 @@
         </div>
         <div class="auction-step">
           <div class="auction-step-num">2</div>
-          <div class="auction-step-body"><b>예산 및 방법 설명</b> — 참가자별 예산과 입찰 방법을 안내합니다</div>
+          <div class="auction-step-body"><b>예산 및 방법 설명</b> — 각자 동일한 예산을 나눠주고(예: 칩 20개, 또는 가상화폐 100만원), 한 번에 올릴 수 있는 단위(예: 5개씩)를 정합니다</div>
         </div>
         <div class="auction-step">
           <div class="auction-step-num">3</div>
-          <div class="auction-step-body"><b>진행</b> — 카드를 하나씩 공개하고, 갖고 싶은 사람이 금액을 부릅니다. 가장 높게 부른 사람이 가져갑니다</div>
+          <div class="auction-step-body"><b>진행</b> — 진행자가 카드를 하나씩 공개하면, 갖고 싶은 참가자가 금액을 부릅니다. 가장 높게 부른 사람이 가져갑니다</div>
         </div>
         <div class="auction-step">
           <div class="auction-step-num">4</div>
-          <div class="auction-step-body"><b>리뷰</b> — 받은 카드를 왜 골랐는지, 한 사람씩 짧게 이야기 나눠보세요</div>
+          <div class="auction-step-body"><b>리뷰</b> — "왜 이 카드에 끝까지 예산을 썼어요?" / "못 가져간 카드 중에 아쉬운 게 있었나요?"</div>
         </div>
       </div>
 
@@ -886,7 +896,7 @@
   </div>
 
   <!-- ================= Part 5-① : 방향성 해석 (이미지 삽입 + 두 축) ================= -->
-  <div class="page">
+  <div class="page" id="p08">
     <div class="content">
       <div class="page-head">
         <div class="part-label">Part 04-1 — 가치 해석 가이드 - 방향성 해석</div>
@@ -895,7 +905,8 @@
       <div class="page-title">04-1 - 가치 해석 가이드 - 방향성 해석</div>
       <div class="page-desc">가치카드는 두 가지 관점으로 해석할 수 있습니다 — ① 방향성(심리적 나침반), ② 컬러(에너지 타입). 이 페이지에서는 방향성 해석을 다룹니다.</div>
 
-      <div class="img-slot big">
+      <div class="img-slot big upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 삽입">
+        <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
         <img src="images/direction-graph.png" alt="가치의 방향성 원형 차트"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="img-slot-fallback">
@@ -931,7 +942,7 @@
   </div>
 
   <!-- ================= Part 5-② : 컬러 해석 (10유형 통합 1p) ================= -->
-  <div class="page">
+  <div class="page" id="p09">
     <div class="content">
       <div class="page-head">
         <div class="part-label">Part 04-2 — 가치 해석 가이드 - 컬러 해석</div>
@@ -1003,13 +1014,13 @@
         </div>
       </div>
 
-      <a class="link-box" href="https://ulit.kr/interpret.html" target="_blank" rel="noopener">
+      <a class="link-box" href="https://ulit.kr/library.html" target="_blank" rel="noopener">
         <div class="link-box-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10 14a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07l-1.29 1.29" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"/><path d="M14 10a5 5 0 0 0-7.07 0L4.1 12.83a5 5 0 0 0 7.07 7.07l1.29-1.29" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"/></svg>
         </div>
         <div>
           <div class="link-box-title">가치 해석 조회하기 — 내가 고른 카드 바로 검색</div>
-          <div class="link-box-url">ulit.kr/interpret.html</div>
+          <div class="link-box-url">ulit.kr/library.html</div>
         </div>
       </a>
 
@@ -1019,6 +1030,26 @@
       </div>
     </div>
   </div>
+<script>
+  function triggerUpload(e, el){
+    if(e.target.tagName === 'INPUT') return;
+    el.querySelector('.upload-input').click();
+  }
+  function handleUpload(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const container = e.target.closest('.upload-slot');
+    const img = container.querySelector('img');
+    const fallback = container.querySelector('.mini-card-fallback, .img-slot-fallback');
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      img.src = ev.target.result;
+      img.style.display = 'block';
+      if(fallback) fallback.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+</script>
 <script>
 (function(){
   function init(){
