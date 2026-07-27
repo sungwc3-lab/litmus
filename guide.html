@@ -402,6 +402,7 @@
   .axis-card-title{font-size:12px; font-weight:700; color:var(--dark); margin-bottom:5px;}
   .axis-card-title span{font-size:9px; font-weight:500; color:var(--muted); margin-left:4px;}
   .axis-card-desc{font-size:10.5px; color:var(--text); line-height:1.55;}
+  .axis-card-tags{font-size:10px; color:var(--blue); font-weight:600; margin-top:6px;}
 
   /* ===== 활용목적 태그 + 시나리오 카드 (Part4) ===== */
   .tag-row{display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 10px;}
@@ -904,6 +905,9 @@
       </div>
       <div class="page-title">04-1 - 가치 해석 가이드 - 방향성 해석</div>
       <div class="page-desc">가치카드는 두 가지 관점으로 해석할 수 있습니다 — ① 방향성(심리적 나침반), ② 컬러(에너지 타입). 이 페이지에서는 방향성 해석을 다룹니다.</div>
+      <div class="body-text" style="font-size:10px; margin:2px 0 8px; background:var(--warm); border-radius:8px; padding:8px 12px;">
+        💡 카드 앞면에 표시된 컬러를 확인하면, 아래 원형 차트에서 같은 컬러를 찾아 바로 방향을 확인할 수 있어요.
+      </div>
 
       <div class="img-slot big upload-slot" onclick="triggerUpload(event,this)" title="클릭하여 이미지 삽입">
         <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
@@ -919,18 +923,22 @@
         <div class="axis-card">
           <div class="axis-card-title">개인 중심 <span>Self-focused</span></div>
           <div class="axis-card-desc">내 목표·욕구·성취가 중요 · 나만의 방식과 독립성 강조. 가치의 중심이 '나 자신'에게 있습니다.</div>
+          <div class="axis-card-tags">→ 자율 · 자극 · 쾌락주의 · 성취 · 권력</div>
         </div>
         <div class="axis-card">
           <div class="axis-card-title">사회 중심 <span>Other-focused</span></div>
           <div class="axis-card-desc">관계·타인·공동체의 조화가 중요 · 배려와 협력, 관계 안정 강조. 가치의 중심이 '타인과 사회'에 있습니다.</div>
+          <div class="axis-card-tags">→ 보편주의 · 박애 · 동조 · 전통 · 안전</div>
         </div>
         <div class="axis-card">
           <div class="axis-card-title">성장 <span>Growth</span></div>
           <div class="axis-card-desc">변화·경험·확장을 추구 · "지금보다 더 나아지고 싶다"는 흐름으로 움직입니다.</div>
+          <div class="axis-card-tags">→ 자율 · 자극 · 보편주의 · 박애</div>
         </div>
         <div class="axis-card">
           <div class="axis-card-title">안정 <span>Stability</span></div>
           <div class="axis-card-desc">안전·유지·예측 가능성을 추구 · "지금 가진 것을 지키고 싶다"는 흐름으로 움직입니다.</div>
+          <div class="axis-card-tags">→ 전통 · 안전 · 성취 · 권력</div>
         </div>
       </div>
 
