@@ -80,34 +80,6 @@
     color:var(--muted); font-weight:400; max-width:92mm;
   }
 
-  .cover-cards{
-    margin-top:22px;
-    display:flex; gap:10px;
-  }
-  .mini-card{
-    width:29mm; height:44mm; background:var(--white);
-    border:1px solid var(--border); border-radius:12px;
-    overflow:hidden; position:relative;
-    box-shadow:0 6px 20px rgba(0,0,0,0.06);
-    transform:rotate(var(--r,0deg));
-  }
-  .mini-card:nth-child(1){--r:-6deg;}
-  .mini-card:nth-child(2){--r:2deg; margin-top:6px;}
-  .mini-card:nth-child(3){--r:8deg;}
-  .mini-card img{width:100%; height:100%; object-fit:contain; display:block;}
-  .mini-card-fallback{
-    position:absolute; inset:0; padding:10px;
-    display:none; flex-direction:column; justify-content:space-between;
-    background:var(--warm);
-  }
-  .mini-card-dot{width:9px;height:9px;border-radius:50%;}
-  .mini-card:nth-child(1) .mini-card-dot{background:var(--blue);}
-  .mini-card:nth-child(2) .mini-card-dot{background:var(--orange);}
-  .mini-card:nth-child(3) .mini-card-dot{background:var(--green);}
-  .mini-card-word{font-size:13px; font-weight:700; color:var(--dark);}
-  .mini-card-en{font-size:8px; color:var(--muted); letter-spacing:0.02em; margin-top:1px;}
-  .mini-card-path{font-size:7px; color:var(--muted); font-family:monospace;}
-
   .cover-bottom{
     display:flex; justify-content:space-between; align-items:flex-end;
     border-top:1px solid var(--border); padding-top:14px;
@@ -474,8 +446,6 @@
     /* 표지 */
     .cover-title{ font-size:26px; line-height:1.32; }
     .cover-sub{ font-size:15px; max-width:none; }
-    .cover-cards{ justify-content:center; }
-    .mini-card{ width:26vw; height:40vw; max-width:110px; max-height:168px; }
     .cover-meta, .cover-brand, .cover-eyebrow{ font-size:12px; }
 
     /* 공통 제목/본문 */
@@ -576,44 +546,6 @@
       60장의 가치카드로 나의 가치관을 발견하는 법.
     </div>
 
-    <div class="cover-cards">
-      <div class="mini-card">
-        <img src="images/fr1.png" alt="가치카드 이미지"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="mini-card-fallback">
-          <div class="mini-card-dot"></div>
-          <div>
-            <div class="mini-card-word">가족</div>
-            <div class="mini-card-en">Family</div>
-            <div class="mini-card-path">images/fr1.png</div>
-          </div>
-        </div>
-      </div>
-      <div class="mini-card">
-        <img src="images/fr2.png" alt="가치카드 이미지"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="mini-card-fallback">
-          <div class="mini-card-dot"></div>
-          <div>
-            <div class="mini-card-word">경험</div>
-            <div class="mini-card-en">Experience</div>
-            <div class="mini-card-path">images/fr2.png</div>
-          </div>
-        </div>
-      </div>
-      <div class="mini-card">
-        <img src="images/fr3.png" alt="가치카드 이미지"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="mini-card-fallback">
-          <div class="mini-card-dot"></div>
-          <div>
-            <div class="mini-card-word">부</div>
-            <div class="mini-card-en">Wealth</div>
-            <div class="mini-card-path">images/fr3.png</div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="cover-bottom">
@@ -740,14 +672,6 @@
             <div class="method-body">20장씩 세 묶음에서 1장씩 골라 3장 완성 → 1장으로 압축</div>
             <div class="method-point-single">소거하며 좁혀가는 과정 자체가 신중한 선택을 유도해요</div>
           </div>
-          <div class="img-slot side">
-            <img src="images/method-dummy.jpg" alt="더미 방식 진행 이미지"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="img-slot-fallback">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#78746E" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#78746E"/><path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#78746E" stroke-width="1.6"/></svg>
-              <code>images/method-dummy.jpg</code>
-            </div>
-          </div>
         </div>
 
         <div class="method-col orange">
@@ -760,14 +684,6 @@
             <div class="method-body">카드를 빠르게 넘기며 즉각 선택</div>
             <div class="method-point-single">고민할 틈이 없을수록 더 솔직한 반응이 나와요</div>
           </div>
-          <div class="img-slot side">
-            <img src="images/method-select.jpg" alt="선택 방식 진행 이미지"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="img-slot-fallback">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#78746E" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#78746E"/><path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#78746E" stroke-width="1.6"/></svg>
-              <code>images/method-select.jpg</code>
-            </div>
-          </div>
         </div>
 
         <div class="method-col green">
@@ -779,14 +695,6 @@
             </div>
             <div class="method-body">코인으로 가치를 입찰, 최고 입찰자가 낙찰</div>
             <div class="method-point-single">무엇을 끝까지 놓지 못하는지가 곧 그 사람의 가치관이에요</div>
-          </div>
-          <div class="img-slot side">
-            <img src="images/method-auction.jpg" alt="경매 방식 진행 이미지"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="img-slot-fallback">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#78746E" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#78746E"/><path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#78746E" stroke-width="1.6"/></svg>
-              <code>images/method-auction.jpg</code>
-            </div>
           </div>
         </div>
       </div>
