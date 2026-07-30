@@ -459,7 +459,88 @@
   /* ===== 모바일 화면 보기 (자동 축소) ===== */
   .page-frame{ overflow:hidden; margin:0 auto; }
   @media (max-width:640px){
-    body{ padding:14px 0; gap:14px; }
+    body{ padding:0; gap:0; background:var(--cream); }
+  }
+
+  /* ===== 모바일 반응형 (640px 이하: 축소 대신 리플로우) ===== */
+  @media (max-width:640px){
+    .page-frame{ width:100% !important; height:auto !important; overflow:visible; }
+    .page{
+      width:100% !important; height:auto !important;
+      box-shadow:none; border-bottom:10px solid #E8E4DE;
+    }
+    .content{ padding:30px 20px 34px; }
+
+    /* 표지 */
+    .cover-title{ font-size:26px; line-height:1.32; }
+    .cover-sub{ font-size:15px; max-width:none; }
+    .cover-cards{ justify-content:center; }
+    .mini-card{ width:26vw; height:40vw; max-width:110px; max-height:168px; }
+    .cover-meta, .cover-brand, .cover-eyebrow{ font-size:12px; }
+
+    /* 공통 제목/본문 */
+    .page-title{ font-size:21px; }
+    .page-desc{ font-size:14px; line-height:1.6; }
+    .part-label{ font-size:12px; }
+    .sub-head{ font-size:15px; }
+    .body-text{ font-size:14px; line-height:1.75; }
+
+    /* 카드형 콘텐츠 */
+    .method-name{ font-size:16px; }
+    .method-when{ font-size:12px; }
+    .method-body{ font-size:14px; line-height:1.7; }
+    .method-point{ font-size:13px; }
+    .method-col .method-body{ font-size:13px; }
+    .method-col .method-point-single{ font-size:12.5px; }
+    .method-col{ flex-direction:column; align-items:flex-start; }
+    .method-col .img-slot.side{ width:100%; height:34vw; margin-top:8px; }
+
+    /* 표 */
+    .cmp-table th{ font-size:12.5px; }
+    .cmp-table td{ font-size:13px; }
+
+    /* 목차 */
+    .toc-name{ font-size:14.5px; }
+    .toc-row.sub .toc-name{ font-size:13px; }
+    .toc-page{ font-size:12.5px; }
+
+    /* 2단 그리드 → 1단 리플로우 */
+    .axis-grid, .color-grid-full, .color-grid-compact, .cat-card-grid,
+    .lib-example-row, .scene-row, .ext-table-row{
+      display:flex !important; flex-direction:column !important;
+    }
+
+    .axis-card-title{ font-size:13.5px; }
+    .axis-card-desc{ font-size:13px; line-height:1.6; }
+    .axis-card-tags{ font-size:12px; }
+
+    .color-name-c{ font-size:14px; }
+    .color-kw-c{ font-size:12px; }
+    .color-tags-f{ font-size:12px; line-height:1.55; }
+    .color-quote-f{ font-size:13px; line-height:1.55; }
+    .color-pts-f{ font-size:12px; line-height:1.55; }
+    .color-card-f .color-name-c{ font-size:13px; }
+
+    .cat-card-row{ font-size:13px; }
+    .tag-pill{ font-size:11.5px; }
+    .scene-card-title{ font-size:13.5px; }
+    .scene-card-q{ font-size:13.5px; }
+    .scene-card-sub .q-item, .scene-card-sub-lg .q-item{ font-size:12.5px; }
+
+    .lib-example-tag{ font-size:11.5px; }
+    .lib-example-row-item{ font-size:13px; }
+
+    .auction-step-body{ font-size:13.5px; }
+    .auction-step-q{ font-size:12px; }
+
+    /* 이미지 슬롯 */
+    .img-slot.big{ height:60vw; }
+    .img-slot{ height:38vw; }
+
+    .link-box-title{ font-size:13.5px; }
+    .link-box-url{ font-size:14.5px; }
+
+    .footer-brand{ font-size:11px; }
   }
 
   /* ===== 인쇄 / PDF 저장용 ===== */
@@ -1032,9 +1113,16 @@
     applyScale();
   }
   function applyScale(){
-    var maxW = window.innerWidth - 16;
+    var isMobile = window.innerWidth <= 640;
     document.querySelectorAll('.page-frame').forEach(function(wrapper){
       var page = wrapper.querySelector('.page');
+      if(isMobile){
+        page.style.transform = 'none';
+        wrapper.style.width = '100%';
+        wrapper.style.height = 'auto';
+        return;
+      }
+      var maxW = window.innerWidth - 16;
       page.style.transform = 'none';
       var nw = page.offsetWidth;
       var nh = page.offsetHeight;
