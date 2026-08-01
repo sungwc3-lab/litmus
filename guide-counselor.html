@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>가치 실험 Card Kit 가이드북 — 샘플</title>
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+<style>
+  :root{
+    --blue:#4A80B5; --blue-light:#D6E8F7; --blue-dark:#2C5F8A;
+    --orange:#F07C00; --orange-light:#FFF3E0;
+    --green:#2DA06B;
+    --cream:#FAF8F3; --warm:#F5EFE6;
+    --dark:#1C1917; --text:#2D2B28; --muted:#78746E;
+    --border:#E8E0D6; --white:#FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  .upload-input{display:none;}
+  .upload-slot{cursor:pointer; position:relative; transition:box-shadow .15s ease;}
+  .upload-slot:hover{box-shadow:0 0 0 2px var(--blue) inset;}
+  .upload-slot:hover::after{
+    content:"클릭하여 이미지 삽입";
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    background:rgba(74,128,181,0.88); color:#fff; font-size:11px; font-weight:700;
+    border-radius:inherit; z-index:5; text-align:center; padding:6px;
+  }
+  body{
+    font-family:'Pretendard Variable','Pretendard',sans-serif;
+    background:#E8E4DE;
+    padding:40px 0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:32px;
+  }
+  html{ scroll-behavior:smooth; }
+  .page{
+    width:148mm;
+    height:210mm;
+    background:var(--cream);
+    box-shadow:0 8px 50px rgba(0,0,0,0.14);
+    position:relative;
+    overflow:hidden;
+    flex-shrink:0;
+    scroll-margin-top:20px;
+  }
+
+  /* ===== 표지 ===== */
+  .cover{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:16mm 14mm;
+    background:
+      radial-gradient(circle at 85% 12%, var(--blue-light) 0%, transparent 38%),
+      radial-gradient(circle at 10% 92%, var(--orange-light) 0%, transparent 34%),
+      var(--cream);
+  }
+  .cover-top{display:flex;justify-content:space-between;align-items:flex-start;}
+  .cover-brand{
+    font-size:12px; font-weight:600; letter-spacing:0.16em;
+    color:var(--muted); text-transform:uppercase;
+  }
+  .cover-brand b{color:var(--dark);}
+  .cover-num{
+    font-size:11px; font-weight:600; color:var(--blue);
+    background:var(--blue-light); border-radius:100px;
+    padding:5px 12px; letter-spacing:0.04em;
+  }
+  .cover-num-sub{
+    margin-top:7px; font-size:10px; font-weight:700; color:var(--muted);
+    letter-spacing:0.14em; text-transform:uppercase;
+  }
+
+  .cover-mid{margin-top:8mm;}
+  .cover-eyebrow{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:11.5px; color:var(--muted); font-weight:500;
+    background:var(--white); border:1px solid var(--border);
+    border-radius:100px; padding:5px 14px; margin-bottom:20px;
+  }
+  .cover-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--green);}
+  .cover-title{
+    font-weight:800; font-size:35px; line-height:1.28;
+    color:var(--dark); letter-spacing:-0.01em;
+  }
+  .cover-title em{
+    font-style:normal; color:var(--blue);
+  }
+  .cover-sub{
+    margin-top:14px; font-size:14.5px; line-height:1.7;
+    color:var(--muted); font-weight:400; max-width:92mm;
+  }
+
+
+
+  .cover-bottom{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    border-top:1px solid var(--border); padding-top:14px;
+  }
+  .cover-meta{font-size:11px; color:var(--muted); line-height:1.6;}
+  .cover-meta b{color:var(--dark); font-weight:600;}
+  .cover-wordmark{
+    font-weight:800; font-size:16px; color:var(--dark); letter-spacing:-0.01em;
+  }
+  .cover-wordmark span{color:var(--blue);}
+
+  /* ===== 본문 페이지 공통 ===== */
+  .content{
+    padding:14mm 13mm 12mm;
+    display:flex; flex-direction:column; height:100%;
+  }
+  .page-head{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:16px;
+  }
+  .part-label{
+    font-size:11px; font-weight:700; letter-spacing:0.1em;
+    color:var(--blue); text-transform:uppercase;
+  }
+  .page-num{font-size:10.5px; color:var(--muted); font-weight:500;}
+  .page-title{
+    font-weight:800; font-size:22px; color:var(--dark);
+    margin-bottom:4px; letter-spacing:-0.01em;
+  }
+  .page-desc{
+    font-size:12.5px; color:var(--muted); line-height:1.6; margin-bottom:18px;
+  }
+
+  .method-card{
+    background:var(--white); border:1px solid var(--border);
+    border-radius:14px; padding:16px 18px; margin-bottom:12px;
+  }
+  .method-head{display:flex; align-items:center; gap:9px; margin-bottom:8px;}
+  .method-tag{
+    width:26px; height:26px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:800; color:#fff; flex-shrink:0;
+  }
+  .method-card.blue .method-tag{background:var(--blue);}
+  .method-card.orange .method-tag{background:var(--orange);}
+  .method-card.green .method-tag{background:var(--green);}
+  .method-card.green .method-point::before{background:#DCF2E7;}
+
+  /* ===== 방식 요약 (p4 통합, 세로 3행) ===== */
+  .method-row{display:flex; flex-direction:column; gap:8px; margin-top:6px;}
+  .method-col{
+    background:var(--white); border:1px solid var(--border);
+    border-radius:12px; padding:10px 12px; display:flex; flex-direction:row;
+    align-items:center; gap:12px;
+  }
+  .method-col-text{flex:1; min-width:0;}
+  .method-col-head{display:flex; align-items:center; gap:7px; margin-bottom:4px;}
+  .method-col .method-tag{width:20px; height:20px; font-size:10px; border-radius:6px; flex-shrink:0;}
+  .method-col.blue .method-tag{background:var(--blue);}
+  .method-col.orange .method-tag{background:var(--orange);}
+  .method-col.green .method-tag{background:var(--green);}
+  .method-col .method-name{font-size:13px; font-weight:700; color:var(--dark);}
+  .method-col .method-when{font-size:10.5px; color:var(--muted); font-weight:500;}
+  .method-col .method-body{font-size:11px; color:var(--text); line-height:1.55; margin-bottom:4px;}
+  .method-col .method-point-single{font-size:10.5px; color:var(--muted); line-height:1.5;}
+  .img-slot.side{
+    width:34mm; height:24mm; border-radius:9px; flex-shrink:0;
+  }
+  .img-slot.side .img-slot-fallback{font-size:9px; gap:4px;}
+  .img-slot.side .img-slot-fallback code{font-size:7.5px; padding:1px 4px;}
+  .method-name{font-size:15px; font-weight:700; color:var(--dark);}
+  .method-when{font-size:11px; color:var(--muted); margin-top:1px;}
+
+  .method-body{font-size:12.5px; color:var(--text); line-height:1.65; margin-bottom:10px;}
+  .method-body b{color:var(--dark); font-weight:600;}
+
+  .method-points{
+    display:flex; flex-direction:column; gap:5px; margin-bottom:12px;
+  }
+  .method-point{
+    display:flex; gap:7px; font-size:11.5px; color:var(--muted); line-height:1.55;
+  }
+  .method-point::before{
+    content:''; width:4px; height:4px; border-radius:50%;
+    background:var(--border); margin-top:6px; flex-shrink:0;
+  }
+  .method-card.blue .method-point::before{background:var(--blue-light);}
+  .method-card.orange .method-point::before{background:var(--orange-light);}
+
+  .img-slot{
+    height:32mm; border-radius:10px;
+    border:1.4px dashed var(--border);
+    background:var(--warm);
+    position:relative;
+    overflow:hidden;
+  }
+  .img-slot img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .img-slot-fallback{
+    position:absolute; inset:0;
+    display:none; flex-direction:column; align-items:center; justify-content:center;
+    gap:6px; font-size:10.5px; color:var(--muted); font-weight:500; text-align:center;
+    padding:0 10px;
+  }
+  .img-slot-fallback svg{opacity:0.45;}
+  .img-slot-fallback code{
+    font-size:9.5px; background:var(--white); border:1px solid var(--border);
+    border-radius:5px; padding:2px 6px; color:var(--muted); font-family:monospace;
+  }
+
+  .footer-brand{
+    margin-top:auto; padding-top:10px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:9.5px; color:var(--muted);
+  }
+
+  /* ===== 표 공통 ===== */
+  .cmp-table{
+    width:100%; border-collapse:collapse; margin-top:6px;
+    background:var(--white); border:1px solid var(--border); border-radius:12px; overflow:hidden;
+  }
+  .cmp-table th{
+    background:var(--warm); font-size:11px; font-weight:700; color:var(--dark);
+    text-align:left; padding:9px 12px; border-bottom:1px solid var(--border);
+  }
+  .cmp-table td{
+    font-size:11.5px; color:var(--text); padding:9px 12px;
+    border-bottom:1px solid var(--border); vertical-align:top; line-height:1.5;
+  }
+  .cmp-table tr:last-child td{border-bottom:none;}
+  .cmp-table td:first-child{font-weight:600; color:var(--dark); white-space:nowrap;}
+  .dot{display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:6px;}
+  .dot.blue{background:var(--blue);} .dot.orange{background:var(--orange);} .dot.green{background:var(--green);}
+
+  /* ===== 목차 ===== */
+  .toc-list{display:flex; flex-direction:column; margin-top:6px;}
+  .toc-link{ display:block; text-decoration:none; color:inherit; border-radius:6px; }
+  .toc-link:hover{ background:var(--warm); }
+  .toc-row{
+    display:flex; align-items:baseline; gap:10px;
+    padding:11px 0; border-bottom:1px solid var(--border);
+  }
+  .toc-row.sub{padding:7px 0 7px 20px; border-bottom:none;}
+  .toc-row.sub .toc-name{font-size:11.5px; color:var(--muted); font-weight:400;}
+  .toc-part{
+    font-size:11px; font-weight:700; color:var(--blue); width:34px; flex-shrink:0;
+    white-space:nowrap;
+  }
+  .toc-name{font-size:13.5px; font-weight:600; color:var(--dark); flex-shrink:0;}
+  .toc-fill{flex:1; border-bottom:1px dotted #EDE6DA; margin-bottom:4px;}
+  .toc-page{font-size:11.5px; color:var(--muted); font-weight:500;}
+
+  /* ===== 섹션 서브헤드 ===== */
+  .sub-head{
+    font-size:13.5px; font-weight:700; color:var(--dark);
+    margin:14px 0 8px; display:flex; align-items:center; gap:7px;
+  }
+  .sub-head .dot{margin-right:0;}
+  .body-text{font-size:12.5px; color:var(--text); line-height:1.75; margin-bottom:10px;}
+  .body-text b{color:var(--dark); font-weight:600;}
+
+  /* ===== 4분면 그래프 ===== */
+  .quad-wrap{
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    background:var(--white); border:1px solid var(--border); border-radius:14px;
+    padding:16px; margin:8px 0 14px;
+  }
+  .quad-legend{display:flex; flex-direction:column; gap:9px; font-size:10.5px; color:var(--muted); flex:1;}
+  .quad-legend-row{display:flex; align-items:flex-start; gap:6px; line-height:1.5;}
+  .quad-legend-row b{color:var(--dark); font-size:11px; display:block;}
+
+  /* ===== 컬러 카드 (5-3, 5-4) ===== */
+  .color-grid{display:flex; flex-direction:column; gap:8px; margin-top:6px;}
+  .color-card{
+    display:flex; gap:10px; align-items:flex-start;
+    background:var(--white); border:1px solid var(--border); border-radius:10px;
+    padding:10px 12px;
+  }
+  .color-swatch{width:8px; border-radius:4px; flex-shrink:0; align-self:stretch;}
+  .color-info{flex:1;}
+  .color-name{font-size:12.5px; font-weight:700; color:var(--dark);}
+  .color-kw{font-size:10px; color:var(--muted); margin:2px 0 4px;}
+  .color-desc{font-size:11px; color:var(--text); line-height:1.5;}
+
+  /* ===== 체크리스트 / 부록 ===== */
+  .check-list{display:flex; flex-direction:column; gap:8px; margin-top:6px;}
+  .check-item{
+    display:flex; align-items:center; gap:9px; font-size:12px; color:var(--text);
+    background:var(--white); border:1px solid var(--border); border-radius:9px; padding:9px 12px;
+  }
+  .check-box{
+    width:15px; height:15px; border-radius:4px; border:1.6px solid var(--border);
+    flex-shrink:0;
+  }
+  .q-group{margin-bottom:12px;}
+  .q-group-title{
+    font-size:11px; font-weight:700; color:var(--blue); margin-bottom:5px;
+    letter-spacing:0.02em;
+  }
+  .q-item{font-size:11.5px; color:var(--text); line-height:1.6; padding-left:10px; position:relative;}
+  .q-item::before{content:'—'; position:absolute; left:0; color:var(--border);}
+  .ref-item{font-size:11px; color:var(--muted); line-height:1.7;}
+
+  /* ===== 가치 라이브러리 예시 카드 (p5) ===== */
+  .lib-example-row{display:flex; gap:10px; margin-bottom:14px;}
+  .lib-example{
+    flex:1; background:var(--white); border:1px solid var(--border);
+    border-radius:12px; padding:12px 13px;
+  }
+  .lib-example-tag{
+    display:inline-block; font-size:10px; font-weight:700; color:#fff;
+    border-radius:100px; padding:3px 10px; margin-bottom:8px;
+  }
+  .lib-example-tag.blue{background:var(--blue);}
+  .lib-example-tag.orange{background:var(--orange);}
+  .lib-example-row-item{
+    font-size:11px; color:var(--text); line-height:1.55; margin-bottom:6px;
+  }
+  .lib-example-row-item b{
+    display:block; font-size:9.5px; font-weight:700; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.03em; margin-bottom:1px;
+  }
+
+  /* ===== 가치관 경매 단계 (p5) ===== */
+  .auction-steps{display:flex; flex-direction:column; gap:7px;}
+  .auction-step{
+    display:flex; align-items:flex-start; gap:10px;
+    background:var(--white); border:1px solid var(--border);
+    border-radius:10px; padding:10px 13px;
+  }
+  .auction-step-num{
+    width:20px; height:20px; border-radius:50%; background:var(--green);
+    color:#fff; font-size:10.5px; font-weight:700; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .auction-step-num.blue-num{background:var(--blue);}
+
+  /* ===== Part4 통합 레이아웃 ===== */
+  .scene-row{display:flex; gap:12px; margin-top:2px;}
+  .scene-col{flex:1;}
+  .ext-table-row{display:flex; gap:8px; margin-top:6px;}
+  .ext-table-row table{flex:1;}
+
+  /* ===== 컬러 해석 압축 그리드 (p8) ===== */
+  .color-grid-compact{
+    display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:8px;
+  }
+  .color-card-c{
+    display:flex; align-items:center; gap:9px;
+    background:var(--white); border:1px solid var(--border); border-radius:9px;
+    padding:9px 11px;
+  }
+  .color-swatch-c{width:22px; height:22px; border-radius:7px; flex-shrink:0;}
+  .color-name-c{font-size:12px; font-weight:700; color:var(--dark);}
+  .color-kw-c{font-size:9.5px; color:var(--muted); margin-top:1px;}
+
+  /* ===== 컬러 해석 풀버전 (p9, 해시태그+인용문+포인트) ===== */
+  .color-grid-full{
+    display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:6px;
+  }
+  .color-card-f{
+    background:var(--white); border:1px solid var(--border); border-radius:9px;
+    padding:8px 10px;
+  }
+  .color-card-f-head{display:flex; align-items:center; gap:6px; margin-bottom:3px;}
+  .color-card-f .color-swatch-c{width:13px; height:13px; border-radius:5px; flex-shrink:0;}
+  .color-card-f .color-name-c{font-size:10.5px;}
+  .color-tags-f{font-size:7.8px; color:var(--muted); line-height:1.4; margin-bottom:3px;}
+  .color-quote-f{font-size:8.6px; color:var(--dark); font-weight:600; line-height:1.4; margin-bottom:3px;}
+  .color-pts-f{font-size:8px; color:var(--muted); line-height:1.4;}
+
+  /* ===== 방향성 해석 페이지 (큰 이미지 + 축 카드) ===== */
+  .img-slot.big{height:90mm; border-radius:12px; margin:6px 0 12px; background:var(--white);}
+  .img-slot.big img{ object-fit:contain; }
+  .img-slot.big .img-slot-fallback{font-size:11px; gap:8px;}
+  .img-slot.big .img-slot-fallback code{font-size:9.5px; padding:2px 7px;}
+  .axis-grid{display:grid; grid-template-columns:1fr 1fr; gap:9px;}
+  .axis-card{
+    background:var(--white); border:1px solid var(--border); border-radius:11px;
+    padding:11px 13px;
+  }
+  .axis-card-title{font-size:12px; font-weight:700; color:var(--dark); margin-bottom:5px;}
+  .axis-card-title span{font-size:9px; font-weight:500; color:var(--muted); margin-left:4px;}
+  .axis-card-desc{font-size:10.5px; color:var(--text); line-height:1.55;}
+
+  /* ===== 활용목적 태그 + 시나리오 카드 (Part4) ===== */
+  .tag-row{display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 10px;}
+  .tag-pill{
+    font-size:10px; font-weight:600; color:var(--blue);
+    background:var(--blue-light); border-radius:100px; padding:4px 11px;
+  }
+  .cat-card-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:6px 12px; margin-top:6px;
+  }
+  .cat-card-row{
+    font-size:11px; color:var(--text); line-height:1.5;
+    display:flex; align-items:center; gap:6px;
+    background:var(--white); border:1px solid var(--border); border-radius:8px;
+    padding:6px 10px;
+  }
+  .cat-card-row b{color:var(--dark); font-weight:700; flex-shrink:0;}
+  .cat-card-dot{width:8px; height:8px; border-radius:50%; flex-shrink:0;}
+  .scene-card{
+    background:var(--white); border:1px solid var(--border); border-radius:11px;
+    padding:11px 13px; margin-bottom:8px;
+  }
+  .scene-card-title{font-size:11.5px; font-weight:700; color:var(--dark); margin-bottom:4px;}
+  .scene-card-q{
+    font-size:11.5px; color:var(--text); line-height:1.55; margin-bottom:7px;
+    padding-left:10px; border-left:2.5px solid var(--blue-light);
+  }
+  .scene-card-sub{display:flex; flex-direction:column; gap:3px;}
+  .scene-card-sub .q-item{font-size:10.5px;}
+
+  /* ===== 상황별 탐색 질문 예시 (Part4 보충페이지) ===== */
+  .scene-card-lg{
+    background:var(--white); border:1px solid var(--border); border-radius:11px;
+    padding:11px 14px; margin-bottom:9px;
+  }
+  .scene-card-sub-lg{display:flex; flex-direction:column; gap:4px;}
+  .scene-card-sub-lg .q-item{font-size:10.5px; line-height:1.55;}
+
+  /* ===== QR 박스 (부록 마지막) ===== */
+  .qr-box{
+    display:flex; align-items:center; gap:12px; margin-top:16px;
+    background:var(--white); border:1px solid var(--border); border-radius:12px;
+    padding:12px 14px;
+  }
+  .qr-fake{width:22mm; height:22mm; border:1px solid var(--border); border-radius:6px; flex-shrink:0;}
+  .link-box{
+    display:flex; align-items:center; gap:12px; margin-top:16px;
+    background:var(--white); border:1px solid var(--border); border-radius:12px;
+    padding:12px 14px; text-decoration:none;
+  }
+  .link-box-icon{
+    width:38px; height:38px; border-radius:9px; background:var(--blue-light);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .link-box-title{font-size:12px; font-weight:700; color:var(--dark); margin-bottom:3px;}
+  .link-box-url{font-size:13px; font-weight:700; color:var(--blue);}
+  .qr-box-title{font-size:12px; font-weight:700; color:var(--dark); margin-bottom:3px;}
+  .qr-box-desc{font-size:10px; color:var(--muted); line-height:1.5;}
+  .auction-step-body{font-size:11.5px; color:var(--text); line-height:1.6;}
+  .auction-step-body b{color:var(--dark);}
+  .auction-step-q{font-size:10.5px; color:var(--muted); display:inline-block; margin-top:3px;}
+
+  /* ===== 모바일 화면 보기 (자동 축소) ===== */
+  .page-frame{ overflow:hidden; margin:0 auto; }
+  @media (max-width:640px){
+    body{ padding:0; gap:0; background:var(--cream); }
+  }
+
+  /* ===== 모바일 반응형 (640px 이하: 축소 대신 리플로우) ===== */
+  @media (max-width:640px){
+    .page-frame{ width:100% !important; height:auto !important; overflow:visible; }
+    .page{
+      width:100% !important; height:auto !important;
+      box-shadow:none; border-bottom:10px solid #E8E4DE;
+    }
+    .content{ padding:30px 20px 34px; }
+
+    /* 표지 */
+    .cover-title{ font-size:26px; line-height:1.32; }
+    .cover-sub{ font-size:15px; max-width:none; }
+    .cover-meta, .cover-brand, .cover-eyebrow{ font-size:12px; }
+
+    /* 공통 제목/본문 */
+    .page-title{ font-size:21px; }
+    .page-desc{ font-size:14px; line-height:1.6; }
+    .part-label{ font-size:12px; }
+    .sub-head{ font-size:15px; }
+    .body-text{ font-size:14px; line-height:1.75; }
+
+    /* 카드형 콘텐츠 */
+    .method-name{ font-size:16px; }
+    .method-when{ font-size:12px; }
+    .method-body{ font-size:14px; line-height:1.7; }
+    .method-point{ font-size:13px; }
+    .method-col .method-body{ font-size:13px; }
+    .method-col .method-point-single{ font-size:12.5px; }
+    .method-col{ flex-direction:column; align-items:flex-start; }
+    .method-col .img-slot.side{ width:100%; height:34vw; margin-top:8px; }
+
+    /* 표 */
+    .cmp-table th{ font-size:12.5px; }
+    .cmp-table td{ font-size:13px; }
+
+    /* 목차 */
+    .toc-name{ font-size:14.5px; }
+    .toc-row.sub .toc-name{ font-size:13px; }
+    .toc-page{ font-size:12.5px; }
+
+    /* 2단 그리드 → 1단 리플로우 */
+    .axis-grid, .color-grid-full, .color-grid-compact, .cat-card-grid,
+    .lib-example-row, .scene-row, .ext-table-row{
+      display:flex !important; flex-direction:column !important;
+    }
+
+    .axis-card-title{ font-size:13.5px; }
+    .axis-card-desc{ font-size:13px; line-height:1.6; }
+    .axis-card-tags{ font-size:12px; }
+
+    .color-name-c{ font-size:14px; }
+    .color-kw-c{ font-size:12px; }
+    .color-tags-f{ font-size:12px; line-height:1.55; }
+    .color-quote-f{ font-size:13px; line-height:1.55; }
+    .color-pts-f{ font-size:12px; line-height:1.55; }
+    .color-card-f .color-name-c{ font-size:13px; }
+
+    .cat-card-row{ font-size:13px; }
+    .tag-pill{ font-size:11.5px; }
+    .scene-card-title{ font-size:13.5px; }
+    .scene-card-q{ font-size:13.5px; }
+    .scene-card-sub .q-item, .scene-card-sub-lg .q-item{ font-size:12.5px; }
+
+    .lib-example-tag{ font-size:11.5px; }
+    .lib-example-row-item{ font-size:13px; }
+
+    .auction-step-body{ font-size:13.5px; }
+    .auction-step-q{ font-size:12px; }
+
+    /* 이미지 슬롯 */
+    .img-slot.big{ height:60vw; }
+    .img-slot{ height:38vw; }
+
+    .link-box-title{ font-size:13.5px; }
+    .link-box-url{ font-size:14.5px; }
+
+    .footer-brand{ font-size:11px; }
+  }
+
+  /* ===== 인쇄 / PDF 저장용 ===== */
+  @page{ size:148mm 210mm; margin:0; }
+  @media print{
+    html, body{
+      background:#fff !important; padding:0; margin:0;
+      -webkit-print-color-adjust:exact; print-color-adjust:exact;
+    }
+    .page-frame{ width:auto !important; height:auto !important; overflow:visible !important; }
+    .page{
+      box-shadow:none; margin:0 auto;
+      transform:none !important;
+      page-break-after:always; break-after:page;
+      -webkit-print-color-adjust:exact; print-color-adjust:exact;
+    }
+    .page:last-child{ page-break-after:auto; break-after:auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= 표지 ================= -->
+<div class="page cover">
+  <div class="cover-top">
+    <div class="cover-brand">가치 실험실 <b>LITMUS</b></div>
+    <div style="text-align:right;">
+      <div class="cover-num">GUIDEBOOK</div>
+      <div class="cover-num-sub">FOR COUNSELOR</div>
+    </div>
+  </div>
+
+  <div class="cover-mid">
+    <div class="cover-title">가치 실험<br><em>Card Kit</em> 가이드북</div>
+    <div class="cover-sub">
+      60장의 가치카드로 나의 가치관을 발견하는 법.
+    </div>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cover-meta">
+      <b>60 Value Cards</b> · Schwartz 보편적 가치이론 기반
+    </div>
+  </div>
+</div>
+
+
+  <!-- ================= 목차 및 구성 ================= -->
+  <div class="page" id="p02">
+    <div class="content">
+      <div class="page-head">
+        <div class="part-label">Contents</div>
+        <div class="page-num">02</div>
+      </div>
+      <div class="page-title">목차 및 구성</div>
+
+      <div class="body-text" style="margin-bottom:10px;">
+        가치 실험 Card Kit은 오프라인 카드와 QR 기반 온라인 페이지로 함께 구성되어 있습니다.
+      </div>
+
+      <div class="sub-head" style="margin-top:2px;"><span class="dot blue"></span>구성품</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px;">
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:10px; padding:9px 12px;">
+          <div style="font-size:11px; font-weight:700; color:var(--dark);">가치카드 60장</div>
+          <div style="font-size:9px; color:var(--muted); margin-top:2px;">핵심 도구</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:10px; padding:9px 12px;">
+          <div style="font-size:11px; font-weight:700; color:var(--dark);">질문카드 12장</div>
+          <div style="font-size:9px; color:var(--muted); margin-top:2px;">사랑·진로·인생, 주제별 4장</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:10px; padding:9px 12px;">
+          <div style="font-size:11px; font-weight:700; color:var(--dark);">카드 설명서 1장</div>
+          <div style="font-size:9px; color:var(--muted); margin-top:2px;">카드 사용법 요약</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:10px; padding:9px 12px;">
+          <div style="font-size:11px; font-weight:700; color:var(--dark);">가치카드 온라인 가이드</div>
+          <div style="font-size:9px; color:var(--muted); margin-top:2px;">이 페이지</div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:10px; padding:9px 12px; grid-column:1 / -1;">
+          <div style="font-size:11px; font-weight:700; color:var(--dark);">가치카드 해석 페이지</div>
+          <div style="font-size:9px; color:var(--muted); margin-top:2px;">QR 연결</div>
+        </div>
+      </div>
+
+      <div class="sub-head"><span class="dot orange"></span>목차</div>
+      <div class="toc-list" style="gap:0;">
+        <a class="toc-link" href="#p03"><div class="toc-row"><span class="toc-part">01</span><span class="toc-name">왜 가치카드인가</span><span class="toc-fill"></span><span class="toc-page">03</span></div></a>
+        <a class="toc-link" href="#p04"><div class="toc-row"><span class="toc-part">02</span><span class="toc-name">카드 구성과 탐색 범위</span><span class="toc-fill"></span><span class="toc-page">04</span></div></a>
+        <a class="toc-link" href="#p05"><div class="toc-row"><span class="toc-part">03</span><span class="toc-name">가치카드 진행 방법</span><span class="toc-fill"></span><span class="toc-page">05</span></div></a>
+        <a class="toc-link" href="#p06"><div class="toc-row"><span class="toc-part">03-1</span><span class="toc-name">활용법 - 질문카드</span><span class="toc-fill"></span><span class="toc-page">06</span></div></a>
+        <a class="toc-link" href="#p07"><div class="toc-row"><span class="toc-part">03-2</span><span class="toc-name">활용법 - 주제 딥다이브</span><span class="toc-fill"></span><span class="toc-page">07</span></div></a>
+        <a class="toc-link" href="#p08"><div class="toc-row"><span class="toc-part">03-3</span><span class="toc-name">활용법 - 함께</span><span class="toc-fill"></span><span class="toc-page">08</span></div></a>
+        <a class="toc-link" href="#p09"><div class="toc-row"><span class="toc-part">04-1</span><span class="toc-name">상담 적용 - 개인상담</span><span class="toc-fill"></span><span class="toc-page">09</span></div></a>
+        <a class="toc-link" href="#p10"><div class="toc-row"><span class="toc-part">04-2</span><span class="toc-name">상담 적용 - 부모교육·집단상담</span><span class="toc-fill"></span><span class="toc-page">10</span></div></a>
+        <a class="toc-link" href="#p11"><div class="toc-row"><span class="toc-part">05-1</span><span class="toc-name">상담 질문 Bank</span><span class="toc-fill"></span><span class="toc-page">11</span></div></a>
+        <a class="toc-link" href="#p12"><div class="toc-row"><span class="toc-part">05-2</span><span class="toc-name">해석 가이드 - 방향성 해석</span><span class="toc-fill"></span><span class="toc-page">12</span></div></a>
+        <a class="toc-link" href="#p13"><div class="toc-row"><span class="toc-part">05-3</span><span class="toc-name">해석 가이드 - 컬러 해석</span><span class="toc-fill"></span><span class="toc-page">13</span></div></a>
+      </div>
+
+      <div class="footer-brand">
+        <span>가치 실험 Card Kit 가이드북 · 상담사용</span>
+        <span>LITMUS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Part 01 : 왜 가치카드인가 ================= -->
+  <div class="page" id="p03">
+    <div class="content">
+      <div class="page-head">
+        <div class="part-label">Part 01 — 왜 가치카드인가</div>
+        <div class="page-num">03</div>
+      </div>
+      <div class="page-title">01 - 왜 가치카드인가</div>
+
+      <div class="sub-head" style="margin-top:2px;"><span class="dot blue"></span>Litmus의 철학</div>
+      <div class="body-text" style="font-size:11px;">
+        "당신에게 중요한 게 뭐예요?"라는 질문 앞에서 우리는 자주 머뭇거립니다. 가치관은 분명 내 안에 있지만, 그것을 말로 표현해 본 경험은 많지 않기 때문입니다. Litmus는 가치관을 설명하지 않습니다. 60장의 가치 단어를 직접 고르고, 비교하고, 이야기하는 과정을 통해 자신의 가치를 발견하도록 돕습니다.
+      </div>
+
+      <div class="sub-head"><span class="dot orange"></span>왜 가치를 탐색하는가</div>
+      <div class="body-text" style="font-size:11px;">
+        상담에서 마주하는 것은 대부분 '행동'입니다. 하지만 행동은 결과일 뿐, 그 뒤에는 언제나 가치가 존재합니다. 내담자가 어떤 행동을 반복하는 이유, 무언가를 쉽게 포기하지 못하는 이유, 사람과의 갈등을 반복하는 이유 역시 자신이 중요하게 여기는 가치와 연결되어 있습니다. <b>행동을 바꾸려 하기보다, 그 행동 뒤에 있는 가치를 발견하도록 돕는 것</b> — 이것이 가치 탐색이 상담에서 갖는 힘입니다.
+      </div>
+
+      <div class="body-text" style="font-size:10.5px; background:var(--warm); border-radius:10px; padding:10px 14px; margin-bottom:10px;">
+        <b>상담자를 위한 안내</b> — 가치카드는 사람을 평가하거나 진단하기 위한 도구가 아닙니다. 중요한 것은 어떤 카드를 선택했는지보다 <b>왜 그 카드를 선택했는지</b>입니다. 상담자는 해석을 제시하기보다 질문을 통해 내담자가 스스로 발견하도록 돕습니다.
+      </div>
+
+      <div class="sub-head"><span class="dot green"></span>카드가 더 잘 작동하는 이유</div>
+      <table class="cmp-table">
+        <thead><tr><th></th><th>말로 묻기</th><th>카드로 고르기</th></tr></thead>
+        <tbody>
+          <tr><td>반응</td><td>"글쎄요… 잘 모르겠어요"</td><td>직관적으로 손이 먼저 감</td></tr>
+          <tr><td>부담</td><td>정답을 말해야 할 것 같은 압박</td><td>그냥 고르면 되는 가벼움</td></tr>
+          <tr><td>결과</td><td>추상적이고 모호한 대답</td><td>구체적 단어에서 대화 시작</td></tr>
+        </tbody>
+      </table>
+
+      <div class="footer-brand">
+        <span>가치 실험 Card Kit 가이드북 · 상담사용</span>
+        <span>LITMUS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Part 02 : 카드 구성과 탐색 범위 ================= -->
+  <div class="page" id="p04">
+    <div class="content">
+      <div class="page-head">
+        <div class="part-label">Part 02 — 카드 구성과 탐색 범위</div>
+        <div class="page-num">04</div>
+      </div>
+      <div class="page-title">02 - 카드 구성과 탐색 범위</div>
+      <div class="page-desc">상황에 맞게 카드 수를 조절해 보세요. 한 번에 모든 가치를 다루기보다 단계적으로 범위를 넓혀가는 방식이 효과적입니다.</div>
+
+      <div class="scene-card">
+        <div class="scene-card-title">첫 만남 세트 (20장)</div>
+        <div class="q-item">추천: 첫 회기 · 청소년 &nbsp;|&nbsp; 권장 시간: 10~20분</div>
+        <div class="q-item" style="margin-top:3px;">10가지 가치 유형에서 대표 가치 2장씩 선택하여 선택 부담을 줄이고 전체 가치 영역을 경험합니다.</div>
+      </div>
+
+      <div class="scene-card">
+        <div class="scene-card-title">주제 탐색 세트 (30장)</div>
+        <div class="q-item">추천: 개인상담 · 주제 상담 &nbsp;|&nbsp; 권장 시간: 20~40분</div>
+        <div class="q-item" style="margin-top:3px;">상담 목적에 맞는 가치 유형의 비중을 높여 구성합니다.</div>
+        <div class="q-item" style="margin-top:3px;">
+          예) 진로 — <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#4A80B5;"></span>자율 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#D6558C;"></span>성취 &nbsp;/&nbsp;
+          부모교육 — <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#2DA06B;"></span>박애 <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#F07C00;"></span>안전
+        </div>
+      </div>
+
+      <div class="scene-card">
+        <div class="scene-card-title">전체 탐색 세트 (60장)</div>
+        <div class="q-item">추천: 심층상담 · 집단 프로그램 &nbsp;|&nbsp; 권장 시간: 40~60분</div>
+        <div class="q-item" style="margin-top:3px;">전체 가치 스펙트럼을 탐색하며 가치 우선순위를 입체적으로 이해합니다.</div>
+      </div>
+
+      <div class="body-text" style="margin-top:6px; font-size:10.5px; background:var(--warm); border-radius:10px; padding:10px 14px;">
+        <b>상담 TIP</b> — 처음부터 많은 카드를 제시하기보다 적은 카드로 시작해 점차 탐색 범위를 넓혀가는 것이 내담자의 선택 부담을 줄이고 자연스럽게 대화를 시작하는 데 도움이 됩니다.
+      </div>
+
+      <div class="footer-brand">
+        <span>가치 실험 Card Kit 가이드북 · 상담사용</span>
+        <span>LITMUS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Part 03 : 가치카드 진행 방법 ================= -->
+  <div class="page" id="p05">
+    <div class="content">
+      <div class="page-head">
+        <div class="part-label">Part 03 — 가치카드 진행 방법</div>
+        <div class="page-num">05</div>
+      </div>
+      <div class="page-title">03 - 가치카드 진행 방법</div>
+      <div class="page-desc">60장을 어떻게 고르게 하느냐에 따라 전혀 다른 경험이 만들어집니다. 상담 목적과 상황에 맞는 방식을 선택해 활용해 보세요.</div>
+
+      <div class="scene-card">
+        <div class="scene-card-title">① 더미 방식 — 혼자, 차분히</div>
+        <div class="q-item">방법: 20장씩 세 묶음에서 1장씩 선택 → 마지막 3장 중 1장 선택</div>
+        <div class="q-item" style="margin-top:2px;">추천: 개인상담 · 자기이해 · 진로상담 · 깊은 성찰</div>
+        <div class="q-item" style="margin-top:2px;">포인트: 소거하며 선택하는 과정 자체가 우선순위를 더 명확하게 만들어줍니다.</div>
+      </div>
+
+      <div class="scene-card">
+        <div class="scene-card-title">② 선택 방식 — 함께, 빠르게</div>
+        <div class="q-item">방법: 카드를 빠르게 넘기며 직관적으로 선택</div>
+        <div class="q-item" style="margin-top:2px;">추천: 첫 회기 · 라포 형성 · 아이스브레이킹 · 청소년 프로그램</div>
+        <div class="q-item" style="margin-top:2px;">포인트: 생각보다 직관이 먼저 반응합니다. 빠르게 선택할수록 지금 중요한 가치가 드러납니다.</div>
+      </div>
+
+      <div class="scene-card">
+        <div class="scene-card-title">③ 경매 방식 — 함께, 즐기며</div>
+        <div class="q-item">방법: 코인을 이용해 원하는 가치에 입찰</div>
+        <div class="q-item" style="margin-top:2px;">추천: 집단상담 · 부모교육 · 팀빌딩 · 워크숍</div>
+        <div class="q-item" style="margin-top:2px;">포인트: 끝까지 포기하지 않는 가치가 그 사람의 우선순위를 보여줍니다.</div>
+      </div>
+
+      <table class="cmp-table">
+        <thead><tr><th>방식</th><th>리듬</th><th>추천 상황</th></tr></thead>
+        <tbody>
+          <tr><td>더미</td><td>느림·소거</td><td>개인상담, 자기이해</td></tr>
+          <tr><td>선택</td><td>빠름·직관</td><td>첫 회기, 아이스브레이킹</td></tr>
+          <tr><td>경매</td><td>경쟁·비교</td><td>집단상담, 부모교육</td></tr>
+        </tbody>
+      </table>
+
+      <div class="body-text" style="margin-top:8px; font-size:10.5px; background:var(--warm); border-radius:10px; padding:10px 14px;">
+        <b>상담 TIP</b> — 처음 사용하는 내담자라면 선택 방식으로 시작하면 부담이 적습니다.
+      </div>
+
+      <div class="footer-brand">
+        <span>가치 실험 Card Kit 가이드북 · 상담사용</span>
+        <span>LITMUS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Part 03-1 : 가치카드 활용법 - 질문카드 ================= -->
+  <div class="page" id="p06">
+    <div class="content">
+      <div class="page-head">
+        <div class="part-label">Part 03-1 — 가치카드 활용법 - 질문카드</div>
+        <div class="page-num">06</div>
+      </div>
+      <div class="page-title">03-1 - 가치카드 활용법 - 질문카드</div>
+      <div class="page-desc">기본 활용은 매우 간단합니다. 질문카드 12장(사랑·진로·인생) 가운데 한 장을 선택하면, 카드 안에 핵심 질문과 탐색 질문이 함께 제시되어 있습니다.</div>
+
+      <div class="img-slot big upload-slot" style="height:70mm;" onclick="triggerUpload(event,this)" title="클릭하여 이미지 삽입">
+        <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
+        <img src="images/method-dummy.jpg" alt="질문카드 12장"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-slot-fallback">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#78746E" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#78746E"/><path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#78746E" stroke-width="1.6"/></svg>
+          질문카드 12장 이미지<br><code>images/method-dummy.jpg</code>
+        </div>
+      </div>
+
+      <div class="sub-head" style="margin-top:10px;"><span class="dot blue"></span>주제별 구성</div>
+      <table class="cmp-table">
+        <tbody>
+          <tr><td>사랑</td><td>끌림 · 갈등 · 신뢰 · 선택</td></tr>
+          <tr><td>진로</td><td>선택 · 점검 · 변화 · 미래</td></tr>
+          <tr><td>인생</td><td>과거 · 현재 · 관계 · 방향</td></tr>
+        </tbody>
+      </table>
+
+      <div class="body-text" style="margin-top:8px; font-size:10.5px; background:var(--warm); border-radius:10px; padding:10px 14px;">
+        <b>상담 TIP</b> — 질문카드는 상담의 주제를 정하는 역할을 합니다. 질문을 모두 사용할 필요는 없으며, 내담자의 반응에 따라 자연스럽게 이어가면 됩니다.
+      </div>
+
+      <div class="footer-brand">
+        <span>가치 실험 Card Kit 가이드북 · 상담사용</span>
+        <span>LITMUS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Part 03-2 : 가치카드 활용법 - 주제 딥다이브 ================= -->
+  <div class="page" id="p07">
+    <div class="content">
+      <div class="page-head">
+        <div class="part-label">Part 03-2 — 가치카드 활용법 - 주제 딥다이브</div>
+        <div class="page-num">07</div>
+      </div>
+      <div class="page-title">03-2 - 가치카드 활용법 - 주제 딥다이브</div>
+      <div class="page-desc">질문카드에 없는 주제를 다루고 싶다면 질문을 직접 만들고, 그 주제에 맞는 카드를 활용합니다.</div>
+
+      <div class="sub-head" style="margin-top:2px;"><span class="dot blue"></span>① 질문 만들기</div>
+      <div class="body-text" style="margin:4px 0 6px; background:var(--warm); border-radius:9px; padding:8px 12px; text-align:center; font-weight:700; color:var(--dark); font-size:11px;">
+        "[상황]에서 나에게 가장 중요한 가치는 무엇인가요?"
+      </div>
+      <table class="cmp-table">
+        <tbody>
+          <tr><td>가족</td><td>가족 안에서 내가 가장 지키고 싶은 가치는?</td></tr>
+          <tr><td>친구</td><td>친구에게 가장 바라는 가치는?</td></tr>
+          <tr><td>직장</td><td>함께 일하기 좋은 사람은 어떤 가치를 가진 사람인가요?</td></tr>
+          <tr><td>팀</td><td>우리 팀이 가장 중요하게 여기는 가치는?</td></tr>
+        </tbody>
+      </table>
+
+      <div class="sub-head" style="margin-top:10px;"><span class="dot orange"></span>② 선택 이후 탐색 질문</div>
+      <div class="q-item">왜 이 카드를 선택했나요?</div>
+      <div class="q-item">언제부터 중요했나요?</div>
+      <div class="q-item">앞으로도 계속 중요한 가치일까요?</div>
+
+      <div class="sub-head" style="margin-top:10px;"><span class="dot green"></span>③ 주제별 추천 카드</div>
+      <div class="scene-card" style="margin-bottom:6px; padding:9px 12px;">
+        <div class="scene-card-title" style="margin-bottom:3px;">💕 연인·부부</div>
+        <div class="q-item">
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#2DA06B;"></span>박애
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#4A80B5;"></span>자율 · 카드: 사랑, 신뢰, 자유, 예의, 가족
+        </div>
+      </div>
+      <div class="scene-card" style="margin-bottom:6px; padding:9px 12px;">
+        <div class="scene-card-title" style="margin-bottom:3px;">🎓 청소년 진로</div>
+        <div class="q-item">
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3B6BA8;"></span>자극
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#C23B3B;"></span>권력 · 카드: 호기심, 도전, 성공, 리더십
+        </div>
+      </div>
+      <div class="scene-card" style="padding:9px 12px;">
+        <div class="scene-card-title" style="margin-bottom:3px;">🌱 자기이해</div>
+        <div class="q-item">
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#4A80B5;"></span>자율
+          <span class="cat-card-dot" style="display:inline-block;vertical-align:middle;background:#3E9C6C;"></span>보편주의 · 카드: 자존감, 창의성, 성장, 지혜
+        </div>
+      </div>
+
+      <div class="body-text" style="margin-top:8px; font-size:10px; font-style:italic; color:var(--muted);">
+        상담 TIP — 질문은 많이 하기보다, 하나의 질문을 충분히 탐색하는 것이 중요합니다.
+      </div>
+
+      <div class="footer-brand">
+        <span>가치 실험 Card Kit 가이드북 · 상담사용</span>
+        <span>LITMUS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Part 03-3 : 가치카드 활용법 - 함께 ================= -->
+  <div class="page" id="p08">
+    <div class="content">
+      <div class="page-head">
+        <div class="part-label">Part 03-3 — 가치카드 활용법 - 함께</div>
+        <div class="page-num">08</div>
+      </div>
+      <div class="page-title">03-3 - 가치카드 활용법 - 함께</div>
+      <div class="page-desc">가족, 친구, 팀원들과 함께하는 자리에서는 가치관 경매 방식으로 진행하면 자연스럽게 서로의 가치 차이를 이해할 수 있습니다.</div>
+
+      <div class="img-slot big upload-slot" style="height:48mm; margin:6px 0 12px;" onclick="triggerUpload(event,this)" title="클릭하여 이미지 삽입">
+        <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
+        <img src="images/method-auction.jpg" alt="가치관 경매 진행 이미지"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-slot-fallback">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#78746E" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#78746E"/><path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#78746E" stroke-width="1.6"/></svg>
+          가치관 경매 진행 이미지<br><code>images/method-auction.jpg</code>
+        </div>
+      </div>
+
+      <div class="sub-head" style="margin-top:2px;"><span class="dot blue"></span>진행 순서</div>
+      <div class="auction-steps">
+        <div class="auction-step">
+          <div class="auction-step-num">1</div>
+          <div class="auction-step-body"><b>가치카드 선택</b> — 참여자들이 중요하게 생각하는, 경매할 카드를 선택합니다</div>
+        </div>
+        <div class="auction-step">
+          <div class="auction-step-num">2</div>
+          <div class="auction-step-body"><b>예산 및 방법 설명</b> — 각자 동일한 예산을 나눠주고(예: 칩 20개, 또는 가상화폐 100만원), 한 번에 올릴 수 있는 단위(예: 5개씩)를 정합니다</div>
+        </div>
+        <div class="auction-step">
+          <div class="auction-step-num">3</div>
+          <div class="auction-step-body"><b>진행</b> — 진행자가 카드를 하나씩 공개하면, 갖고 싶은 참가자가 금액을 부릅니다. 가장 높게 부른 사람이 가져갑니다</div>
+        </div>
+        <div class="auction-step">
+          <div class="auction-step-num">4</div>
+          <div class="auction-step-body"><b>리뷰</b> — "왜 이 카드에 끝까지 예산을 썼어요?" / "못 가져간 카드 중에 아쉬운 게 있었나요?"</div>
+        </div>
+      </div>
+
+      <div class="body-text" style="margin-top:10px; font-size:10.5px;">
+        예산은 가상화폐뿐 아니라 칩, 동전, 종이화폐 등 손에 잡히는 어떤 도구도 활용할 수 있습니다.
+      </div>
+
+      <div class="body-text" style="margin-top:8px; font-size:10.5px; background:var(--warm); border-radius:10px; padding:10px 14px;">
+        <b>상담 TIP</b> — 경매의 목적은 승패가 아니라 서로의 가치 차이를 경험하고 선택의 이유를 나누는 것입니다.
+      </div>
+
+      <div class="footer-brand">
+        <span>가치 실험 Card Kit 가이드북 · 상담사용</span>
+        <span>LITMUS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Part 04-1 : 상담 장면별 활용 - 개인상담 ================= -->
+  <div class="page" id="p09">
+    <div class="content">
+      <div class="page-head">
+        <div class="part-label">Part 04-1 — 상담 장면별 활용 - 개인상담</div>
+        <div class="page-num">09</div>
+      </div>
+      <div class="page-title">04-1 - 상담 적용 - 개인상담</div>
+      <div class="page-desc">가치카드는 질문만 바꾸면 다양한 상담 장면으로 확장됩니다. 상담자는 선택을 해석하기보다, 질문을 통해 의미를 함께 탐색합니다.</div>
+
+      <div class="scene-card" style="padding:9px 12px; margin-bottom:6px;">
+        <div class="scene-card-title" style="margin-bottom:2px;">진로상담 <span style="font-weight:400; color:var(--muted); font-size:9.5px;">— 진로 선택 기준 명료화</span></div>
+        <div class="scene-card-q" style="font-size:10.5px; margin-bottom:4px;">일을 선택할 때 절대 포기하고 싶지 않은 가치는 무엇인가요?</div>
+        <div class="q-item" style="font-size:9.5px;">왜 중요한가요? / 언제부터 중요했나요? / 가장 충족되었던 경험은? / 현재 얼마나 충족되고 있나요?(10점)</div>
+        <div class="q-item" style="font-size:9.5px; margin-top:3px; color:var(--blue); font-weight:600;">행동 연결 — 이번 주 안에 이 가치를 실천할 수 있는 가장 작은 행동은?</div>
+      </div>
+
+      <div class="scene-card" style="padding:9px 12px; margin-bottom:6px;">
+        <div class="scene-card-title" style="margin-bottom:2px;">우울·무기력 상담 <span style="font-weight:400; color:var(--muted); font-size:9.5px;">— 잃어버린 가치 회복</span></div>
+        <div class="scene-card-q" style="font-size:10.5px; margin-bottom:4px;">예전에는 있었지만 지금은 잃어버린 가치가 있다면 무엇인가요?</div>
+        <div class="q-item" style="font-size:9.5px;">언제부터 멀어졌나요? / 그때 나는 어떤 삶을 살고 있었나요? / 지금 가장 그리운 것은?</div>
+        <div class="q-item" style="font-size:9.5px; margin-top:3px; color:var(--blue); font-weight:600;">행동 연결 — 오늘부터 아주 작게 다시 시작할 수 있는 행동은?</div>
+      </div>
+
+      <div class="scene-card" style="padding:9px 12px;">
+        <div class="scene-card-title" style="margin-bottom:2px;">스마트폰·게임 과몰입 <span style="font-weight:400; color:var(--muted); font-size:9.5px;">— 행동 뒤의 가치 이해</span></div>
+        <div class="scene-card-q" style="font-size:10.5px; margin-bottom:4px;">지금의 행동이 내가 원하는 가치를 채워주고 있나요?</div>
+        <div class="q-item" style="font-size:9.5px;">스마트폰이 채워주는 가치는? / 빼앗는 가치는? / 진짜 원하는 것은 무엇일까요?</div>
+        <div class="q-item" style="font-size:9.5px; margin-top:3px; color:var(--blue); font-weight:600;">행동 연결 — 같은 가치를 건강하게 채울 수 있는 다른 방법은?</div>
+      </div>
+
+      <div class="footer-brand">
+        <span>가치 실험 Card Kit 가이드북 · 상담사용</span>
+        <span>LITMUS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Part 04-2 : 상담 장면별 활용 - 부모교육·집단상담 ================= -->
+  <div class="page" id="p10">
+    <div class="content">
+      <div class="page-head">
+        <div class="part-label">Part 04-2 — 상담 장면별 활용 - 부모교육·집단상담</div>
+        <div class="page-num">10</div>
+      </div>
+      <div class="page-title">04-2 - 부모교육 · 집단상담</div>
+
+      <div class="sub-head" style="margin-top:2px;"><span class="dot blue"></span>부모교육 및 가족상담</div>
+      <div class="body-text" style="font-size:10.5px;">부모는 ① 내가 중요하게 생각하는 가치, ② 아이가 중요하게 생각할 것 같은 가치를 각각 선택하고 비교합니다.</div>
+      <div class="q-item">정말 아이의 가치일까요, 부모가 기대하는 가치일까요?</div>
+      <div class="q-item">부모와 아이가 공통으로 중요하게 생각한 가치는?</div>
+      <div class="q-item">가장 차이가 컸던 가치는?</div>
+
+      <div class="sub-head" style="margin-top:12px;"><span class="dot orange"></span>집단상담</div>
+      <div class="body-text" style="font-size:10.5px;">가치관 경매와 가치 토론을 통해 또래 간 가치 차이를 자연스럽게 경험합니다.</div>
+      <div class="q-item">나와 가장 다른 사람은 누구였나요?</div>
+      <div class="q-item">새롭게 이해한 점은 무엇인가요?</div>
+      <div class="q-item">서로 다른 가치도 존중할 수 있을까요?</div>
+
+      <div class="sub-head" style="margin-top:12px;"><span class="dot green"></span>다양한 분야로 확장하기</div>
+      <table class="cmp-table">
+        <tbody>
+          <tr><td>연애</td><td>함께 살아갈 사람에게 가장 중요한 가치는?</td></tr>
+          <tr><td>청소년</td><td>10년 뒤에도 지키고 싶은 가치는?</td></tr>
+          <tr><td>직장인</td><td>회사에서 꼭 지켜졌으면 하는 가치는?</td></tr>
+          <tr><td>기업교육</td><td>우리 팀이 가장 중요하게 생각하는 가치는?</td></tr>
+        </tbody>
+      </table>
+
+      <div class="footer-brand">
+        <span>가치 실험 Card Kit 가이드북 · 상담사용</span>
+        <span>LITMUS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Part 05-1 : 상담 질문 Bank ================= -->
+  <div class="page" id="p11">
+    <div class="content">
+      <div class="page-head">
+        <div class="part-label">Part 05-1 — 상담 질문 Bank</div>
+        <div class="page-num">11</div>
+      </div>
+      <div class="page-title">05-1 - 상담 질문 Bank</div>
+      <div class="page-desc">카드를 선택한 이후에는 정답을 찾기보다 질문을 통해 의미를 발견하는 과정이 중요합니다. 상황에 맞게 자유롭게 활용해 보세요.</div>
+
+      <div class="q-group">
+        <div class="q-group-title">선택의 이유</div>
+        <div class="q-item">왜 이 카드를 선택하셨나요?</div>
+        <div class="q-item">가장 먼저 눈에 들어온 이유가 있었나요?</div>
+        <div class="q-item">다른 카드 대신 이것을 고른 이유는 무엇인가요?</div>
+      </div>
+      <div class="q-group">
+        <div class="q-group-title">경험 탐색</div>
+        <div class="q-item">이 가치가 가장 잘 드러났던 순간은 언제였나요?</div>
+        <div class="q-item">가장 지키기 어려웠던 순간은 언제였나요?</div>
+        <div class="q-item">누군가의 영향을 받아 중요해진 가치인가요?</div>
+        <div class="q-item">이 가치가 형성된 특별한 경험이 있었나요?</div>
+      </div>
+      <div class="q-group">
+        <div class="q-group-title">현재의 삶</div>
+        <div class="q-item">지금 이 가치는 얼마나 실현되고 있나요? (10점 척도)</div>
+        <div class="q-item">이 가치가 충족될 때 어떤 감정을 느끼나요?</div>
+        <div class="q-item">부족할 때는 어떤 어려움을 경험하나요?</div>
+        <div class="q-item">현재 삶에서 가장 방해가 되는 것은 무엇인가요?</div>
+      </div>
+      <div class="q-group">
+        <div class="q-group-title">행동 연결</div>
+        <div class="q-item">이 가치를 더 살아가기 위해 할 수 있는 가장 작은 행동은?</div>
+        <div class="q-item">이번 주 안에 실천할 수 있는 한 가지는?</div>
+        <div class="q-item">이 행동을 방해하는 것은 무엇일까요?</div>
+        <div class="q-item">그럼에도 시작해 볼 수 있는 가장 쉬운 첫걸음은?</div>
+      </div>
+
+      <div class="footer-brand">
+        <span>가치 실험 Card Kit 가이드북 · 상담사용</span>
+        <span>LITMUS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Part 05-2 : 방향성 해석 ================= -->
+  <div class="page" id="p12">
+    <div class="content">
+      <div class="page-head">
+        <div class="part-label">Part 05-2 — 해석 가이드 - 방향성 해석</div>
+        <div class="page-num">12</div>
+      </div>
+      <div class="page-title">05-2 - 해석 가이드 - 방향성 해석</div>
+      <div class="page-desc">가치카드는 두 가지 관점으로 해석할 수 있습니다 — ① 방향성, ② 컬러.</div>
+
+      <div class="img-slot big upload-slot" style="height:75mm;" onclick="triggerUpload(event,this)" title="클릭하여 이미지 삽입">
+        <input type="file" accept="image/*" class="upload-input" onchange="handleUpload(event)">
+        <img src="images/direction-graph.png" alt="가치의 방향성 원형 차트"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-slot-fallback">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#78746E" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#78746E"/><path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#78746E" stroke-width="1.6"/></svg>
+          방향성 원형 차트 이미지<br><code>images/direction-graph.png</code>
+        </div>
+      </div>
+
+      <div class="axis-grid">
+        <div class="axis-card">
+          <div class="axis-card-title">개인 중심 <span>Self-focused</span></div>
+          <div class="axis-card-desc">나의 목표와 성취를 중요하게 생각합니다.</div>
+        </div>
+        <div class="axis-card">
+          <div class="axis-card-title">사회 중심 <span>Other-focused</span></div>
+          <div class="axis-card-desc">관계와 공동체를 중요하게 생각합니다.</div>
+        </div>
+        <div class="axis-card">
+          <div class="axis-card-title">성장 <span>Growth</span></div>
+          <div class="axis-card-desc">새로운 경험과 변화를 추구합니다.</div>
+        </div>
+        <div class="axis-card">
+          <div class="axis-card-title">안정 <span>Stability</span></div>
+          <div class="axis-card-desc">안전과 지속성을 중요하게 생각합니다.</div>
+        </div>
+      </div>
+
+      <div class="body-text" style="margin-top:8px; font-size:10.5px; font-style:italic; color:var(--muted);">
+        어느 방향이 더 좋거나 나쁜 것은 아닙니다. 현재 삶에서 어떤 가치가 더 중요하게 작동하는지를 이해하기 위한 하나의 심리적 나침반으로 활용해 보세요.
+      </div>
+
+      <div class="footer-brand">
+        <span>가치 실험 Card Kit 가이드북 · 상담사용</span>
+        <span>LITMUS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Part 05-3 : 컬러 해석 ================= -->
+  <div class="page" id="p13">
+    <div class="content">
+      <div class="page-head">
+        <div class="part-label">Part 05-3 — 해석 가이드 - 컬러 해석</div>
+        <div class="page-num">13</div>
+      </div>
+      <div class="page-title">05-3 - 해석 가이드 - 컬러 해석</div>
+
+      <div class="color-grid-full">
+        <div class="color-card-f">
+          <div class="color-card-f-head"><span class="color-swatch-c" style="background:#F07C00;"></span><span class="color-name-c">안전(주황색)</span></div>
+          <div class="color-tags-f">#가족 #건강 #연대감 #감사 #복지 #균형 #청결</div>
+          <div class="color-quote-f">"나는 안정·안전·예측 가능성을 중요하게 여기는 사람입니다."</div>
+          <div class="color-pts-f">일상에 안정이 필요함 · 급격한 변화보다 안정적인 흐름 선호</div>
+        </div>
+        <div class="color-card-f">
+          <div class="color-card-f-head"><span class="color-swatch-c" style="background:#4A80B5;"></span><span class="color-name-c">자율(하늘색)</span></div>
+          <div class="color-tags-f">#성장 #프라이버시 #자율성 #자유 #자존감 #창의성 #자기효능감</div>
+          <div class="color-quote-f">"나는 스스로 선택하고 결정하는 삶을 추구합니다."</div>
+          <div class="color-pts-f">독립성 · 자기만의 방식 · 주체적으로 살고 싶은 에너지</div>
+        </div>
+        <div class="color-card-f">
+          <div class="color-card-f-head"><span class="color-swatch-c" style="background:#E8B93C;"></span><span class="color-name-c">동조(노랑색)</span></div>
+          <div class="color-tags-f">#존경 #예의 #친절함 #성실</div>
+          <div class="color-quote-f">"나는 타인과 조화를 이루며 관계를 편안하게 유지하는 것이 중요합니다."</div>
+          <div class="color-pts-f">예의·배려·신뢰 · 갈등보다 평화, 관계의 편안함이 핵심</div>
+        </div>
+        <div class="color-card-f">
+          <div class="color-card-f-head"><span class="color-swatch-c" style="background:#3B6BA8;"></span><span class="color-name-c">자극(파란색)</span></div>
+          <div class="color-tags-f">#재미 #경험 #도전 #호기심 #변화</div>
+          <div class="color-quote-f">"나는 새로움과 흥미로운 경험을 통해 에너지를 얻는 사람입니다."</div>
+          <div class="color-pts-f">도전, 변화 · 반복보다 새 자극, 지루함을 싫어함</div>
+        </div>
+        <div class="color-card-f">
+          <div class="color-card-f-head"><span class="color-swatch-c" style="background:#B08D57;"></span><span class="color-name-c">전통(굴색)</span></div>
+          <div class="color-tags-f">#존중 #유연함 #근본 #결손함 #헌신</div>
+          <div class="color-quote-f">"나는 익숙한 방식과 전통적 가치에서 편안함을 느끼는 사람입니다."</div>
+          <div class="color-pts-f">익숙한 질서에 안정감 · 관습·전통의 의미를 중요하게 여김</div>
+        </div>
+        <div class="color-card-f">
+          <div class="color-card-f-head"><span class="color-swatch-c" style="background:#7B5EA7;"></span><span class="color-name-c">쾌락주의(보라색)</span></div>
+          <div class="color-tags-f">#유머 #쾌락 #열정 #모험</div>
+          <div class="color-quote-f">"나는 즐거움·감정·감각적 만족을 인생의 중요한 요소로 여깁니다."</div>
+          <div class="color-pts-f">순간의 생동감 · 감정적 만족, 즐거움 중심의 에너지</div>
+        </div>
+        <div class="color-card-f">
+          <div class="color-card-f-head"><span class="color-swatch-c" style="background:#2DA06B;"></span><span class="color-name-c">박애(연두색)</span></div>
+          <div class="color-tags-f">#사랑 #신뢰 #책임감 #성취 #정직함 #신앙 #우정 #용서 #봉사</div>
+          <div class="color-quote-f">"나는 가까운 사람들의 행복과 복지를 진심으로 중요하게 여깁니다."</div>
+          <div class="color-pts-f">'내 사람들'을 챙기는 마음 · 깊고 진정성 있는 관계</div>
+        </div>
+        <div class="color-card-f">
+          <div class="color-card-f-head"><span class="color-swatch-c" style="background:#D6558C;"></span><span class="color-name-c">성취(핑크색)</span></div>
+          <div class="color-tags-f">#성공 #명예 #유능함 #야망 #지식</div>
+          <div class="color-quote-f">"나는 목표를 이루고 성장하는 과정에서 큰 동기를 얻습니다."</div>
+          <div class="color-pts-f">성과 중심 · 목표 설정→달성, 스스로를 발전시키는 데 의미</div>
+        </div>
+        <div class="color-card-f">
+          <div class="color-card-f-head"><span class="color-swatch-c" style="background:#3E9C6C;"></span><span class="color-name-c">보편주의(초록색)</span></div>
+          <div class="color-tags-f">#지혜 #마음챙김 #배려심 #평등 #평화 #자연주의 #아름다움 #정의 #환경보호</div>
+          <div class="color-quote-f">"나는 모두가 존중받고 평등한 세상을 중요하게 여깁니다."</div>
+          <div class="color-pts-f">넓은 관점 · 자연·세상·인간에 대한 관심</div>
+        </div>
+        <div class="color-card-f">
+          <div class="color-card-f-head"><span class="color-swatch-c" style="background:#C23B3B;"></span><span class="color-name-c">권력(빨간색)</span></div>
+          <div class="color-tags-f">#부 #매력 #리더십 #인정 #품위</div>
+          <div class="color-quote-f">"나는 영향력·결정력·주도성을 통해 나의 가치를 드러내고 싶어합니다."</div>
+          <div class="color-pts-f">리더십 · 영향력, 위치·권한을 통해 삶을 설계하고 싶은 욕구</div>
+        </div>
+      </div>
+
+      <div class="body-text" style="margin-top:8px; font-size:9px; color:var(--muted);">
+        컬러는 성격 유형을 의미하지 않습니다. 선택한 가치들의 공통된 특징을 보기 쉽게 표현한 상징적인 에너지 타입입니다. 중요한 것은 결과보다 왜 그 가치를 선택했는지를 함께 탐색하는 과정입니다.
+      </div>
+
+      <a class="link-box" href="https://ulit.kr/library.html" target="_blank" rel="noopener" style="margin-top:8px;">
+        <div class="link-box-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10 14a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07l-1.29 1.29" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"/><path d="M14 10a5 5 0 0 0-7.07 0L4.1 12.83a5 5 0 0 0 7.07 7.07l1.29-1.29" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="link-box-title">가치 해석 조회하기 — 내가 고른 카드 바로 검색</div>
+          <div class="link-box-url">ulit.kr/library.html</div>
+        </div>
+      </a>
+
+      <div class="body-text" style="margin-top:8px; font-size:9.5px; font-style:italic; color:var(--muted); text-align:center;">
+        상담은 답을 알려주는 과정이 아니라, 내담자가 자신의 답을 발견하도록 함께 걸어가는 과정입니다.<br>가치카드는 그 여정을 시작하는 작은 질문이 되기를 바랍니다.
+      </div>
+
+      <div class="footer-brand">
+        <span>가치 실험 Card Kit 가이드북 · 상담사용</span>
+        <span>LITMUS</span>
+      </div>
+    </div>
+  </div>
+
+<script>
+  function triggerUpload(e, el){
+    if(e.target.tagName === 'INPUT') return;
+    el.querySelector('.upload-input').click();
+  }
+  function handleUpload(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const container = e.target.closest('.upload-slot');
+    const img = container.querySelector('img');
+    const fallback = container.querySelector('.mini-card-fallback, .img-slot-fallback');
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      img.src = ev.target.result;
+      img.style.display = 'block';
+      if(fallback) fallback.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+</script>
+<script>
+(function(){
+  function init(){
+    document.querySelectorAll('body > .page').forEach(function(page){
+      var wrapper = document.createElement('div');
+      wrapper.className = 'page-frame';
+      page.parentNode.insertBefore(wrapper, page);
+      wrapper.appendChild(page);
+    });
+    applyScale();
+  }
+  function applyScale(){
+    var isMobile = window.innerWidth <= 640;
+    document.querySelectorAll('.page-frame').forEach(function(wrapper){
+      var page = wrapper.querySelector('.page');
+      if(isMobile){
+        page.style.transform = 'none';
+        wrapper.style.width = '100%';
+        wrapper.style.height = 'auto';
+        return;
+      }
+      var maxW = window.innerWidth - 16;
+      page.style.transform = 'none';
+      var nw = page.offsetWidth;
+      var nh = page.offsetHeight;
+      var scale = Math.min(1, maxW / nw);
+      page.style.transformOrigin = 'top left';
+      page.style.transform = 'scale(' + scale + ')';
+      wrapper.style.width = (nw * scale) + 'px';
+      wrapper.style.height = (nh * scale) + 'px';
+    });
+  }
+  window.addEventListener('load', init);
+  window.addEventListener('resize', applyScale);
+  window.addEventListener('orientationchange', applyScale);
+})();
+</script>
+</body>
+</html>
